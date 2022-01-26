@@ -1,0 +1,119 @@
+#better-macro-directory {
+  min-width: 230px;
+  min-height: 230px;
+
+  .window-content {
+    padding: 0;
+    overflow: inherit;
+  }
+
+  // Reverse universal selector set for `.window-app .window-content > *`.
+  .window-content > * {
+    flex: unset;
+  }
+
+  // Header menu icon
+  i {
+    flex: none;
+
+    &.fas.fa-filter {
+      color: yellow;
+      filter: drop-shadow(0 0 2px #000);
+    }
+
+    &.fas.fa-moon {
+      color: lightblue;
+      filter: drop-shadow(0 0 2px #000);
+    }
+
+    &.fas.off {
+      color: white;
+      filter: drop-shadow(0 0 2px #000);
+    }
+  }
+
+  // Light / normal theme
+  &.window-app {
+    .style-rule {
+      background: linear-gradient(180deg, var(--color-border-light-1) 0%, var(--color-border-light-2) 100%);;
+      border-top: solid 1px var(--color-border-dark-primary);
+      border-bottom: solid 1px var(--color-border-dark-primary);
+      padding: 0 0 2px 5px;
+    }
+  }
+
+  // For Firefox scrollbars
+  .container {
+    scrollbar-width: thin;
+    scrollbar-color: #782e22 #111;
+  }
+
+  // Dark theme
+  &.tjs-window-app {
+    --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
+
+    --tjs-icon-button-background-hover: rgba(255, 255, 255, 0.05);
+    --tjs-icon-button-background-selected: rgba(255, 255, 255, 0.1);
+
+    --tjs-input-background: #333333dd;
+    --tjs-input-border: solid 1px #666;
+
+    ::-webkit-scrollbar {
+      width: 6px !important;
+      height: 6px !important;
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: 0 0 1px #999 inset !important;
+      border-radius: 4px !important;
+    }
+    ::-webkit-scrollbar-thumb {
+      outline: none !important;
+      border-radius: 3px !important;
+      background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 14.7%, rgba(89, 97, 223, 1) 88.7% ) !important;
+      border: 1px solid rgba(95, 100, 230, 1) !important;
+    }
+
+    a:hover {
+      text-shadow: 0 0 8px pink !important;
+    }
+
+    /* Unset Foundry style */
+    select:focus {
+      box-shadow: unset;
+    }
+
+    // For Firefox scrollbars
+    .container {
+      scrollbar-color: rgba(89, 97, 223, 1) #111 !important;
+    }
+
+    .style-rule {
+      background: linear-gradient(180deg, #4b4a44 0%, #191813 100%) !important;
+      border-top: solid 1px #666 !important;
+      border-bottom: solid 1px #444 !important;
+      padding: 0 0 2px 5px !important;
+    }
+
+    .window-content {
+      color: #b5b3a4 !important;
+      background: linear-gradient(135deg, rgba(52, 51, 52, 0.9) 10%, rgba(15, 14, 28, 0.9) 90%) !important;
+    }
+
+    .window-header {
+      h4 {
+        font-family: "Signika", sans-serif !important;
+      }
+
+      i {
+        border: none !important;
+        padding: 0 !important;
+        width: 9.63px !important;
+        background-color: unset !important;
+
+        &.fas:not(.fa-times) {
+          width: 14px !important;
+        }
+      }
+    }
+  }
+}

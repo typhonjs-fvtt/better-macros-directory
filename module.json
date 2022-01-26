@@ -1,0 +1,36 @@
+{
+  "name": "better-macro-directory",
+  "title": "Better Macro Directory",
+  "description": "Provides a better macro directory experience over Foundry core.",
+  "version": "0.0.0",
+  "library": false,
+  "manifestPlusVersion": "1.0.0",
+  "minimumCoreVersion": "9",
+  "compatibleCoreVersion": "9",
+  "author": "Michael Leahy (TyphonJS) - MLeahy#4299",
+  "authors": [
+    {
+      "name": "Michael Leahy (TyphonJS)",
+      "url": "https://www.typhonjs.io",
+      "discord": "MLeahy#4299"
+    }
+  ],
+  "esmodules": [
+    "/dist/better-macro-directory.js"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "url": "https://github.com/typhonjs-fvtt/better-macro-directory",
+  "readme": "https://github.com/typhonjs-fvtt/better-macro-directory#readme",
+  "bugs": "https://github.com/typhonjs-fvtt/better-macro-directory/issues",
+  "changelog": "https://github.com/typhonjs-fvtt/better-macro-directory/releases/latest/",
+  "manifest": "https://github.com/typhonjs-fvtt/better-macro-directory/releases/latest/download/module.json",
+  "download": "https://github.com/typhonjs-fvtt/better-macro-directory/releases/download/0.0.0/module.zip",
+  "protected": false,
+  "coreTranslation": false
+}

@@ -1,0 +1,28 @@
+{
+  "bmd": {
+    "settings": {
+      "title": "Better Macro Directory",
+      "config": {
+        "name": "Click to open:",
+        "label": "Better Macro Directory"
+      }
+    },
+
+    "buttons": {
+      "darkmode": {
+        "disable": "Disable dark mode",
+        "enable": "Enable dark mode"
+      },
+      "keyword-filter": {
+        "disable": "Disable filters",
+        "enable": "Enable filters"
+      },
+      "close-all": "Close All",
+      "open-all": "Open All"
+    },
+
+    "menu": {
+      "always-on-top": "Always on top"
+    }
+  }
+}

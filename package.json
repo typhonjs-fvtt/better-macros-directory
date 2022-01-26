@@ -1,0 +1,45 @@
+{
+  "name": "better-macro-directory",
+  "description": "Provides a better macro directory experience over Foundry core.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "author": "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)",
+  "imports": {
+    "#constants": "./src/constants.js",
+    "#views": "./src/view/index.js"
+  },
+  "dependencies": {
+    "svelte": "^3.46.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@rollup/plugin-babel": "^5",
+    "@rollup/plugin-alias": "^3",
+    "@rollup/plugin-commonjs": "^19",
+    "@rollup/plugin-virtual": "^2",
+    "@typhonjs-config/eslint-config": "^0.3.0",
+    "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
+    "eslint": "^8"
+  },
+  "peerDependencies": {
+    "@rollup/plugin-node-resolve": "^13",
+    "autoprefixer": "^10",
+    "cssnano": "^5",
+    "postcss": "^8",
+    "postcss-preset-env": "^7",
+    "rollup-plugin-postcss": "^4",
+    "rollup-plugin-sourcemaps": "^0.6",
+    "rollup-plugin-svelte": "^7",
+    "rollup-plugin-terser": "^7",
+    "sass": "^1",
+    "svelte-preprocess": "^4.10.0"
+  },
+  "browserslist": [">5%", "not IE 11"],
+  "scripts": {
+    "build": "rollup --config",
+    "build-watch": "rollup --watch --config",
+    "eslint": "eslint ."
+  }
+}

@@ -5,7 +5,7 @@
       ApplicationShell,
       TJSApplicationShell }      from '@typhonjs-fvtt/runtime/svelte/component/core';
 
-   import Directory              from './dir/Directory.svelte';
+   import MacroDirectory         from './dir/MacroDirectory.svelte';
 
    import { sessionConstants }   from "#constants";
 
@@ -30,5 +30,5 @@
 <svelte:options accessors={true}/>
 
 <svelte:component this={appShell} bind:elementRoot>
-   <Directory/>
+   <MacroDirectory/>
 </svelte:component>

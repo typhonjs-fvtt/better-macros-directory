@@ -36,6 +36,11 @@ export default class PluginLoader
    static async foundryReady()
    {
       await pluginManager.addAll([
+         {
+            name: 'bmd-data-macros',
+            instance: DataPlugins.MacroData
+         },
+
          // System plugins -------------------------------------------------------------------------------------------
 
          // Add view manager.

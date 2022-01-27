@@ -22,6 +22,8 @@
     },
 
     "menu": {
+      "create-macro": "Create Macro",
+      "create-folder": "Create Folder",
       "always-on-top": "Always on top"
     }
   }

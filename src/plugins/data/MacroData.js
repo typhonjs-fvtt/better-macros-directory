@@ -1,8 +1,9 @@
 import { writable }        from 'svelte/store';
 import { DynArrayReducer } from '@typhonjs-fvtt/svelte-standard/store';
 
-import { filterSearch }   from './filterSearch.js';
+import { filterSearch }    from './filterSearch.js';
 import { filterUser }      from './filterUser.js';
+import { sortAlpha }       from './sortAlpha.js';
 
 export class MacroData
 {
@@ -10,7 +11,11 @@ export class MacroData
 
    static augmentTree(data)
    {
-      data.contentStore = new DynArrayReducer({ data: data.content, filters: [filterSearch, filterUser] });
+      data.contentStore = new DynArrayReducer({
+         data: data.content,
+         filters: [filterSearch, filterUser],
+         sort: sortAlpha
+      });
 
       for (const child of data.children) { this.augmentTree(child); }
 
@@ -24,6 +29,7 @@ export class MacroData
 
       const tree = this.augmentTree(SidebarDirectory.setupFolders(folders, documents));
       tree.filterSearch = filterSearch;
+      tree.sortAlpha = sortAlpha;
 
       tree.userSelect = {
          selected: '',

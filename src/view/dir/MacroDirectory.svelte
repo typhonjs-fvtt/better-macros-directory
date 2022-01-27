@@ -13,6 +13,7 @@
       TJSSelect,
       TJSToggleIconButton }      from '@typhonjs-fvtt/svelte-standard/component';
 
+   import { createMenuItems }    from './createMenuItems.js';
    import Folder                 from './Folder.svelte';
    import FolderContent          from './FolderContent.svelte';
 
@@ -24,13 +25,31 @@
 
    const storeScroll = writable(void 0);
 
+   const alphaSortButton = {
+      store: $tree.sortAlpha,
+      icon: 'fas fa-sort-alpha-down',
+      efx: ripple(),
+      styles: { 'margin-left': '8px' }
+   };
+
+   const overflowMenu = {
+      icon: 'fas fa-ellipsis-v',
+      efx: ripple(),
+      styles: { 'margin-left': '8px' }
+   };
+
    let itemHeight = 20;
 </script>
 
 <section class=top-bar>
 <!--   <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>-->
    <TJSInput input={{ store: $tree.filterSearch, efx: rippleFocus() }}/>
-<!--   <input type=range bind:value={itemHeight} min=20 max=60>-->
+   <TJSToggleIconButton button={alphaSortButton}/>
+   <TJSToggleIconButton button={overflowMenu}>
+      <TJSMenu menu={{ items: createMenuItems(eventbus), offset:{ y: 4 } }} />
+   </TJSToggleIconButton>
+
+   <!--   <input type=range bind:value={itemHeight} min=20 max=60>-->
 </section>
 
 <div class=container use:storeScrolltop={storeScroll}>

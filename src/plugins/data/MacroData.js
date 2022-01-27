@@ -1,16 +1,39 @@
-import { writable } from 'svelte/store';
+import { writable }        from 'svelte/store';
+import { DynArrayReducer } from '@typhonjs-fvtt/svelte-standard/store';
+
+import { filterSearch }   from './filterSearch.js';
+import { filterUser }      from './filterUser.js';
 
 export class MacroData
 {
    static tree = writable({ root: true, content: [], children: [] });
 
+   static augmentTree(data)
+   {
+      data.contentStore = new DynArrayReducer({ data: data.content, filters: [filterSearch, filterUser] });
+
+      for (const child of data.children) { this.augmentTree(child); }
+
+      return data;
+   }
+
    static buildTree()
    {
-      const folders = game.folders.filter(f => f.type === 'Macro');
-      const documents = game.collections.get('Macro').filter(e => e.visible);
+      const folders = game.folders.filter((f) => f.type === 'Macro');
+      const documents = game.collections.get('Macro').filter((e) => e.visible);
+
+      const tree = this.augmentTree(SidebarDirectory.setupFolders(folders, documents));
+      tree.filterSearch = filterSearch;
+
+      tree.userSelect = {
+         selected: '',
+         options: [{ label: 'All', value: '' }, ...[...game.users].map((u) => ({ label: u.name, value: u.id })).sort(
+          (a, b) => a.label.localeCompare(b.label))],
+         store: filterUser
+      };
 
       // Build Tree
-      this.tree.set(SidebarDirectory.setupFolders(folders, documents));
+      this.tree.set(tree);
    }
 
    static render(force, options = {})

@@ -10,5 +10,5 @@
 {#each folder.children as folder (folder.id)}
    <svelte:self {folder}/>
 {/each}
-<FolderContent content={folder.content} />
+<FolderContent content={folder.contentStore} />
 </TJSFolder>

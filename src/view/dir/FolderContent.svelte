@@ -17,7 +17,7 @@
    }
 </script>
 
-{#each content as macro (macro.id)}
+{#each [...$content] as macro (macro.id)}
    <li class="directory-item document flexrow">
       {#if macro.data.img}
          <img class=thumbnail title={macro.name} alt={macro.name} src={macro.data.img}/>

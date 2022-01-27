@@ -24,11 +24,13 @@
 
    const storeScroll = writable(void 0);
 
-   let itemHeight = 40;
+   let itemHeight = 20;
 </script>
 
 <section class=top-bar>
-   <input type=range bind:value={itemHeight} min=20 max=60>
+<!--   <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>-->
+   <TJSInput input={{ store: $tree.filterSearch, efx: rippleFocus() }}/>
+<!--   <input type=range bind:value={itemHeight} min=20 max=60>-->
 </section>
 
 <div class=container use:storeScrolltop={storeScroll}>
@@ -37,7 +39,7 @@
          {#each $tree.children as folder (folder.id)}
             <Folder {folder}/>
          {/each}
-         <FolderContent content={$tree.content} />
+         <FolderContent content={$tree.contentStore} />
       </ol>
    </section>
 </div>

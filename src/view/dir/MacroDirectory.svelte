@@ -1,5 +1,6 @@
 <script>
    import { getContext }            from 'svelte';
+   import { quintOut }              from 'svelte/easing';
    import { writable }              from 'svelte/store';
 
    import {
@@ -25,35 +26,50 @@
 
    const storeScroll = writable(void 0);
 
+   const searchInput = {
+      store: $tree.filterSearch,
+      efx: rippleFocus(),
+      placeholder: 'bmd.form.search-macros',
+      styles: { '--tjs-input-text-align': 'center', 'margin-left': '4px' }
+   };
+
    const alphaSortButton = {
       store: $tree.sortAlpha,
       icon: 'fas fa-sort-alpha-down',
       efx: ripple(),
-      styles: { 'margin-left': '8px' }
+      styles: { 'margin-left': '4px' }
    };
 
    const overflowMenu = {
       icon: 'fas fa-ellipsis-v',
       efx: ripple(),
-      styles: { 'margin-left': '8px' }
+      styles: { 'margin-left': '4px' }
    };
 
+   let fontSize;
    let itemHeight = 20;
+
+   // A very fun use of Svelte easing / quintOut to modify font-size reactively from 1 to 1.25em.
+   $: fontSize = `${1 + (quintOut((itemHeight - 20) / 30 ) * 0.25)}em`;
 </script>
 
 <section class=top-bar>
-<!--   <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>-->
-   <TJSInput input={{ store: $tree.filterSearch, efx: rippleFocus() }}/>
+   <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>
+   <TJSInput input={searchInput}/>
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>
-      <TJSMenu menu={{ items: createOverflowItems(eventbus), offset:{ y: 4 } }} />
+      <TJSMenu menu={{ items: createOverflowItems(eventbus), offset:{ y: 4 } }}>
+         <span slot=after>
+            <input type=range bind:value={itemHeight} min=20 max=50>
+         </span>
+      </TJSMenu>
    </TJSToggleIconButton>
-
-   <!--   <input type=range bind:value={itemHeight} min=20 max=60>-->
 </section>
 
 <div class=container use:storeScrolltop={storeScroll}>
-   <section class="directory flexcol" style:--sidebar-item-height={`${itemHeight}px`}>
+   <section class="directory flexcol"
+            style:font-size={fontSize}
+            style:--sidebar-item-height={`${itemHeight}px`}>
       <ol class=directory-list>
          {#each $tree.children as folder (folder.id)}
             <Folder {folder}/>

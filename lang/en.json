@@ -21,6 +21,10 @@
       "open-all": "Open All"
     },
 
+    "form": {
+      "search-macros": "Search Macros"
+    },
+
     "menu": {
       "context": {
         "execute-macro": "Execute Macro",

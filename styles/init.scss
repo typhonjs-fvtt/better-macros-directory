@@ -77,6 +77,11 @@
       text-shadow: 0 0 8px pink !important;
     }
 
+    input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #666;
+      //opacity: 1;
+    }
+
     /* Unset Foundry style */
     select:focus {
       box-shadow: unset;

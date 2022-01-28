@@ -4,14 +4,20 @@ let keyword = '';
 let storeKeyword = writable(keyword);
 let regex;
 
+/**
+ * If there is no filter keyword / regex then don't filter otherwise filter based on the case-insensitive regex
+ * created from the search input element.
+ *
+ * @param {Macro} macro -
+ *
+ * @returns {boolean} Macro filter state.
+ */
 function filterSearch(macro)
 {
-   // If there is no filter keyword or enabled store is false return true and don't filter. Otherwise, filter variable
-   // by inclusion of keyword in full property name.
    return keyword === '' || !regex ? true : regex.test(SearchFilter.cleanQuery(macro.name));
 }
 
-// Create a custom store that changes when either storeKeyword or storeEnabled changes.
+// Create a custom store that changes when the search keyword changes.
 filterSearch.subscribe = storeKeyword.subscribe;
 filterSearch.get = () => keyword;
 filterSearch.set = (value) =>

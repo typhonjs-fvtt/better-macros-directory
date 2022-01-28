@@ -46,11 +46,16 @@
       styles: { 'margin-left': '4px' }
    };
 
+   let folderStyles;
    let fontSize;
    let itemHeight = 20;
 
    // A very fun use of Svelte easing / quintOut to modify font-size reactively from 1 to 1.25em.
-   $: fontSize = `${1 + (quintOut((itemHeight - 20) / 30 ) * 0.25)}em`;
+   // `folderStyles` adjusts the CSS var that is attached to the chevron of the child folders.
+   $: {
+      fontSize = `${1 + (quintOut((itemHeight - 20) / 30 ) * 0.25)}em`;
+      folderStyles = { '--tjs-summary-font-size': fontSize };
+   }
 </script>
 
 <section class=top-bar>
@@ -72,7 +77,7 @@
             style:--sidebar-item-height={`${itemHeight}px`}>
       <ol class=directory-list>
          {#each $tree.children as folder (folder.id)}
-            <Folder {folder}/>
+            <Folder {folder} styles={folderStyles}/>
          {/each}
          <FolderContent content={$tree.contentStore} />
       </ol>

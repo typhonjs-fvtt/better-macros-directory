@@ -30,7 +30,7 @@
       store: $tree.filterSearch,
       efx: rippleFocus(),
       placeholder: 'bmd.form.search-macros',
-      styles: { '--tjs-input-text-align': 'center', 'margin-left': '4px' }
+      styles: { '--tjs-input-text-align': 'center' }
    };
 
    const alphaSortButton = {
@@ -59,7 +59,9 @@
 </script>
 
 <section class=top-bar>
-   <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>
+   {#if $tree.isGM}
+      <TJSSelect select={$tree.userSelect} efx={rippleFocus()} styles={{'margin-right': '4px'}}/>
+   {/if}
    <TJSInput input={searchInput}/>
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>

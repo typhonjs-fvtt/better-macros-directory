@@ -50,6 +50,7 @@ export class MacroData
       tree.filterSearch = filterSearch;
       tree.sortAlpha = sortAlpha;
       tree.userSelect = this.userSelect;
+      tree.isGM = game.user.isGM;
 
       this.tree.set(tree);
    }

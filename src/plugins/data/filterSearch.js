@@ -1,12 +1,8 @@
 import { writable }  from 'svelte/store';
 
-let keyword;
-let storeKeyword;
+let keyword = '';
+let storeKeyword = writable(keyword);
 let regex;
-
-storeKeyword = writable('');
-
-keyword = '';
 
 function filterSearch(macro)
 {

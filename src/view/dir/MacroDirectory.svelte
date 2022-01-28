@@ -1,21 +1,21 @@
 <script>
-   import { getContext }         from 'svelte';
-   import { writable }           from 'svelte/store';
+   import { getContext }            from 'svelte';
+   import { writable }              from 'svelte/store';
 
    import {
       ripple,
       rippleFocus,
-      storeScrolltop }           from '@typhonjs-fvtt/svelte-standard/action';
+      storeScrolltop }              from '@typhonjs-fvtt/svelte-standard/action';
 
    import {
       TJSInput,
       TJSMenu,
       TJSSelect,
-      TJSToggleIconButton }      from '@typhonjs-fvtt/svelte-standard/component';
+      TJSToggleIconButton }         from '@typhonjs-fvtt/svelte-standard/component';
 
-   import { createMenuItems }    from './createMenuItems.js';
-   import Folder                 from './Folder.svelte';
-   import FolderContent          from './FolderContent.svelte';
+   import { createOverflowItems }   from './createOverflowItems.js';
+   import Folder                    from './Folder.svelte';
+   import FolderContent             from './FolderContent.svelte';
 
    import { sessionConstants }   from "#constants";
 
@@ -46,7 +46,7 @@
    <TJSInput input={{ store: $tree.filterSearch, efx: rippleFocus() }}/>
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>
-      <TJSMenu menu={{ items: createMenuItems(eventbus), offset:{ y: 4 } }} />
+      <TJSMenu menu={{ items: createOverflowItems(eventbus), offset:{ y: 4 } }} />
    </TJSToggleIconButton>
 
    <!--   <input type=range bind:value={itemHeight} min=20 max=60>-->

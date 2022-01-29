@@ -4,13 +4,6 @@ import BMDAppShell           from './BMDAppShell.svelte';
 
 import { constants, sessionConstants } from '#constants';
 
-/**
- * Provides the default position for BMDirectory if not defined.
- *
- * @type {{top: number, width: number}}
- */
-const s_DEFAULT_POSITION = { top: 80, width: 325 };
-
 export default class BMDirectory extends SvelteApplication
 {
    /**
@@ -78,53 +71,8 @@ export default class BMDirectory extends SvelteApplication
       return buttons;
    }
 
-   /**
-    * Saves the position with a debounce to session storage.
-    *
-    * @inheritDoc
-    */
-   setPosition(pos = {})
-   {
-      const currentPosition = super.setPosition(pos);
-
-      s_SAVE_POSITION(currentPosition, this._eventbus);
-
-      return currentPosition;
-   }
-
    onPluginLoad(ev)
    {
       this._eventbus = ev.eventbus;
-
-      try
-      {
-         /**
-          * Retrieves and sets any stored position from session storage.
-          *
-          * @type {object}
-          * {@link Application.position}
-          */
-         const position = JSON.parse(
-          this._eventbus.triggerSync('bmd:storage:session:item:get', sessionConstants.bmdPosition, {}));
-
-         if (position !== null && typeof position === 'object')
-         {
-            const constraints = (({left, top, width, height}) => ({left, top, width, height}))(position);
-
-            if (Object.keys(constraints).length > 0) { this.position = Object.assign(this.position, constraints); }
-         }
-      }
-      catch (err)
-      {
-         this.position = s_DEFAULT_POSITION;
-      }
    }
 }
-
-/**
- * Provides a debounced function to save position to {@link BMDSessionConstants.bmdPosition}.
- */
-const s_SAVE_POSITION = foundry.utils.debounce((currentPosition, eventbus) =>
-{
-   eventbus.triggerSync('bmd:storage:session:item:set', sessionConstants.bmdPosition, JSON.stringify(currentPosition));
-}, 500);

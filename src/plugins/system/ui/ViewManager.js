@@ -1,8 +1,6 @@
-import {
-   constants,
-   sessionConstants }   from "#constants";
+import { constants } from "#constants";
 
-import * as Views       from '#views';
+import * as Views    from '#views';
 
 const Apps = {
    directory: void 0
@@ -19,11 +17,6 @@ export class ViewManager
          instance: Apps.directory
       });
 
-      Hooks.on('BetterMacro.Open.Directory', this.renderDirectory);
-
-      Hooks.on('closeBMDirectory', this.#bmdClosed.bind(this));
-      Hooks.on('renderBMDirectory', this.#bmdRendered.bind(this));
-
       Hooks.on('renderHotbar', this.#hotbarRendered.bind(this));
 
       game.settings.registerMenu(constants.moduleName, 'config', {
@@ -33,36 +26,6 @@ export class ViewManager
          type: Views.SettingsShim,
          restricted: false
       });
-
-      // If there is an existing session storage item for BMDirectory being open then render it.
-      if (this._eventbus.triggerSync('bmd:storage:session:item:get', sessionConstants.bmdOpen, false))
-      {
-         this.renderDirectory();
-      }
-   }
-
-   /**
-    * Handles the `closeBMDirectory` hook. Setting the session storage item `bmdOpen` to false.
-    *
-    * @param {BMDirectory}   bmd - The closed BMDirectory app.
-    */
-   static #bmdClosed(bmd)
-   {
-      if (!(bmd instanceof Views.BMDirectory)) { return; }
-
-      this._eventbus.triggerSync('bmd:storage:session:item:set', sessionConstants.bmdOpen, false)
-   }
-
-   /**
-    * Handles the `renderBMDirectory` hook. Setting the session storage item `bmdOpen` to true.
-    *
-    * @param {BMDirectory}   bmd - The closed BMDirectory app.
-    */
-   static #bmdRendered(bmd)
-   {
-      if (!(bmd instanceof Views.BMDirectory)) { return; }
-
-      this._eventbus.triggerSync('bmd:storage:session:item:set', sessionConstants.bmdOpen, true)
    }
 
    /**
@@ -85,17 +48,9 @@ export class ViewManager
          element.parentNode.replaceChild(elementClone, element);
 
          // Add new listeners; click opens BMD; context menu opens the core / old macros directory app.
-         elementClone.addEventListener('click', () => this.renderDirectory());
+         elementClone.addEventListener('click', () => Apps.directory.render(true, { focus: true }));
          elementClone.addEventListener('contextmenu', () => ui.macros.renderPopout(true));
       }
-   }
-
-   /**
-    * Convenience method to render BMD.
-    */
-   static renderDirectory()
-   {
-      Apps.directory.render(true, { focus: true });
    }
 
    static async onPluginLoad(ev)

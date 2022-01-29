@@ -1,1 +1,1 @@
-export * from './MacroData.js'
+export * from './MacroData.js';

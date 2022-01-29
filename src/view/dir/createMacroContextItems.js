@@ -1,5 +1,14 @@
 import { TJSDialog } from '@typhonjs-fvtt/runtime/svelte/application';
 
+/**
+ * Creates the items for the context menu from the given document ID.
+ *
+ * @param {object}   eventbus - Plugin eventbus
+ *
+ * @param {string}   documentId - Document ID to lookup
+ *
+ * @returns {object[]} Context menu items.
+ */
 export function createMacroContextItems(eventbus, documentId)
 {
    const macro = game.macros.get(documentId);
@@ -20,9 +29,9 @@ export function createMacroContextItems(eventbus, documentId)
             return TJSDialog.confirm({
                modal: true,
                draggable: false,
-               title: `${game.i18n.format("DOCUMENT.Delete", {type})}: ${macro.name}`,
+               title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${macro.name}`,
                content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.format("SIDEBAR.DeleteWarning", 
-                {type})}</p>`,
+                { type })}</p>`,
                yes: macro.delete.bind(macro)
             });
          }

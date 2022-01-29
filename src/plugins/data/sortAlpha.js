@@ -10,7 +10,7 @@ const storeSort = writable(sort);
  *
  * @param {Macro} b -
  *
- * @returns {number}
+ * @returns {number} sort order
  */
 function sortAlpha(a, b)
 {
@@ -24,9 +24,9 @@ sortAlpha.set = (value) =>
 {
    if (typeof value === 'boolean')
    {
-      sort = value
+      sort = value;
       storeSort.set(sort);
    }
-}
+};
 
 export { sortAlpha };

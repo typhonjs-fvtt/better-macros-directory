@@ -1,9 +1,8 @@
-.github/
-./assets/
-./css/
-./dist/
-./docs/
-./lang/
-./styles/
-src/lch-picker/*
+/.github/
+/assets/
+/css/
+/dist/
+/docs/
+/lang/
+/styles/
 src/**/*.svelte

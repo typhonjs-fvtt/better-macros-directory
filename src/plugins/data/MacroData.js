@@ -21,8 +21,9 @@ export class MacroData
     * converting the 'content' array to a DynArrayReducer store w/ two filters for retaining macros owned by a specific
     * user and a keyword search. Additionally, an alpha sort can be applied to any remaining macros & folders.
     *
-    * @param data
-    * @returns {*}
+    * @param {object}   data - Data from SidebarDirectory.
+    *
+    * @returns {object} Augmented tree structure.
     */
    static augmentTree(data)
    {
@@ -64,13 +65,12 @@ export class MacroData
     */
    static render(force, options = {})
    {
-      const {action, data, documentType} = options;
+      const { action, data, documentType } = options;
 
-      if (action && !['create', 'update', 'delete'].includes(action) ) { return this; }
+      if (action && !['create', 'update', 'delete'].includes(action)) { return this; }
 
-      if ((documentType !== 'Folder') && (action === 'update') && !data.some((d) => {
-         return s_RENDER_UPDATE_KEYS.some((k) => k in d);
-      })) { return; }
+      if ((documentType !== 'Folder') && (action === 'update') && !data.some(
+       (d) => s_RENDER_UPDATE_KEYS.some((k) => k in d))) { return; }
 
       this.buildTree();
    }

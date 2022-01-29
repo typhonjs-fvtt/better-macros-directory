@@ -3,6 +3,14 @@ import { writable }  from 'svelte/store';
 let userId = '';
 const storeUserId = writable(userId);
 
+/**
+ * If there is no userId set then do not filter otherwise filter based on the default state or individual matching user
+ * permissions for greater or equals OBSERVER.
+ *
+ * @param {Macro} macro - Macro to potentially filter.
+ *
+ * @returns {boolean} Macro filter state.
+ */
 function filterUser(macro)
 {
    const perms = macro.data.permission;
@@ -24,6 +32,6 @@ filterUser.set = (value) =>
       userId = value;
       storeUserId.set(userId);
    }
-}
+};
 
 export { filterUser };

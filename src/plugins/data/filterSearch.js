@@ -1,14 +1,14 @@
 import { writable }  from 'svelte/store';
 
 let keyword = '';
-let storeKeyword = writable(keyword);
 let regex;
+const storeKeyword = writable(keyword);
 
 /**
- * If there is no filter keyword / regex then don't filter otherwise filter based on the case-insensitive regex
+ * If there is no filter keyword / regex then do not filter otherwise filter based on the case-insensitive regex
  * created from the search input element.
  *
- * @param {Macro} macro -
+ * @param {Macro} macro - Macro to potentially filter.
  *
  * @returns {boolean} Macro filter state.
  */
@@ -28,6 +28,6 @@ filterSearch.set = (value) =>
       regex = new RegExp(RegExp.escape(keyword), 'i');
       storeKeyword.set(keyword);
    }
-}
+};
 
 export { filterSearch };

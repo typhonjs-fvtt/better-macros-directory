@@ -1,4 +1,11 @@
-export function createOverflowItems(eventbus)
+/**
+ * Creates the items for the overflow menu.
+ *
+ * @param {object}   eventbus - Plugin eventbus
+ *
+ * @returns {object[]} Overflow menu items.
+ */
+export function createOverflowItems(eventbus) // eslint-disable-line no-unused-vars
 {
    return [
       { label: 'bmd.menu.overflow.create-macro', icon: 'fas fa-code' },

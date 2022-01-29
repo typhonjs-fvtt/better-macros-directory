@@ -1,6 +1,4 @@
-import {
-   SessionStorage,
-   TJSGameSettings }       from '@typhonjs-fvtt/runtime/svelte/plugin/system';
+import { SessionStorage }  from '@typhonjs-fvtt/runtime/svelte/plugin/system';
 
 import * as DataPlugins    from './data/index.js';
 import * as SystemPlugins  from './system/index.js';
@@ -19,17 +17,7 @@ export default class PluginLoader
             name: 'tjs-system-session-storage',
             instance: new SessionStorage(),
             options: { eventPrepend: 'bmd' }
-         },
-         // Add setting dispatch / triggers events w/ data for all settings changes; also provides Svelte stores.
-         {
-            name: 'tjs-system-game-settings',
-            instance: new TJSGameSettings()
-         },
-         // Add setting control / responder to settings changes.
-         {
-            name: 'bmd-system-settings-control',
-            instance: new SystemPlugins.SettingsControl()
-         },
+         }
       ]);
    }
 

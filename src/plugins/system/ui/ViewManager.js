@@ -1,6 +1,4 @@
-import { constants } from "#constants";
-
-import * as Views    from '#views';
+import * as Views from '#views';
 
 const Apps = {
    directory: void 0
@@ -18,14 +16,6 @@ export class ViewManager
       });
 
       Hooks.on('renderHotbar', this.#hotbarRendered.bind(this));
-
-      game.settings.registerMenu(constants.moduleName, 'config', {
-         name: 'bmd.settings.config.name',
-         label: 'bmd.settings.config.label',
-         icon: 'fas fa-palette',
-         type: Views.SettingsShim,
-         restricted: false
-      });
    }
 
    /**
@@ -58,7 +48,5 @@ export class ViewManager
       this._eventbus = ev.eventbus;
 
       await this.init();
-
-      ev.eventbus.on('bmd:system:viewmanager:bettermacros:render', this.renderDirectory, this, { guard: true });
    }
 }

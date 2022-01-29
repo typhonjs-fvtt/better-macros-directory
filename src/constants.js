@@ -24,10 +24,6 @@ const sessionConstants = {
 export { constants, sessionConstants, settings };
 
 /**
- * @typedef {object} BMDSettings
- */
-
-/**
  * @typedef {object} BMDSessionConstants
  *
  * @property {string} themeDarkMode - Indicates whether dark mode is enabled.

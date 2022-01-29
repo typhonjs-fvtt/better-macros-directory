@@ -15,7 +15,4 @@ Hooks.once('init', async () =>
    }));
 });
 
-Hooks.once('ready', async () =>
-{
-   await PluginLoader.foundryReady();
-});
+Hooks.once('ready', async () => await PluginLoader.foundryReady());

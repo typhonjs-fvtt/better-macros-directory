@@ -26,7 +26,11 @@
     },
 
     "menu": {
-      "context": {
+      "context-directory": {
+        "launch-core": "Core Macros Directory"
+      },
+
+      "context-macro": {
         "execute-macro": "Execute Macro",
         "delete-macro": "Delete Macro",
         "duplicate-macro": "Duplicate Macro",

@@ -24,6 +24,8 @@ export class ViewManager
       Hooks.on('closeBMDirectory', this.#bmdClosed.bind(this));
       Hooks.on('renderBMDirectory', this.#bmdRendered.bind(this));
 
+      Hooks.on('renderHotbar', this.#hotbarRendered.bind(this));
+
       game.settings.registerMenu(constants.moduleName, 'config', {
          name: 'bmd.settings.config.name',
          label: 'bmd.settings.config.label',
@@ -63,6 +65,34 @@ export class ViewManager
       this._eventbus.triggerSync('bmd:storage:session:item:set', sessionConstants.bmdOpen, true)
    }
 
+   /**
+    * Replace core listener for macro directory button to launch BMD from a click and a context menu click opens
+    * the old / core macros directory app.
+    *
+    * @param {Hotbar}   app - Hotbar app
+    *
+    * @param {JQuery}   html - Hotbar HTML
+    */
+   static #hotbarRendered(app, html)
+   {
+      const element = html[0].querySelector('#macro-directory');
+
+      if (element instanceof HTMLElement && element.parentNode instanceof HTMLElement)
+      {
+         const elementClone = element.cloneNode(true);
+
+         // Clone anchor element to remove all listeners.
+         element.parentNode.replaceChild(elementClone, element);
+
+         // Add new listeners; click opens BMD; context menu opens the core / old macros directory app.
+         elementClone.addEventListener('click', () => this.renderDirectory());
+         elementClone.addEventListener('contextmenu', () => ui.macros.renderPopout(true));
+      }
+   }
+
+   /**
+    * Convenience method to render BMD.
+    */
    static renderDirectory()
    {
       Apps.directory.render(true, { focus: true });
@@ -74,8 +104,6 @@ export class ViewManager
 
       await this.init();
 
-      const opts = { guard: true };
-
-      ev.eventbus.on('bmd:system:viewmanager:bettermacros:render', this.renderDirectory, this, opts);
+      ev.eventbus.on('bmd:system:viewmanager:bettermacros:render', this.renderDirectory, this, { guard: true });
    }
 }

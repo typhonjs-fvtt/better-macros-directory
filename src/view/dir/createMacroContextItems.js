@@ -6,12 +6,12 @@ export function createMacroContextItems(eventbus, documentId)
 
    return [
       {
-         label: 'bmd.menu.context.execute-macro',
+         label: 'bmd.menu.context-macro.execute-macro',
          icon: 'fas fa-dice-d20',
          onclick: () => macro.execute()
       },
       {
-         label: 'bmd.menu.context.delete-macro',
+         label: 'bmd.menu.context-macro.delete-macro',
          icon: 'fas fa-trash fa-fw',
          condition: () => game.user.isGM || macro.isOwner,
          onclick: () =>
@@ -28,24 +28,24 @@ export function createMacroContextItems(eventbus, documentId)
          }
       },
       {
-         label: 'bmd.menu.context.duplicate-macro',
+         label: 'bmd.menu.context-macro.duplicate-macro',
          icon: 'fas fa-copy fa-fw',
          condition: () => game.user.isGM || macro.isOwner,
          onclick: () => macro.clone({ name: `${macro.name} (Copy)` }, { save: true })
       },
       {
-         label: 'bmd.menu.context.configure-permissions',
+         label: 'bmd.menu.context-macro.configure-permissions',
          icon: 'fas fa-lock fa-fw',
          onclick: () => console.log('ITEM 1 Selected')
       },
       {
-         label: 'bmd.menu.context.export-data',
+         label: 'bmd.menu.context-macro.export-data',
          icon: 'fas fa-file-export fa-fw',
          condition: () => macro.isOwner,
          onclick: () => macro.exportToJSON()
       },
       {
-         label: 'bmd.menu.context.import-data',
+         label: 'bmd.menu.context-macro.import-data',
          icon: 'fas fa-file-import fa-fw',
          condition: () => macro.isOwner,
          onclick: () => macro.importFromJSONDialog()

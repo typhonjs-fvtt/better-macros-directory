@@ -1,9 +1,12 @@
-import { writable }        from 'svelte/store';
-import { DynArrayReducer } from '@typhonjs-fvtt/svelte-standard/store';
+import { writable }           from 'svelte/store';
 
-import { filterSearch }    from './filterSearch.js';
-import { filterUser }      from './filterUser.js';
-import { sortAlpha }       from './sortAlpha.js';
+import { DynArrayReducer }    from '@typhonjs-fvtt/svelte-standard/store';
+
+import { filterSearch }       from './filterSearch.js';
+import { filterUser }         from './filterUser.js';
+import { sortAlpha }          from './sortAlpha.js';
+
+import { Subscribers }        from './Subscribers.js';
 
 /**
  * Provides the data preparation and generation for the Svelte view layer. MacroData takes advantage of the core
@@ -43,6 +46,9 @@ export class MacroData
     */
    static buildTree()
    {
+      // Run all unsubscribe functions for DynArrayReducer subscriptions added previously.
+      Subscribers.unsubscribeAll();
+
       const folders = game.folders.filter((f) => f.type === 'Macro');
       const documents = game.collections.get('Macro').filter((e) => e.visible);
 

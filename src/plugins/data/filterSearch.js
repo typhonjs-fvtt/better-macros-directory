@@ -1,4 +1,6 @@
-import { writable }  from 'svelte/store';
+import { writable }     from 'svelte/store';
+
+import { Subscribers }  from './Subscribers.js';
 
 let keyword = '';
 let regex;
@@ -18,8 +20,15 @@ function filterSearch(macro)
 }
 
 // Create a custom store that changes when the search keyword changes.
-filterSearch.subscribe = storeKeyword.subscribe;
-filterSearch.get = () => keyword;
+filterSearch.subscribe = (handler) =>
+{
+   const unsubscribe = storeKeyword.subscribe(handler);
+
+   Subscribers.add(unsubscribe);
+
+   return unsubscribe;
+};
+
 filterSearch.set = (value) =>
 {
    if (typeof value === 'string')
@@ -29,5 +38,7 @@ filterSearch.set = (value) =>
       storeKeyword.set(keyword);
    }
 };
+
+// ------------------------
 
 export { filterSearch };

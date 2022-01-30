@@ -1,4 +1,6 @@
-import { writable }  from 'svelte/store';
+import { writable }     from 'svelte/store';
+
+import { Subscribers }  from './Subscribers.js';
 
 let sort = false;
 const storeSort = writable(sort);
@@ -17,9 +19,16 @@ function sortAlpha(a, b)
    return sort ? a.name.localeCompare(b.name) : 0;
 }
 
-// Create a custom store that changes when the toggle button is engaged.
-sortAlpha.subscribe = storeSort.subscribe;
-sortAlpha.get = () => sort;
+// Create a custom store that changes when on select / option change.
+sortAlpha.subscribe = (handler) =>
+{
+   const unsubscribe = storeSort.subscribe(handler);
+
+   Subscribers.add(unsubscribe);
+
+   return unsubscribe;
+};
+
 sortAlpha.set = (value) =>
 {
    if (typeof value === 'boolean')

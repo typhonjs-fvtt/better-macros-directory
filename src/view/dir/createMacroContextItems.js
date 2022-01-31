@@ -1,4 +1,6 @@
-import { TJSDialog } from '@typhonjs-fvtt/runtime/svelte/application';
+import {
+   TJSDialog,
+   TJSPermissionControl }  from '@typhonjs-fvtt/runtime/svelte/application';
 
 /**
  * Creates the items for the context menu from the given document ID.
@@ -45,7 +47,7 @@ export function createMacroContextItems(eventbus, documentId)
       {
          label: 'bmd.menu.context-macro.configure-permissions',
          icon: 'fas fa-lock fa-fw',
-         onclick: () => console.log('ITEM 1 Selected')
+         onclick: () => new TJSPermissionControl(macro).render(true, { focus: true })
       },
       {
          label: 'bmd.menu.context-macro.export-data',

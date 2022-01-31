@@ -29,18 +29,11 @@ function filterUser(macro)
 // Create a custom store that changes when on select / option change.
 filterUser.subscribe = (handler) =>
 {
-   console.log(`!!!!!! filterUser - SUBSCRIBED - handler: `, handler);
    const unsubscribe = storeUserId.subscribe(handler);
 
-   const unsubscriber = () =>
-   {
-      console.log(`!!!!!! filterUser - UNSUBSCRIBED - handler: `, handler);
-      unsubscribe();
-   };
+   Subscribers.add(unsubscribe);
 
-   Subscribers.add(unsubscriber);
-
-   return unsubscriber;
+   return unsubscribe;
 };
 
 filterUser.set = (value) =>

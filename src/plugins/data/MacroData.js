@@ -18,9 +18,13 @@ import { Subscribers }           from './Subscribers.js';
  */
 export class MacroData
 {
+   /**
+    * @type {TJSDocumentCollection}
+    */
+   static collection;
+
    static tree = writable({ root: true, content: [], children: [] });
    static userSelect = {};
-   static collection;
 
    /**
     * Recursive function that augments the data structure returned by {@link SidebarDirectory.setupFolders}
@@ -79,7 +83,6 @@ export class MacroData
       this.collection = new TJSDocumentCollection(game.macros);
 
       this.userSelect = {
-         selected: '',
          options: [{ label: 'All', value: '' }, ...[...game.users].map((u) => ({ label: u.name, value: u.id })).sort(
           (a, b) => a.label.localeCompare(b.label))],
          store: filterUser
@@ -88,7 +91,7 @@ export class MacroData
       // Subscribe to receive updates from `game.macros`.
       this.collection.subscribe(() =>
       {
-         const options = this.collection.updateOptions ?? {};
+         const options = this.collection.updateOptions;
 
          //
          const { action, data, documentType } = options;

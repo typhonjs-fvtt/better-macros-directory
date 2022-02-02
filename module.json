@@ -1,7 +1,7 @@
 {
-  "name": "better-macro-directory",
-  "title": "Better Macro Directory",
-  "description": "Provides a better macro directory experience over Foundry core.",
+  "name": "better-macros-directory",
+  "title": "Better Macros Directory",
+  "description": "Provides a better macros directory experience over Foundry core.",
   "version": "0.0.0",
   "library": false,
   "manifestPlusVersion": "1.0.0",
@@ -16,7 +16,10 @@
     }
   ],
   "esmodules": [
-    "/dist/better-macro-directory.js"
+    "/dist/better-macros-directory.js"
+  ],
+  "styles": [
+    "/dist/better-macros-directory.css"
   ],
   "languages": [
     {

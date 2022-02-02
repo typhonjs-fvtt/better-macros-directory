@@ -17,7 +17,7 @@ const s_SOURCEMAPS = true;
 const s_TYPHONJS_MODULE_LIB = false;
 
 const postcssMain = postcssConfig({
-   extract: 'better-macro-directory.css',
+   extract: 'better-macros-directory.css',
    compress: s_COMPRESS,
    sourceMap: s_SOURCEMAPS
 });
@@ -40,7 +40,7 @@ export default () =>
       {  // The main module bundle
          input: `src/init.js`,
          output: {
-            file: `dist/better-macro-directory.js`,
+            file: `dist/better-macros-directory.js`,
             format: 'es',
             plugins: outputPlugins,
             sourcemap,

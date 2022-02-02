@@ -1,6 +1,6 @@
 {
-  "name": "better-macro-directory",
-  "description": "Provides a better macro directory experience over Foundry core.",
+  "name": "better-macros-directory",
+  "description": "Provides a better macros directory experience over Foundry core.",
   "license": "MIT",
   "private": true,
   "type": "module",

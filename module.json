@@ -16,10 +16,10 @@
     }
   ],
   "esmodules": [
-    "/dist/better-macros-directory.js"
+    "./dist/better-macros-directory.js"
   ],
   "styles": [
-    "/dist/better-macros-directory.css"
+    "./dist/better-macros-directory.css"
   ],
   "languages": [
     {

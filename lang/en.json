@@ -1,10 +1,10 @@
 {
   "bmd": {
     "settings": {
-      "title": "Better Macro Directory",
+      "title": "Better Macros Directory",
       "config": {
         "name": "Click to open:",
-        "label": "Better Macro Directory"
+        "label": "Better Macros Directory"
       }
     },
 

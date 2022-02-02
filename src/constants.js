@@ -4,8 +4,8 @@
  * @type {{moduleName: string, moduleLabel: string}}
  */
 const constants = {
-   moduleLabel: `Better Macro Directory`,
-   moduleName: 'better-macro-directory'
+   moduleLabel: `Better Macros Directory`,
+   moduleName: 'better-macros-directory'
 };
 
 /**

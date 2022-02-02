@@ -1,14 +1,14 @@
-import { writable }              from 'svelte/store';
+import { writable }        from 'svelte/store';
 
-import { TJSDocumentCollection } from '@typhonjs-fvtt/runtime/svelte/store';
+import {
+   DynArrayReducer,
+   TJSDocumentCollection } from '@typhonjs-fvtt/runtime/svelte/store';
 
-import { DynArrayReducer }       from '@typhonjs-fvtt/svelte-standard/store';
+import { filterSearch }    from './filterSearch.js';
+import { filterUser }      from './filterUser.js';
+import { sortAlpha }       from './sortAlpha.js';
 
-import { filterSearch }          from './filterSearch.js';
-import { filterUser }            from './filterUser.js';
-import { sortAlpha }             from './sortAlpha.js';
-
-import { Subscribers }           from './Subscribers.js';
+import { Subscribers }     from './Subscribers.js';
 
 /**
  * Provides the data preparation and generation for the Svelte view layer. MacroData takes advantage of the core

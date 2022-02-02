@@ -1,2 +1,2 @@
-# better-macro-directory
-Provides a better macro directory experience over Foundry core. 
+# better-macros-directory
+Provides a better macros directory experience over Foundry core. 

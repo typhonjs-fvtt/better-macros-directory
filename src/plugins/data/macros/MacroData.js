@@ -11,6 +11,15 @@ import { sortAlpha }       from './sortAlpha.js';
 import { Subscribers }     from './Subscribers.js';
 
 /**
+ * @type {TJSDocumentCollection}
+ */
+const collection = new TJSDocumentCollection();
+
+const tree = writable({ root: true, content: [], children: [] });
+
+let userSelect = {};
+
+/**
  * Provides the data preparation and generation for the Svelte view layer. MacroData takes advantage of the core
  * {@link SidebarDirectory} data preparation and augments the returned results with reactive storage. When any updates /
  * changes occur the core Foundry data preparation is kicked off and the resulting data is augmented and set to a
@@ -18,14 +27,6 @@ import { Subscribers }     from './Subscribers.js';
  */
 export class MacroData
 {
-   /**
-    * @type {TJSDocumentCollection}
-    */
-   static #collection;
-
-   static #tree = writable({ root: true, content: [], children: [] });
-   static #userSelect = {};
-
    /**
     * Recursive function that augments the data structure returned by {@link SidebarDirectory.setupFolders}
     * converting the 'content' array to a DynArrayReducer store w/ two filters for retaining macros owned by a specific
@@ -39,7 +40,7 @@ export class MacroData
    {
       data.contentStore = new DynArrayReducer({
          data: data.content,
-         filters: [filterSearch, filterUser],
+         filters: [filterUser, filterSearch],
          sort: sortAlpha
       });
 
@@ -64,13 +65,13 @@ export class MacroData
       const folders = game.folders.filter((f) => f.type === 'Macro');
       const documents = game.collections.get('Macro').filter((e) => e.visible);
 
-      const tree = this.#augmentTree(SidebarDirectory.setupFolders(folders, documents));
+      const newTree = this.#augmentTree(SidebarDirectory.setupFolders(folders, documents));
 
-      tree.filterSearch = filterSearch;
-      tree.sortAlpha = sortAlpha;
-      tree.userSelect = this.#userSelect;
+      newTree.filterSearch = filterSearch;
+      newTree.sortAlpha = sortAlpha;
+      newTree.userSelect = userSelect;
 
-      this.#tree.set(tree);
+      tree.set(newTree);
    }
 
    /**
@@ -80,21 +81,18 @@ export class MacroData
     */
    static onPluginLoad(ev)
    {
-      this.#collection = new TJSDocumentCollection(game.macros);
+      collection.set(game.macros);
 
-      this.#userSelect = {
+      userSelect = {
          options: [{ label: 'All', value: '' }, ...[...game.users].map((u) => ({ label: u.name, value: u.id })).sort(
           (a, b) => a.label.localeCompare(b.label))],
          store: filterUser
       };
 
       // Subscribe to receive updates from `game.macros`.
-      this.#collection.subscribe(() =>
+      collection.subscribe(() =>
       {
-         const options = this.#collection.updateOptions;
-
-         //
-         const { action, data, documentType } = options;
+         const { action, data, documentType } = collection.updateOptions;
 
          if (action && !['create', 'update', 'delete'].includes(action)) { return this; }
 
@@ -107,7 +105,7 @@ export class MacroData
       // Build tree initially as the initial response on subscription above will not have any update options set.
       this.#buildTree();
 
-      ev.eventbus.on('bmd:data:macros:directory:get', () => this.#tree, this, { guard: true });
+      ev.eventbus.on('bmd:data:macros:directory:get', () => tree, this, { guard: true });
    }
 }
 

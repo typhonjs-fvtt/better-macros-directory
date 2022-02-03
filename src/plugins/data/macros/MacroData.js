@@ -21,10 +21,10 @@ export class MacroData
    /**
     * @type {TJSDocumentCollection}
     */
-   static collection;
+   static #collection;
 
-   static tree = writable({ root: true, content: [], children: [] });
-   static userSelect = {};
+   static #tree = writable({ root: true, content: [], children: [] });
+   static #userSelect = {};
 
    /**
     * Recursive function that augments the data structure returned by {@link SidebarDirectory.setupFolders}
@@ -35,7 +35,7 @@ export class MacroData
     *
     * @returns {object} Augmented tree structure.
     */
-   static augmentTree(data)
+   static #augmentTree(data)
    {
       data.contentStore = new DynArrayReducer({
          data: data.content,
@@ -43,7 +43,7 @@ export class MacroData
          sort: sortAlpha
       });
 
-      for (const child of data.children) { this.augmentTree(child); }
+      for (const child of data.children) { this.#augmentTree(child); }
 
       return data;
    }
@@ -56,7 +56,7 @@ export class MacroData
     * and augment the returned results w/ DynArrayReducer for all content arrays. Downstream Svelte is smart enough to
     * not re-render everything.
     */
-   static buildTree()
+   static #buildTree()
    {
       // Run all unsubscribe functions for DynArrayReducer subscriptions added previously.
       Subscribers.unsubscribeAll();
@@ -64,13 +64,13 @@ export class MacroData
       const folders = game.folders.filter((f) => f.type === 'Macro');
       const documents = game.collections.get('Macro').filter((e) => e.visible);
 
-      const tree = this.augmentTree(SidebarDirectory.setupFolders(folders, documents));
+      const tree = this.#augmentTree(SidebarDirectory.setupFolders(folders, documents));
 
       tree.filterSearch = filterSearch;
       tree.sortAlpha = sortAlpha;
-      tree.userSelect = this.userSelect;
+      tree.userSelect = this.#userSelect;
 
-      this.tree.set(tree);
+      this.#tree.set(tree);
    }
 
    /**
@@ -80,18 +80,18 @@ export class MacroData
     */
    static onPluginLoad(ev)
    {
-      this.collection = new TJSDocumentCollection(game.macros);
+      this.#collection = new TJSDocumentCollection(game.macros);
 
-      this.userSelect = {
+      this.#userSelect = {
          options: [{ label: 'All', value: '' }, ...[...game.users].map((u) => ({ label: u.name, value: u.id })).sort(
           (a, b) => a.label.localeCompare(b.label))],
          store: filterUser
       };
 
       // Subscribe to receive updates from `game.macros`.
-      this.collection.subscribe(() =>
+      this.#collection.subscribe(() =>
       {
-         const options = this.collection.updateOptions;
+         const options = this.#collection.updateOptions;
 
          //
          const { action, data, documentType } = options;
@@ -101,13 +101,13 @@ export class MacroData
          if ((documentType !== 'Folder') && (action === 'update') && !data.some(
           (d) => s_RENDER_UPDATE_KEYS.some((k) => k in d))) { return; }
 
-         this.buildTree();
+         this.#buildTree();
       });
 
       // Build tree initially as the initial response on subscription above will not have any update options set.
-      this.buildTree();
+      this.#buildTree();
 
-      ev.eventbus.on('bmd:data:macro:directory:get', () => this.tree, this, { guard: true });
+      ev.eventbus.on('bmd:data:macro:directory:get', () => this.#tree, this, { guard: true });
    }
 }
 

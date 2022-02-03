@@ -24,7 +24,7 @@
 
    const eventbus = getContext('external').eventbus;
 
-   const tree = eventbus.triggerSync('bmd:data:macro:directory:get');
+   const tree = eventbus.triggerSync('bmd:data:macros:directory:get');
 
    const storeScroll = writable(void 0);
 

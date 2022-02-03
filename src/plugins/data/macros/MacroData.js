@@ -107,7 +107,7 @@ export class MacroData
       // Build tree initially as the initial response on subscription above will not have any update options set.
       this.#buildTree();
 
-      ev.eventbus.on('bmd:data:macro:directory:get', () => this.#tree, this, { guard: true });
+      ev.eventbus.on('bmd:data:macros:directory:get', () => this.#tree, this, { guard: true });
    }
 }
 

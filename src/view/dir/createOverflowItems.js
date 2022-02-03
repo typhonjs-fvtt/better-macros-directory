@@ -1,3 +1,5 @@
+import { TJSDocumentDialog }  from '@typhonjs-fvtt/runtime/svelte/application';
+
 /**
  * Creates the items for the overflow menu.
  *
@@ -8,8 +10,16 @@
 export function createOverflowItems(eventbus) // eslint-disable-line no-unused-vars
 {
    return [
-      { label: 'bmd.menu.overflow.create-macro', icon: 'fas fa-code' },
-      { label: 'bmd.menu.overflow.create-folder', icon: 'fas fa-folder' },
+      {
+         label: 'bmd.menu.overflow.create-macro',
+         icon: 'fas fa-code',
+         onclick: () => TJSDocumentDialog.createDocument(Macro)
+      },
+      {
+         label: 'bmd.menu.overflow.create-folder',
+         icon: 'fas fa-folder',
+         onclick: () => TJSDocumentDialog.createFolder({ type: 'Macro' })
+      },
       { label: 'bmd.menu.overflow.always-on-top', icon: 'fas fa-arrow-alt-circle-up' }
    ];
 }

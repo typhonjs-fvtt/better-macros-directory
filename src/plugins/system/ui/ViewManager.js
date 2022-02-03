@@ -6,7 +6,7 @@ const Apps = {
 
 export class ViewManager
 {
-   static async init()
+   static async #init()
    {
       Apps.directory = new Views.BMDirectory();
 
@@ -47,6 +47,6 @@ export class ViewManager
    {
       this._eventbus = ev.eventbus;
 
-      await this.init();
+      await this.#init();
    }
 }

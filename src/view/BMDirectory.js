@@ -30,8 +30,7 @@ export default class BMDirectory extends SvelteApplication
          headerButtonNoLabel: true,
          svelte: {
             class: BMDAppShell,
-            target: document.body,
-            intro: true
+            target: document.body
          }
       });
    }

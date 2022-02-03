@@ -55,7 +55,7 @@
 
    // `itemHeight` is a linear value applied to the Foundry CSS var `--sidebar-item-height`.
    let itemHeight = 200;
-   let itemHeightQuint;
+   let itemHeightQuad;
 
    // A very fun use of Svelte easing / quintOut to modify font-size reactively from 1 to 1.25em using quad in easing.
    // This gives a very natural feeling when increasing / decreasing the elements displayed.
@@ -65,7 +65,7 @@
       const easing = quadIn((adjustedItemHeight - 20) / 30 );
       fontSize = `${1 + (easing * 0.25)}em`;
       folderStyles = { '--tjs-summary-font-size': fontSize };
-      itemHeightQuint = `${20 + (easing * 30)}px`;
+      itemHeightQuad = `${20 + (easing * 30)}px`;
    }
 </script>
 
@@ -88,7 +88,7 @@
 <div class=container use:storeScrolltop={storeScroll}>
    <section class="directory flexcol"
             style:font-size={fontSize}
-            style:--sidebar-item-height={itemHeightQuint}>
+            style:--sidebar-item-height={itemHeightQuad}>
       <ol class=directory-list>
          {#each $tree.children as folder (folder.id)}
             <Folder {folder} styles={folderStyles}/>

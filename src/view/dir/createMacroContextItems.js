@@ -11,6 +11,9 @@ import { TJSDocumentDialog }  from '@typhonjs-fvtt/runtime/svelte/application';
  */
 export function createMacroContextItems(eventbus, documentId)
 {
+   /**
+    * @type {Macro}
+    */
    const macro = game.macros.get(documentId);
 
    return [
@@ -34,7 +37,7 @@ export function createMacroContextItems(eventbus, documentId)
       {
          label: 'bmd.menu.context-macro.configure-permissions',
          icon: 'fas fa-lock fa-fw',
-         onclick: async () => TJSDocumentDialog.configurePermissions(macro)
+         onclick: () => TJSDocumentDialog.configurePermissions(macro)
       },
       {
          label: 'bmd.menu.context-macro.export-data',

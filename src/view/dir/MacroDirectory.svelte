@@ -1,8 +1,9 @@
 <script>
    import { getContext }            from 'svelte';
-   import { quadIn }               from 'svelte/easing';
+   import { quadIn }                from 'svelte/easing';
    import { writable }              from 'svelte/store';
 
+   import { applyStyles }           from '@typhonjs-fvtt/runtime/svelte/action';
    import { gameState }             from '@typhonjs-fvtt/runtime/svelte/store';
 
    import {
@@ -89,9 +90,9 @@
    <section class="directory flexcol"
             style:font-size={fontSize}
             style:--sidebar-item-height={itemHeightQuad}>
-      <ol class=directory-list>
+      <ol class=directory-list use:applyStyles={folderStyles}>
          {#each $tree.children as folder (folder.id)}
-            <Folder {folder} styles={folderStyles}/>
+            <Folder {folder} />
          {/each}
          <FolderContent content={$tree.contentStore} />
       </ol>
@@ -99,6 +100,10 @@
 </div>
 
 <style>
+   .directory-list {
+      --tjs-summary-width: 100%;
+   }
+
    .top-bar {
       display: flex;
       padding: 4px;

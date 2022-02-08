@@ -26,8 +26,12 @@
     },
 
     "menu": {
-      "context-directory": {
-        "launch-core": "Core Macros Directory"
+      "context-folder": {
+        "edit": "Edit Folder",
+        "configure-permissions": "Configure Permissions",
+        "export-compendium": "Export to Compendium",
+        "remove": "Remove Folder",
+        "delete-all": "Delete All"
       },
 
       "context-macro": {

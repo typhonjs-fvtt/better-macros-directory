@@ -13,6 +13,15 @@
     flex: unset;
   }
 
+  .directory-list {
+    // TJSFolder background / color default for open & closed folders.
+    --bmd-folder-background-closed: rgba(0, 0, 0, 0.5);
+    --bmd-folder-background-open: rgba(255, 255, 255, 0.2);
+
+    // border type & color for TJSFolder outline.
+    --tjs-summary-border: solid rgba(0, 0, 0, 0.3);
+  }
+
   // Header menu icon
   i {
     flex: none;
@@ -102,11 +111,6 @@
     .window-content {
       color: #b5b3a4 !important;
       background: linear-gradient(135deg, rgba(52, 51, 52, 0.9) 10%, rgba(15, 14, 28, 0.9) 90%) !important;
-
-      .directory-list {
-        // border type & color for TJSFolder outline.
-        --tjs-summary-border: solid rgba(0, 0, 0, 0.3);
-      }
     }
 
     .window-header {
@@ -124,6 +128,11 @@
           width: 14px !important;
         }
       }
+    }
+
+    .directory-list {
+      // Font color for macro directory list.
+      color: var(--color-text-light-highlight);
     }
   }
 }

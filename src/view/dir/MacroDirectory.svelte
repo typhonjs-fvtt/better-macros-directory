@@ -99,8 +99,10 @@
    </section>
 </div>
 
-<style>
+<style lang="scss">
    .directory-list {
+      --tjs-summary-border-width: 1px 0;
+      --tjs-summary-border-radius: 0 0 0 0.25em;
       --tjs-summary-width: 100%;
    }
 

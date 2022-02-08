@@ -102,6 +102,11 @@
     .window-content {
       color: #b5b3a4 !important;
       background: linear-gradient(135deg, rgba(52, 51, 52, 0.9) 10%, rgba(15, 14, 28, 0.9) 90%) !important;
+
+      .directory-list {
+        // border type & color for TJSFolder outline.
+        --tjs-summary-border: solid rgba(0, 0, 0, 0.3);
+      }
     }
 
     .window-header {

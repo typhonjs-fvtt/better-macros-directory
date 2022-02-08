@@ -8,7 +8,7 @@
 
    const eventbus = getContext('external').eventbus;
 
-   function onClickMacro(documentId)
+   function onClick(documentId)
    {
       const sheet = game.macros.get(documentId).sheet;
 
@@ -34,11 +34,9 @@
       {#if macro.data.img}
          <img class=thumbnail title={macro.name} alt={macro.name} src={macro.data.img}/>
       {/if}
-      <h4 class="document-name">
-         <a on:click|preventDefault={() => onClickMacro(macro.id)}
-            on:contextmenu|preventDefault={(event) => onContextClick(event, macro.id)}>
-            {macro.name}
-         </a>
-      </h4>
+      <a on:click|preventDefault={() => onClick(macro.id)}
+         on:contextmenu|preventDefault={(event) => onContextClick(event, macro.id)}>
+         <h4 class="document-name">{macro.name}</h4>
+      </a>
    </li>
 {/each}

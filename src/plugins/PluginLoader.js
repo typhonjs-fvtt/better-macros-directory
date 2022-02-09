@@ -17,6 +17,11 @@ export default class PluginLoader
             name: 'tjs-system-session-storage',
             instance: new SessionStorage(),
             options: { eventPrepend: 'bmd' }
+         },
+         // Add view manager.
+         {
+            name: 'bmd-system-ui-view-manager',
+            instance: SystemPlugins.ViewManager
          }
       ]);
    }
@@ -30,12 +35,6 @@ export default class PluginLoader
          },
 
          // System plugins -------------------------------------------------------------------------------------------
-
-         // Add view manager.
-         {
-            name: 'bmd-system-ui-view-manager',
-            instance: SystemPlugins.ViewManager
-         }
       ]);
    }
 }

@@ -21,31 +21,8 @@
       "open-all": "Open All"
     },
 
-    "form": {
-      "search-macros": "Search Macros"
-    },
-
     "menu": {
-      "context-folder": {
-        "edit": "Edit Folder",
-        "configure-permissions": "Configure Permissions",
-        "export-compendium": "Export to Compendium",
-        "remove": "Remove Folder",
-        "delete-all": "Delete All"
-      },
-
-      "context-macro": {
-        "execute-macro": "Execute Macro",
-        "delete-macro": "Delete Macro",
-        "duplicate-macro": "Duplicate Macro",
-        "configure-permissions": "Configure Permissions",
-        "export-data": "Export Data",
-        "import-data": "Import Data"
-      },
-
       "overflow": {
-        "create-macro": "Create Macro",
-        "create-folder": "Create Folder",
         "always-on-top": "Always on top"
       }
     }

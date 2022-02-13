@@ -4,6 +4,7 @@
    import { writable }              from 'svelte/store';
 
    import { applyStyles }           from '@typhonjs-fvtt/runtime/svelte/action';
+   import { localize }              from '@typhonjs-fvtt/runtime/svelte/helper';
    import { gameState }             from '@typhonjs-fvtt/runtime/svelte/store';
 
    import {
@@ -32,7 +33,7 @@
    const searchInput = {
       store: $tree.filterSearch,
       efx: rippleFocus(),
-      placeholder: 'bmd.form.search-macros',
+      placeholder: localize('SIDEBAR.Search', { types: localize('DOCUMENT.Macros') }),
       styles: { '--tjs-input-text-align': 'center' }
    };
 

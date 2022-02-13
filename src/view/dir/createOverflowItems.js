@@ -1,4 +1,5 @@
-import { TJSDocumentDialog }  from '@typhonjs-fvtt/runtime/svelte/application';
+import { TJSDocumentDialog }  from '@typhonjs-fvtt/runtime/svelte/application/dialog';
+import { localize }           from '@typhonjs-fvtt/runtime/svelte/helper';
 
 /**
  * Creates the items for the overflow menu.
@@ -11,14 +12,14 @@ export function createOverflowItems(eventbus) // eslint-disable-line no-unused-v
 {
    return [
       {
-         label: 'bmd.menu.overflow.create-macro',
+         label: localize('SIDEBAR.Create', { type: localize(Macro.metadata.label) }),
          icon: 'fas fa-code',
-         onclick: () => TJSDocumentDialog.createDocument(Macro)
+         onclick: () => TJSDocumentDialog.documentCreate(Macro)
       },
       {
-         label: 'bmd.menu.overflow.create-folder',
+         label: 'FOLDER.Create',
          icon: 'fas fa-folder',
-         onclick: () => TJSDocumentDialog.createFolder({ type: 'Macro' })
+         onclick: () => TJSDocumentDialog.folderCreate({ type: 'Macro' })
       },
       { label: 'bmd.menu.overflow.always-on-top', icon: 'fas fa-arrow-alt-circle-up' }
    ];

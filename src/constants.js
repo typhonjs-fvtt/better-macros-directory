@@ -1,28 +1,35 @@
 /**
  * Defines the main constants for module name and label.
  *
- * @type {{moduleName: string, moduleLabel: string}}
+ * @type {{moduleId: string, moduleLabel: string}}
  */
 const constants = {
-   moduleLabel: `Better Macros Directory`,
-   moduleName: 'better-macros-directory'
+   moduleId: 'better-macros-directory',
+   moduleLabel: `Better Macros Directory`
 };
 
 /**
  * @type {BMDSettings} Defines all the module settings for world and client.
  */
 const settings = {
+   something: 'something'
 };
 
 /**
  * @type {BMDSessionConstants} Defines all the module session storage static constants.
  */
 const sessionConstants = {
-   themeDarkMode: `${constants.moduleName}.theme.dark`,
-   scrolltopPartial: `${constants.moduleName}.scrolltop-`
+   themeDarkMode: `${constants.moduleId}.theme.dark`,
+   scrolltopPartial: `${constants.moduleId}.scrolltop-`
 };
 
 export { constants, sessionConstants, settings };
+
+/**
+ * @typedef {object} BMDSettings
+ *
+ * @property {string} something - Setting key for 'something'
+ */
 
 /**
  * @typedef {object} BMDSessionConstants

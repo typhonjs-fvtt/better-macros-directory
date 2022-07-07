@@ -20,7 +20,7 @@ export default class BMDirectory extends SvelteApplication
    static get defaultOptions()
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
-         id: constants.moduleName,
+         id: constants.moduleId,
          popOut: true,
          resizable: true,
          minimizable: true,

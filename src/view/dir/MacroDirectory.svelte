@@ -1,16 +1,16 @@
 <script>
    import { getContext }            from 'svelte';
    import { quadIn }                from 'svelte/easing';
-   import { writable }              from 'svelte/store';
 
-   import { applyStyles }           from '@typhonjs-fvtt/runtime/svelte/action';
+   import {
+      applyScrolltop,
+      applyStyles }                 from '@typhonjs-fvtt/runtime/svelte/action';
    import { localize }              from '@typhonjs-fvtt/runtime/svelte/helper';
    import { gameState }             from '@typhonjs-fvtt/runtime/svelte/store';
 
    import {
       ripple,
-      rippleFocus,
-      storeScrolltop }              from '@typhonjs-fvtt/svelte-standard/action';
+      rippleFocus }                 from '@typhonjs-fvtt/svelte-standard/action';
 
    import {
       TJSInput,
@@ -22,13 +22,11 @@
    import Folder                    from './Folder.svelte';
    import FolderContent             from './FolderContent.svelte';
 
-   import { sessionConstants }   from "#constants";
+   import { sessionConstants }      from "#constants";
 
    const eventbus = getContext('external').eventbus;
 
    const tree = eventbus.triggerSync('bmd:data:macros:directory:get');
-
-   const storeScroll = writable(void 0);
 
    const searchInput = {
       store: $tree.filterSearch,
@@ -49,6 +47,15 @@
       efx: ripple(),
       styles: { 'margin-left': '4px' }
    };
+
+   let storeScroll;
+
+   const storeSelect = $tree.userSelect.store;
+
+   $: {
+      const sessionKey = `${sessionConstants.scrolltopPartial}${!game.user.isGM ? 'player' : `gm-${$storeSelect}`}`;
+      storeScroll = eventbus.triggerSync('bmd:storage:session:store:get', sessionKey, 0);
+   }
 
    // `folderStyles` adjusts the CSS var that is attached to the chevron of the child folders.
    // `fontSize` is inherited through the folder / folder contents section.
@@ -87,7 +94,7 @@
    </TJSToggleIconButton>
 </section>
 
-<div class=container use:storeScrolltop={storeScroll}>
+<div class=container use:applyScrolltop={storeScroll}>
    <section class="directory flexcol"
             style:font-size={fontSize}
             style:--sidebar-item-height={itemHeightQuad}>

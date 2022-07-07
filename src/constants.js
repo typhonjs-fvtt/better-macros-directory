@@ -18,7 +18,8 @@ const settings = {
  * @type {BMDSessionConstants} Defines all the module session storage static constants.
  */
 const sessionConstants = {
-   themeDarkMode: `${constants.moduleName}.theme.dark`
+   themeDarkMode: `${constants.moduleName}.theme.dark`,
+   scrolltopPartial: `${constants.moduleName}.scrolltop-`
 };
 
 export { constants, sessionConstants, settings };
@@ -27,4 +28,6 @@ export { constants, sessionConstants, settings };
  * @typedef {object} BMDSessionConstants
  *
  * @property {string} themeDarkMode - Indicates whether dark mode is enabled.
+ *
+ * @property {string} scrolltopPartial - Provides the scrolltop store partial to construct.
  */

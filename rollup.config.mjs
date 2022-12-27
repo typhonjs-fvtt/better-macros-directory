@@ -1,5 +1,4 @@
 import alias               from '@rollup/plugin-alias';
-import { babel }           from '@rollup/plugin-babel';
 import commonjs            from '@rollup/plugin-commonjs';
 import postcss             from 'rollup-plugin-postcss';       // Process Sass / CSS w/ PostCSS
 import resolve             from '@rollup/plugin-node-resolve'; // This resolves NPM modules from node_modules.
@@ -53,29 +52,13 @@ export default () =>
                ]
             }),
             svelte({
-               preprocess: preprocess(),
-               onwarn: (warning, handler) =>
-               {
-                  // Suppress `a11y-missing-attribute` for missing href in <a> links.
-                  if (warning.message.includes(`<a> element should have an href attribute`)) { return; }
-                  // Suppress a11y form label not associated w/ a control.
-                  if (warning.message.includes(`A form label must be associated with a control`)) { return; }
-
-                  // Let Rollup handle all other warnings normally.
-                  handler(warning);
-               },
+               preprocess: preprocess()
             }),
             postcss(postcssMain),
             resolve(s_RESOLVE_CONFIG),
             commonjs(),
             sourcemaps(),
             s_TYPHONJS_MODULE_LIB && typhonjsRuntime(),
-            babel({
-               babelHelpers: 'bundled',
-               presets: [
-                  ['@babel/preset-env', { bugfixes: true, shippedProposals: true, targets: { esmodules: true } }]
-               ]
-            })
          ]
       }
    ];

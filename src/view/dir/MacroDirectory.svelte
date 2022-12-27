@@ -102,7 +102,7 @@
          {#each $tree.children as folder (folder.id)}
             <Folder {folder} />
          {/each}
-         <FolderContent content={$tree.contentStore} />
+         <FolderContent content={$tree.documentStore} />
       </ol>
    </section>
 </div>

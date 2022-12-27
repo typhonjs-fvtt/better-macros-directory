@@ -11,10 +11,10 @@
    const folderProps = {
       iconClosed: 'fas fa-folder',
       iconOpen: 'fas fa-folder-open',
-      onContextMenu: (event) => TJSContextMenu.create({
+      onContextClick: (event) => TJSContextMenu.create({
          x: event.pageX,
          y: event.pageY,
-         items: createFolderContextItems(folder.id)
+         items: createFolderContextItems(folder?.folder?.id)
       })
    }
 
@@ -23,7 +23,8 @@
    $:
    {
       // The foundry create / edit folder dialog can set the color to an empty string, so check for that.
-      const background = typeof folder.data.color === 'string' && folder.data.color.length ? folder.data.color : void 0;
+      const background = typeof folder?.folder?.color === 'string' && folder.folder.color.length ?
+       folder.folder.color : void 0;
 
       // TJSFolder background; --bmd-folder-closed & open defined in Sass.
       styles = {
@@ -33,9 +34,9 @@
    }
 </script>
 
-<TJSIconFolder label={folder.data.name} {...folderProps} {styles}>
-{#each folder.children as folder (folder.id)}
+<TJSIconFolder label={folder?.folder?.name} {...folderProps} {styles}>
+{#each folder.children as folder (folder?.folder?.id)}
    <svelte:self {folder}/>
 {/each}
-<FolderContent content={folder.contentStore} />
+<FolderContent content={folder.documentStore} />
 </TJSIconFolder>

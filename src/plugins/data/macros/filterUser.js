@@ -16,7 +16,7 @@ const storeUserId = writable(userId);
 function filterUser(macro)
 {
    const ownership = macro.ownership;
-   const OBSERVER = CONST.DOCUMENT_PERMISSION_LEVELS.OBSERVER;
+   const OBSERVER = CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER;
 
    // If no user ID is set do not filter otherwise if ID is in permissions or the default permission is at least
    // OBSERVER then keep the macro.

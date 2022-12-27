@@ -71,9 +71,9 @@ export function createMacroContextItems(eventbus, documentId)
          onclick: () => macro.clone({ name: `${macro.name} (Copy)` }, { save: true })
       },
       {
-         label: 'PERMISSION.Configure',
+         label: 'OWNERSHIP.Configure',
          icon: 'fas fa-lock fa-fw',
-         onclick: () => TJSDocumentDialog.configurePermissions(macro)
+         onclick: () => TJSDocumentDialog.configureOwnership(macro)
       },
       {
          label: 'SIDEBAR.Export',

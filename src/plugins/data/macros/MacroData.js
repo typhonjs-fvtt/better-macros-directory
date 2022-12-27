@@ -38,7 +38,7 @@ export class MacroData
     */
    static #augmentTree(data)
    {
-      data.contentStore = new DynArrayReducer({
+      data.documentStore = new DynArrayReducer({
          data: data.documents,
          filters: [filterUser, filterSearch],
          sort: sortAlpha

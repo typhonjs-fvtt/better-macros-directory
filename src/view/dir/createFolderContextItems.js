@@ -22,10 +22,10 @@ export function createFolderContextItems(documentId)
          onclick: () => TJSDocumentDialog.folderUpdate(folder)
       },
       {
-         label: 'PERMISSION.Configure',
+         label: 'OWNERSHIP.Configure',
          icon: 'fas fa-lock fa-fw',
          condition: () => game.user.isGM || folder.isOwner,
-         onclick: () => TJSDocumentDialog.configurePermissions(folder)
+         onclick: () => TJSDocumentDialog.configureOwnership(folder)
       },
       {
          label: 'FOLDER.Export',

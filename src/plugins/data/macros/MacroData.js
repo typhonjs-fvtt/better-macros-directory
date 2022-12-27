@@ -39,7 +39,7 @@ export class MacroData
    static #augmentTree(data)
    {
       data.contentStore = new DynArrayReducer({
-         data: data.content,
+         data: data.documents,
          filters: [filterUser, filterSearch],
          sort: sortAlpha
       });

@@ -15,13 +15,13 @@ const storeUserId = writable(userId);
  */
 function filterUser(macro)
 {
-   const perms = macro.data.permission;
+   const ownership = macro.ownership;
    const OBSERVER = CONST.DOCUMENT_PERMISSION_LEVELS.OBSERVER;
 
    // If no user ID is set do not filter otherwise if ID is in permissions or the default permission is at least
    // OBSERVER then keep the macro.
-   return userId === '' ? true : (userId in perms && perms[userId] >= OBSERVER) ||
-    ('default' in perms && perms['default'] >= OBSERVER);
+   return userId === '' ? true : (userId in ownership && ownership[userId] >= OBSERVER) ||
+    ('default' in ownership && ownership['default'] >= OBSERVER);
 }
 
 // Augment the `filterUser` function with Svelte readable store API.

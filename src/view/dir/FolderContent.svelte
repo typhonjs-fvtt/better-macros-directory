@@ -31,9 +31,10 @@
 
 {#each [...$content] as macro (macro.id)}
    <li class="directory-item document flexrow">
-      {#if macro.data.img}
-         <img class=thumbnail title={macro.name} alt={macro.name} src={macro.data.img}/>
+      {#if macro.img}
+         <img class=thumbnail title={macro.name} alt={macro.name} src={macro.img}/>
       {/if}
+      <!-- svelte-ignore a11y-click-events-have-key-events a11y-missing-attribute -->
       <a on:click|preventDefault={() => onClick(macro.id)}
          on:contextmenu|preventDefault={(event) => onContextClick(event, macro.id)}>
          <h4 class="document-name">{macro.name}</h4>

@@ -99,7 +99,7 @@
             style:font-size={fontSize}
             style:--sidebar-item-height={itemHeightQuad}>
       <ol class=directory-list use:applyStyles={folderStyles}>
-         {#each $tree.children as folder (folder.id)}
+         {#each $tree.children as folder (folder.folder.id)}
             <Folder {folder} />
          {/each}
          <FolderContent content={$tree.documentStore} />

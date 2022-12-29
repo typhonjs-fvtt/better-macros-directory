@@ -52,6 +52,13 @@ export default () =>
                ]
             }),
             svelte({
+               compilerOptions: {
+                  // Provides a custom hash adding `-bmd-` to scoped Svelte styles; "bmd" derived from
+                  // 'better-macros-directory'. This is reasonable to do as the styles in TRL compiled across `n`
+                  // different packages will be the same. Slightly modifying the hash ensures that your package has
+                  // uniquely scoped styles for all TRL components.
+                  cssHash: ({ hash, css }) => `svelte-bmd-${hash(css)}`
+               },
                preprocess: preprocess()
             }),
             postcss(postcssMain),

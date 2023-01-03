@@ -1,4 +1,4 @@
-import { SessionStorage }  from '@typhonjs-fvtt/runtime/svelte/plugin/system';
+import { TJSSessionStorage }  from '@typhonjs-fvtt/runtime/svelte/plugin/system';
 
 import * as DataPlugins    from './data/index.js';
 import * as SystemPlugins  from './system/index.js';
@@ -15,7 +15,7 @@ export default class PluginLoader
          // Manages session storage w/ Svelte stores for each session item.
          {
             name: 'tjs-system-session-storage',
-            instance: new SessionStorage(),
+            instance: new TJSSessionStorage(),
             options: { eventPrepend: 'bmd' }
          },
          // Add view manager.

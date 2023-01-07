@@ -6,7 +6,7 @@ import { localize }           from '@typhonjs-fvtt/runtime/svelte/helper';
  *
  * @param {object}   eventbus - Plugin eventbus
  *
- * @returns {object[]} Overflow menu items.
+ * @returns {Iterable<object>} Overflow menu items.
  */
 export function createOverflowItems(eventbus) // eslint-disable-line no-unused-vars
 {
@@ -14,13 +14,14 @@ export function createOverflowItems(eventbus) // eslint-disable-line no-unused-v
       {
          label: localize('SIDEBAR.Create', { type: localize(Macro.metadata.label) }),
          icon: 'fas fa-code',
-         onclick: () => TJSDocumentDialog.documentCreate(Macro)
+         onPress: () => TJSDocumentDialog.documentCreate(Macro)
       },
       {
          label: 'FOLDER.Create',
          icon: 'fas fa-folder',
-         onclick: () => TJSDocumentDialog.folderCreate({ type: 'Macro' })
+         onPress: () => TJSDocumentDialog.folderCreate({ type: 'Macro' })
       },
-      { label: 'bmd.menu.overflow.always-on-top', icon: 'fas fa-arrow-alt-circle-up' }
+      { label: 'bmd.menu.overflow.always-on-top', icon: 'fas fa-arrow-alt-circle-up' },
+      { separator: 'hr' }
    ];
 }

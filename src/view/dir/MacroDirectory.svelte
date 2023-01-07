@@ -28,6 +28,8 @@
 
    const tree = eventbus.triggerSync('bmd:data:macros:directory:get');
 
+   const storeMenuScale = eventbus.triggerSync('bmd:storage:session:store:get', sessionConstants.menuScale, 200);
+
    const searchInput = {
       store: $tree.filterSearch,
       efx: rippleFocus(),
@@ -39,13 +41,16 @@
       store: $tree.sortAlpha,
       icon: 'fas fa-sort-alpha-down',
       efx: ripple(),
-      styles: { 'margin-left': '4px' }
    };
 
    const overflowMenu = {
       icon: 'fas fa-ellipsis-v',
       efx: ripple(),
-      styles: { 'margin-left': '4px' }
+   };
+
+   const labelMenu = {
+      text: 'Test',
+      efx: ripple(),
    };
 
    let storeScroll;
@@ -62,15 +67,14 @@
    let folderStyles;
    let fontSize;
 
-   // `itemHeight` is a linear value applied to the Foundry CSS var `--sidebar-item-height`.
-   let itemHeight = 200;
+   // `itemHeightQuad` is an eased value applied to the Foundry CSS var `--sidebar-item-height`.
    let itemHeightQuad;
 
    // A very fun use of Svelte easing / quintOut to modify font-size reactively from 1 to 1.25em using quad in easing.
    // This gives a very natural feeling when increasing / decreasing the elements displayed.
    // see https://svelte.dev/repl/easing?version=3.46.3 and select 'quad' & 'ease in' to see the curve applied.
    $: {
-      const adjustedItemHeight = itemHeight / 10;
+      const adjustedItemHeight = $storeMenuScale / 10;
       const easing = quadIn((adjustedItemHeight - 20) / 30 );
       fontSize = `${1 + (easing * 0.25)}em`;
       folderStyles = { '--tjs-summary-font-size': fontSize };
@@ -80,15 +84,14 @@
 
 <section class=top-bar>
    {#if $gameState.user.isGM}
-      <TJSSelect select={$tree.userSelect} efx={rippleFocus()} styles={{'margin-right': '4px'}}/>
+      <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>
    {/if}
    <TJSInput input={searchInput}/>
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>
-      <TJSMenu menu={{ items: createOverflowItems(eventbus), offset:{ y: 4 } }}>
+      <TJSMenu menu={{ items: createOverflowItems(eventbus), offset: { y: 4 } }}>
          <div slot=after>
-            <hr>
-            <div class=range>Scale: <input type=range bind:value={itemHeight} min=200 max=500></div>
+            <div class=range>Scale: <input type=range bind:value={$storeMenuScale} min=200 max=500 step=1></div>
          </div>
       </TJSMenu>
    </TJSToggleIconButton>
@@ -117,6 +120,7 @@
    .top-bar {
       display: flex;
       padding: 4px;
+      gap: 4px;
       flex: 1 1 20px;
       justify-content: center;
       border-bottom: solid 1px #444;
@@ -125,7 +129,8 @@
    div.range {
       display: flex;
       padding: 0 0.5em;
-      max-width: fit-content;
+      width: 110px;
+      gap: 4px;
       font-size: 0.8em;
       justify-content: center;
       align-items: center;
@@ -133,13 +138,6 @@
 
    div.range input {
       width: 70%;
-      margin-left: 4px;
-   }
-
-   hr {
-      border-top: 1px solid #444;
-      border-bottom: none;
-      margin: 2px;
    }
 
    .container {

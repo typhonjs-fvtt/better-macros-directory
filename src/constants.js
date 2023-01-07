@@ -19,6 +19,7 @@ const settings = {
  * @type {BMDSessionConstants} Defines all the module session storage static constants.
  */
 const sessionConstants = {
+   menuScale: `${constants.moduleId}.menu.scale`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
    scrolltopPartial: `${constants.moduleId}.scrolltop-`
 };
@@ -33,6 +34,8 @@ export { constants, sessionConstants, settings };
 
 /**
  * @typedef {object} BMDSessionConstants
+ *
+ * @property {string} menuScale - Scaling factor for menu item size / height.
  *
  * @property {string} themeDarkMode - Indicates whether dark mode is enabled.
  *

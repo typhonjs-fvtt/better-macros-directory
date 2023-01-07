@@ -65,7 +65,7 @@
   // Dark theme
   &.tjs-window-app {
     --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
-    --tjs-anchor-text-shadow-focus-hover: 0 0 8px pink;
+    --tjs-default-text-shadow-focus-hover: 0 0 8px pink;
 
     --tjs-icon-button-background-hover: rgba(255, 255, 255, 0.05);
     --tjs-icon-button-background-selected: rgba(255, 255, 255, 0.1);

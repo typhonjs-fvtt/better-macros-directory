@@ -6,10 +6,18 @@ import { constants, sessionConstants } from '#constants';
 
 export default class BMDirectory extends SvelteApplication
 {
-   /**
-    * @inheritDoc
-    */
-   constructor(options = {}) { super(options); }
+   /** @inheritDoc */
+   constructor(options)
+   {
+      super(options);
+
+      try
+      {
+         // Attempt to parse session storage item and set application state.
+         this.state.set(JSON.parse(sessionStorage.getItem(sessionConstants.appState)));
+      }
+      catch (err) { /**/ }
+   }
 
    /**
     * Default Application options

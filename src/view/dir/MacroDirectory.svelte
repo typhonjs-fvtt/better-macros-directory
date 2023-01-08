@@ -2,9 +2,7 @@
    import { getContext }            from 'svelte';
    import { quadIn }                from 'svelte/easing';
 
-   import {
-      applyScrolltop,
-      applyStyles }                 from '@typhonjs-fvtt/runtime/svelte/action';
+   import { applyStyles }           from '@typhonjs-fvtt/runtime/svelte/action';
    import { localize }              from '@typhonjs-fvtt/runtime/svelte/helper';
    import { gameState }             from '@typhonjs-fvtt/runtime/svelte/store';
 
@@ -15,6 +13,7 @@
    import {
       TJSInput,
       TJSMenu,
+      TJSScrollContainer,
       TJSSelect,
       TJSToggleIconButton }         from '@typhonjs-fvtt/svelte-standard/component';
 
@@ -53,9 +52,9 @@
       efx: ripple(),
    };
 
-   let storeScroll;
-
    const storeSelect = $tree.userSelect.store;
+
+   let storeScroll;
 
    $: {
       const sessionKey = `${sessionConstants.scrolltopPartial}${!game.user.isGM ? 'player' : `gm-${$storeSelect}`}`;
@@ -77,12 +76,12 @@
       const adjustedItemHeight = $storeMenuScale / 10;
       const easing = quadIn((adjustedItemHeight - 20) / 30 );
       fontSize = `${1 + (easing * 0.25)}em`;
-      folderStyles = { '--tjs-summary-font-size': fontSize };
+      folderStyles = { '--tjs-folder-summary-font-size': fontSize };
       itemHeightQuad = `${20 + (easing * 30)}px`;
    }
 </script>
 
-<section class=top-bar>
+<section class=bmd-top-bar>
    {#if $gameState.user.isGM}
       <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>
    {/if}
@@ -97,7 +96,7 @@
    </TJSToggleIconButton>
 </section>
 
-<div class=container use:applyScrolltop={storeScroll}>
+<TJSScrollContainer scrollTop={storeScroll}>
    <section class="directory flexcol"
             style:font-size={fontSize}
             style:--sidebar-item-height={itemHeightQuad}>
@@ -108,16 +107,21 @@
          <FolderContent content={$tree.documentStore} />
       </ol>
    </section>
-</div>
+</TJSScrollContainer>
 
-<style lang="scss">
+<style lang=scss>
    .directory-list {
-      --tjs-summary-border-width: 0 0 2px 0;
-      --tjs-summary-border-radius: 0 0 0 0.25em;
-      --tjs-summary-width: 100%;
+      --tjs-folder-summary-border-width: 0 0 2px 0;
+      --tjs-folder-summary-border-radius: 0 0 0 0.25em;
+      --tjs-folder-summary-gap: 2px;
+      --tjs-folder-summary-width: 100%;
+
+      --tjs-folder-summary-outline-focus: none;
+      --tjs-folder-summary-focus-indicator-color: white;
+      --tjs-folder-summary-focus-indicator-width: 4px;
    }
 
-   .top-bar {
+   .bmd-top-bar {
       display: flex;
       padding: 4px;
       gap: 4px;
@@ -126,7 +130,7 @@
       border-bottom: solid 1px #444;
    }
 
-   div.range {
+   .range {
       display: flex;
       padding: 0 0.5em;
       width: 110px;
@@ -136,11 +140,7 @@
       align-items: center;
    }
 
-   div.range input {
+   .range input {
       width: 70%;
-   }
-
-   .container {
-      overflow-y: auto;
    }
 </style>

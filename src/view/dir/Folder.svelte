@@ -11,7 +11,7 @@
    const folderProps = {
       iconClosed: 'fas fa-folder',
       iconOpen: 'fas fa-folder-open',
-      onContextClick: (event) => TJSContextMenu.create({
+      onContextMenu: (event) => TJSContextMenu.create({
          x: event.pageX,
          y: event.pageY,
          items: createFolderContextItems(folder?.folder?.id)
@@ -28,8 +28,8 @@
 
       // TJSFolder background; --bmd-folder-closed & open defined in Sass.
       styles = {
-         '--tjs-summary-background': background ?? 'var(--bmd-folder-background-closed)',
-         '--tjs-summary-background-open': background ?? 'var(--bmd-folder-background-open)',
+         '--tjs-folder-summary-background': background ?? 'var(--bmd-folder-background-closed)',
+         '--tjs-folder-summary-background-open': background ?? 'var(--bmd-folder-background-open)',
       };
    }
 </script>

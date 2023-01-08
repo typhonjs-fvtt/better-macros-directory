@@ -20,7 +20,7 @@
     --bmd-folder-background-open: rgba(255, 255, 255, 0.2);
 
     // border type & color for TJSFolder outline.
-    --tjs-summary-border: solid rgba(0, 0, 0, 0.3);
+    --tjs-folder-summary-border: solid rgba(0, 0, 0, 0.3);
 
     // Font color for macro directory list.
     color: var(--color-text-light-highlight);
@@ -57,8 +57,7 @@
   }
 
   // For Firefox scrollbars
-  .container {
-    scrollbar-width: thin;
+  .tjs-scroll-container {
     scrollbar-color: #782e22 #111;
   }
 
@@ -102,7 +101,7 @@
     }
 
     // For Firefox scrollbars
-    .container {
+    .tjs-scroll-container {
       scrollbar-color: rgba(89, 97, 223, 1) #111 !important;
     }
 

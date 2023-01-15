@@ -1,9 +1,10 @@
 /**
  * Defines the main constants for module name and label.
  *
- * @type {{moduleId: string, moduleLabel: string}}
+ * @type {{ appId: string, moduleId: string, moduleLabel: string }}
  */
 const constants = {
+   appId: '#better-macros-directory',
    moduleId: 'better-macros-directory',
    moduleLabel: `Better Macros Directory`
 };

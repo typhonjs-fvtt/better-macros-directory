@@ -19,37 +19,37 @@ export function createFolderContextItems(documentId)
          label: 'FOLDER.Edit',
          icon: 'fas fa-edit',
          condition: () => game.user.isGM || folder.isOwner,
-         onclick: () => TJSDocumentDialog.folderUpdate(folder)
+         onPress: (item, options) => TJSDocumentDialog.folderUpdate(folder, options)
       },
       {
          label: 'OWNERSHIP.Configure',
          icon: 'fas fa-lock fa-fw',
          condition: () => game.user.isGM || folder.isOwner,
-         onclick: () => TJSDocumentDialog.configureOwnership(folder)
+         onPress: (item, options) => TJSDocumentDialog.configureOwnership(folder, options)
       },
       {
          label: 'FOLDER.Export',
          icon: 'fas fa-atlas',
          condition: () => CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
-         onclick: async () => TJSDocumentDialog.folderExport(folder)
+         onPress: async (item, options) => TJSDocumentDialog.folderExport(folder, options)
       },
       {
          label: 'FOLDER.CreateTable',
          icon: `${CONFIG.RollTable.sidebarIcon}`,
          condition: () => CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
-         onclick: async () => TJSDocumentDialog.folderRolltable(folder)
+         onPress: async (item, options) => TJSDocumentDialog.folderRolltable(folder, options)
       },
       {
          label: 'FOLDER.Remove',
          icon: 'fas fa-trash',
          condition: () => game.user.isGM || folder.isOwner,
-         onclick: async () => TJSDocumentDialog.folderRemove(folder)
+         onPress: async (item, options) => TJSDocumentDialog.folderRemove(folder, options)
       },
       {
          label: 'FOLDER.Delete',
          icon: 'fas fa-dumpster',
          condition: () => game.user.isGM || folder.isOwner,
-         onclick: async () => TJSDocumentDialog.folderDelete(folder)
+         onPress: async (item, options) => TJSDocumentDialog.folderDelete(folder, options)
       }
    ];
 }

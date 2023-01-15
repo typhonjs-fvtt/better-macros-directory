@@ -5,6 +5,8 @@
    import { createFolderContextItems } from './createFolderContextItems.js';
    import FolderContent                from './FolderContent.svelte';
 
+   import { constants }                from '#constants';
+
    /** @type {Folder} */
    export let folder;
 
@@ -12,9 +14,10 @@
       iconClosed: 'fas fa-folder',
       iconOpen: 'fas fa-folder-open',
       onContextMenu: (event) => TJSContextMenu.create({
-         x: event.pageX,
-         y: event.pageY,
-         items: createFolderContextItems(folder?.folder?.id)
+         id: 'better-macros-directory-context-menu',
+         items: createFolderContextItems(folder?.folder?.id),
+         focusEl: constants.appId,
+         event
       })
    }
 

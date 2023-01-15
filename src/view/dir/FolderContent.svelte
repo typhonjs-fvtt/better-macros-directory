@@ -4,9 +4,11 @@
 
    import { createMacroContextItems }  from './createMacroContextItems.js';
 
+   import { constants }                from '#constants';
+
    export let content;
 
-   const eventbus = getContext('external').eventbus;
+   const { eventbus } = getContext('external');
 
    function onPress(documentId)
    {
@@ -29,21 +31,22 @@
 
    function onContextMenu(event, documentId)
    {
-console.log(`!! FolderContent - onContextMenu - event: `, event);
-
-      TJSContextMenu.create({ x: event.pageX, y: event.pageY, items: createMacroContextItems(eventbus, documentId)});
+      TJSContextMenu.create({
+         id: 'better-macros-directory-context-menu',
+         items: createMacroContextItems(eventbus, documentId),
+         focusEl: constants.appId,
+         event
+      });
    }
 
    function onContextPress(event, documentId)
    {
-      if (event.target instanceof HTMLElement)
-      {
-         const rect = event.target.getBoundingClientRect();
-         const x = rect.left + (rect.width / 2);
-         const y = rect.top + (rect.height / 2);
-
-         TJSContextMenu.create({ x, y, items: createMacroContextItems(eventbus, documentId)});
-      }
+      TJSContextMenu.create({
+         id: 'better-macros-directory-context-menu',
+         items: createMacroContextItems(eventbus, documentId),
+         focusEl: constants.appId,
+         event
+      });
 
       event.preventDefault();
       event.stopPropagation();
@@ -54,8 +57,7 @@ console.log(`!! FolderContent - onContextMenu - event: `, event);
       switch (event.code)
       {
          case 'Enter':
-         // case 'ContextMenu':
-         // case 'F10':
+         case 'ContextMenu':
             event.stopPropagation();
             break;
       }
@@ -70,14 +72,9 @@ console.log(`!! FolderContent - onContextMenu - event: `, event);
             onPress(documentId);
             break;
 
-         // case 'ContextMenu':
-         //    onContextPress(event, documentId);
-         //    break;
-         //
-         // // Support Windows context menu key combo - <Shift-F10>
-         // case 'F10':
-         //    if (event.shiftKey) { onContextPress(event, documentId); }
-         //    break;
+         case 'ContextMenu':
+            onContextPress(event, documentId);
+            break;
       }
    }
 </script>

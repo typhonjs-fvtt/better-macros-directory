@@ -1,6 +1,7 @@
 import { TJSDocumentDialog }  from '@typhonjs-fvtt/runtime/svelte/application/dialog';
 import { localize }           from '@typhonjs-fvtt/runtime/svelte/helper';
 
+export const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 /**
  * Creates the items for the overflow menu.
  *

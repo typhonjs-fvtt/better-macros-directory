@@ -89,8 +89,11 @@
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>
       <TJSMenu menu={{ items: createOverflowItems(eventbus), offset: { y: 4 } }}>
-         <div slot=after>
-            <div class=range>Scale: <input type=range bind:value={$storeMenuScale} min=200 max=500 step=1></div>
+         <div class=range
+              slot=after
+              on:click|preventDefault|stopPropagation={() => null}
+              role=presentation>
+            Scale: <input type=range bind:value={$storeMenuScale} min=200 max=500 step=1>
          </div>
       </TJSMenu>
    </TJSToggleIconButton>

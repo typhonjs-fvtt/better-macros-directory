@@ -106,18 +106,22 @@
    /* Enable focus indicator for focus-within */
    /* Note: the use of `has` pseudo-selector that requires a child with :focus-visible */
    li:focus-within:has(:focus-visible) .bmd-menu-focus-indicator {
-      background: var(--bmd-menu-focus-indicator-color, var(--tjs-default-color-focus, white));
+      background: var(--bmd-menu-focus-indicator-background, var(--tjs-default-focus-indicator-background, white));
    }
 
    /* Fallback for browsers that don't support 'has'; any user interaction including mouse will trigger */
    @supports not (selector(:has(*))) {
       li:focus-within .bmd-menu-focus-indicator {
-         background: var(--bmd-menu-focus-indicator-color, var(--tjs-default-color-focus, white));
+         background: var(--bmd-menu-focus-indicator-background, var(--tjs-default-focus-indicator-background, white));
       }
    }
 
    .bmd-menu-focus-indicator {
-      flex: 0 0 4px;
+      align-self: var(--bmd-menu-focus-indicator-align-self, var(--tjs-default-focus-indicator-align-self, stretch));
+      border: var(--bmd-menu-focus-indicator-border, var(--tjs-default-focus-indicator-border));
+      border-radius: var(--bmd-menu-focus-indicator-border-radius, var(--tjs-default-focus-indicator-border-radius, 0.1em));
+      flex: 0 0 var(--bmd-menu-focus-indicator-width, var(--tjs-default-focus-indicator-width, 0.25em));
+      height: var(--bmd-menu-focus-indicator-height, var(--tjs-default-focus-indicator-height));
    }
 
    .directory-item {

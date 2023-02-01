@@ -18,7 +18,8 @@
          items: createFolderContextItems(folder?.folder?.id),
          focusEl: constants.appId,
          event
-      })
+      }),
+      options: { focusIndicator: true }
    }
 
    let styles;

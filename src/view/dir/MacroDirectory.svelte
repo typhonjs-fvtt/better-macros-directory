@@ -23,13 +23,14 @@
 
    import { sessionConstants }      from "#constants";
 
-   const eventbus = getContext('external').eventbus;
+   const eventbus = getContext('#external').eventbus;
 
    const tree = eventbus.triggerSync('bmd:data:macros:directory:get');
 
    const storeMenuScale = eventbus.triggerSync('bmd:storage:session:store:get', sessionConstants.menuScale, 200);
 
    const searchInput = {
+      type: 'search',
       store: $tree.filterSearch,
       efx: rippleFocus(),
       placeholder: localize('SIDEBAR.Search', { types: localize('DOCUMENT.Macros') }),
@@ -44,11 +45,6 @@
 
    const overflowMenu = {
       icon: 'fas fa-ellipsis-v',
-      efx: ripple(),
-   };
-
-   const labelMenu = {
-      text: 'Test',
       efx: ripple(),
    };
 
@@ -119,7 +115,7 @@
       --tjs-folder-summary-gap: 2px;
       --tjs-folder-summary-width: 100%;
 
-      --tjs-folder-summary-outline-focus: none;
+      --tjs-folder-summary-outline-focus-visible: none;
       --tjs-folder-summary-focus-indicator-color: white;
       --tjs-folder-summary-focus-indicator-width: 4px;
    }

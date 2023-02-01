@@ -8,7 +8,7 @@
 
    export let content;
 
-   const { eventbus } = getContext('external');
+   const { eventbus } = getContext('#external');
 
    function onPress(documentId)
    {
@@ -87,9 +87,9 @@
       <div class=bmd-menu-focus-indicator />
       <!-- svelte-ignore a11y-missing-attribute -->
       <a on:click|preventDefault={() => onPress(macro.id)}
+         on:contextmenu|preventDefault={(event) => onContextMenu(event, macro.id)}
          on:keydown={onKeydown}
          on:keyup={(event) => onKeyup(event, macro.id)}
-         on:contextmenu|preventDefault={(event) => onContextMenu(event, macro.id)}
          role=button
          tabindex=0>
          <h4>{macro.name}</h4>

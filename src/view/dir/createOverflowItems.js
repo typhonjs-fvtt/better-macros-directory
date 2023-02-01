@@ -1,7 +1,6 @@
 import { TJSDocumentDialog }  from '@typhonjs-fvtt/runtime/svelte/application/dialog';
 import { localize }           from '@typhonjs-fvtt/runtime/svelte/helper';
 
-export const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 /**
  * Creates the items for the overflow menu.
  *
@@ -15,12 +14,16 @@ export function createOverflowItems(eventbus) // eslint-disable-line no-unused-v
       {
          label: localize('SIDEBAR.Create', { type: localize(Macro.metadata.label) }),
          icon: 'fas fa-code',
-         onPress: () => TJSDocumentDialog.documentCreate(Macro)
+         onPress: (item, options) => TJSDocumentDialog.documentCreate(Macro, {}, options)
       },
       {
          label: 'FOLDER.Create',
          icon: 'fas fa-folder',
-         onPress: () => TJSDocumentDialog.folderCreate({ type: 'Macro' })
+         // onPress: (item, options) => TJSDocumentDialog.folderCreate({ type: 'Macro' }, options)
+         onPress: (item, options) => {
+            console.log(`!! createOverflowItems - options: `, options);
+            TJSDocumentDialog.folderCreate({ type: 'Macro' }, options);
+         }
       },
       { label: 'bmd.menu.overflow.always-on-top', icon: 'fas fa-arrow-alt-circle-up' },
       { separator: 'hr' }

@@ -34,7 +34,7 @@ export default class BMDirectory extends SvelteApplication
          minimizable: true,
          width: 325,
          height: 300,
-         title: game.i18n.localize('bmd.settings.title'),
+         title: 'bmd.settings.title',
          headerButtonNoLabel: true,
          svelte: {
             class: BMDAppShell,

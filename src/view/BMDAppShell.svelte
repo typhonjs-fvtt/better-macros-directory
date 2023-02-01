@@ -13,7 +13,7 @@
 
    export let elementRoot;
 
-   const external = getContext('external');
+   const external = getContext('#external');
 
    const application = external.application;
    const eventbus = external.eventbus;
@@ -48,8 +48,8 @@
    $: storePosition($position);
 </script>
 
-<svelte:options accessors={true}/>
+<svelte:options accessors={true} />
 
 <svelte:component this={appShell} bind:elementRoot>
-   <MacroDirectory/>
+   <MacroDirectory />
 </svelte:component>

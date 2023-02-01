@@ -31,25 +31,25 @@ export function createFolderContextItems(documentId)
          label: 'FOLDER.Export',
          icon: 'fas fa-atlas',
          condition: () => CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
-         onPress: async (item, options) => TJSDocumentDialog.folderExport(folder, options)
+         onPress: (item, options) => TJSDocumentDialog.folderExport(folder, options)
       },
       {
          label: 'FOLDER.CreateTable',
          icon: `${CONFIG.RollTable.sidebarIcon}`,
          condition: () => CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
-         onPress: async (item, options) => TJSDocumentDialog.folderRolltable(folder, options)
+         onPress: (item, options) => TJSDocumentDialog.folderRolltable(folder, options)
       },
       {
          label: 'FOLDER.Remove',
          icon: 'fas fa-trash',
          condition: () => game.user.isGM || folder.isOwner,
-         onPress: async (item, options) => TJSDocumentDialog.folderRemove(folder, options)
+         onPress: (item, options) => TJSDocumentDialog.folderRemove(folder, options)
       },
       {
          label: 'FOLDER.Delete',
          icon: 'fas fa-dumpster',
          condition: () => game.user.isGM || folder.isOwner,
-         onPress: async (item, options) => TJSDocumentDialog.folderDelete(folder, options)
+         onPress: (item, options) => TJSDocumentDialog.folderDelete(folder, options)
       }
    ];
 }

@@ -7,6 +7,8 @@
   min-height: 200px;
   max-height: 750px;
 
+  --tjs-default-outline-focus-visible: 4px dotted orange;
+
   .window-content {
     padding: 0;
     overflow: inherit;

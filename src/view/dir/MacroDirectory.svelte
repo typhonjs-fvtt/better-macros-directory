@@ -21,7 +21,7 @@
    import Folder                    from './Folder.svelte';
    import FolderContent             from './FolderContent.svelte';
 
-   import { sessionConstants }      from "#constants";
+   import { constants, sessionConstants } from "#constants";
 
    const eventbus = getContext('#external').eventbus;
 
@@ -40,12 +40,12 @@
    const alphaSortButton = {
       store: $tree.sortAlpha,
       icon: 'fas fa-sort-alpha-down',
-      efx: ripple(),
+      efx: ripple()
    };
 
    const overflowMenu = {
       icon: 'fas fa-ellipsis-v',
-      efx: ripple(),
+      efx: ripple()
    };
 
    const storeSelect = $tree.userSelect.store;
@@ -84,7 +84,7 @@
    <TJSInput input={searchInput}/>
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>
-      <TJSMenu menu={{ items: createOverflowItems(eventbus), offset: { y: 4 } }}>
+      <TJSMenu menu={{ items: createOverflowItems(eventbus), offset: { y: 4 }, focusEl: constants.appId }}>
          <div class=range
               slot=after
               on:click|preventDefault|stopPropagation={() => null}

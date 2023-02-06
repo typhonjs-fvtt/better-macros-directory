@@ -1,12 +1,13 @@
 {
-  "name": "better-macros-directory",
+  "id": "better-macros-directory",
   "title": "Better Macros Directory",
   "description": "Provides a better macros directory experience over Foundry core.",
   "version": "0.0.0",
   "library": false,
-  "manifestPlusVersion": "1.0.0",
-  "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "9",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10"
+  },
   "author": "Michael Leahy (TyphonJS) - MLeahy#4299",
   "authors": [
     {
@@ -16,10 +17,10 @@
     }
   ],
   "esmodules": [
-    "./dist/better-macros-directory.js"
+    "index.js"
   ],
   "styles": [
-    "./dist/better-macros-directory.css"
+    "style.css"
   ],
   "languages": [
     {

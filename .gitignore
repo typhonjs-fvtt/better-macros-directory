@@ -1,6 +1,8 @@
 .DS_Store
 .idea/
 .vscode/
-dist/
 node_modules/
 package-lock.json
+/index.js
+/index.js.map
+/style.css

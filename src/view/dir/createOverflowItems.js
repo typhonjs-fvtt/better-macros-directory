@@ -19,11 +19,7 @@ export function createOverflowItems(eventbus) // eslint-disable-line no-unused-v
       {
          label: 'FOLDER.Create',
          icon: 'fas fa-folder',
-         // onPress: (item, options) => TJSDocumentDialog.folderCreate({ type: 'Macro' }, options)
-         onPress: (item, options) => {
-            console.log(`!! createOverflowItems - options: `, options);
-            TJSDocumentDialog.folderCreate({ type: 'Macro' }, options);
-         }
+         onPress: (item, options) => TJSDocumentDialog.folderCreate({ type: 'Macro' }, options)
       },
       { label: 'bmd.menu.overflow.always-on-top', icon: 'fas fa-arrow-alt-circle-up' },
       { separator: 'hr' }

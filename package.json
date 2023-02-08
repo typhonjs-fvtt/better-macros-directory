@@ -21,15 +21,6 @@
     "svelte-preprocess": "^5",
     "vite": "^4"
   },
-  "peerDependencies": {
-    "@rollup/plugin-node-resolve": "^15",
-    "@sveltejs/vite-plugin-svelte": "^2",
-    "autoprefixer": "^10",
-    "cssnano": "^5",
-    "postcss": "^8",
-    "postcss-preset-env": "^7",
-    "sass": "^1"
-  },
   "browserslist": [">5%", "not IE 11"],
   "scripts": {
     "build": "vite build",

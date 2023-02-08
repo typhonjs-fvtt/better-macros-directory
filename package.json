@@ -12,7 +12,7 @@
   "dependencies": {
     "@typhonjs-fvtt/runtime": "^0.0.22",
     "@typhonjs-fvtt/svelte-standard": "^0.0.18",
-    "svelte": "^3.55.1"
+    "svelte": "^3.55.0"
   },
   "devDependencies": {
     "@typhonjs-config/eslint-config": "^0.3.0",

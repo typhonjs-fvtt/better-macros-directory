@@ -4,18 +4,18 @@
   "description": "Provides a better macros directory experience over Foundry core.",
   "version": "0.0.0",
   "library": false,
-  "compatibility": {
-    "minimum": "10",
-    "verified": "10"
-  },
-  "author": "Michael Leahy (TyphonJS) - MLeahy#4299",
   "authors": [
     {
-      "name": "Michael Leahy (TyphonJS)",
+      "name": "Michael Leahy (TyphonJS) - MLeahy#4299",
       "url": "https://www.typhonjs.io",
       "discord": "MLeahy#4299"
     }
   ],
+  "compatibility": {
+    "minimum": "10",
+    "maximum": "10",
+    "verified": "10"
+  },
   "esmodules": [
     "index.js"
   ],

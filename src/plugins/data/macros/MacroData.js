@@ -39,7 +39,7 @@ export class MacroData
    static #augmentTree(data)
    {
       data.documentStore = new DynArrayReducer({
-         data: data.documents,
+         data: data.entries,
          filters: [filterUser, filterSearch],
          sort: sortAlpha
       });
@@ -62,10 +62,8 @@ export class MacroData
       // Run all unsubscribe functions for DynArrayReducer subscriptions added previously.
       Subscribers.unsubscribeAll();
 
-      const folders = game.folders.filter((f) => f.type === 'Macro');
-      const documents = game.collections.get('Macro').filter((e) => e.visible);
-
-      const newTree = this.#augmentTree(SidebarDirectory.setupFolders(folders, documents));
+      // TODO: Now that collections seemingly have a static tree on v11 can we reuse it?
+      const newTree = this.#augmentTree(game.collections.get('Macro').tree);
 
       newTree.filterSearch = filterSearch;
       newTree.sortAlpha = sortAlpha;

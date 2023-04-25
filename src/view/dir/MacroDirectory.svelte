@@ -8,7 +8,7 @@
 
    import {
       ripple,
-      rippleFocus }                 from '@typhonjs-fvtt/svelte-standard/action';
+      rippleFocus }                 from '@typhonjs-fvtt/runtime/svelte/animate/action';
 
    import {
       TJSInput,

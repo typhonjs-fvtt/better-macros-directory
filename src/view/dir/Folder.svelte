@@ -1,6 +1,6 @@
 <script>
-   import { TJSContextMenu }           from '@typhonjs-fvtt/svelte-standard/application';
-   import { TJSIconFolder }            from '@typhonjs-fvtt/svelte-standard/component';
+   import { TJSContextMenu }           from '#standard/application';
+   import { TJSIconFolder }            from '#standard/component';
 
    import { createFolderContextItems } from './createFolderContextItems.js';
    import FolderContent                from './FolderContent.svelte';

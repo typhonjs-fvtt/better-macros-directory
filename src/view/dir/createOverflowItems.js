@@ -1,5 +1,5 @@
-import { TJSDocumentDialog }  from '@typhonjs-fvtt/runtime/svelte/application/dialog';
-import { localize }           from '@typhonjs-fvtt/runtime/svelte/helper';
+import { TJSDocumentDialog }  from '#runtime/svelte/application/dialog';
+import { localize }           from '#runtime/svelte/helper';
 
 /**
  * Creates the items for the overflow menu.

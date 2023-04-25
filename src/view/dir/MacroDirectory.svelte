@@ -2,20 +2,20 @@
    import { getContext }            from 'svelte';
    import { quadIn }                from 'svelte/easing';
 
-   import { applyStyles }           from '@typhonjs-fvtt/runtime/svelte/action';
-   import { localize }              from '@typhonjs-fvtt/runtime/svelte/helper';
-   import { gameState }             from '@typhonjs-fvtt/runtime/svelte/store';
+   import { applyStyles }           from '#runtime/svelte/action';
+   import { localize }              from '#runtime/svelte/helper';
+   import { gameState }             from '#runtime/svelte/store';
 
    import {
       ripple,
-      rippleFocus }                 from '@typhonjs-fvtt/runtime/svelte/animate/action';
+      rippleFocus }                 from '#runtime/svelte/animate/action';
 
    import {
       TJSInput,
       TJSMenu,
       TJSScrollContainer,
       TJSSelect,
-      TJSToggleIconButton }         from '@typhonjs-fvtt/svelte-standard/component';
+      TJSToggleIconButton }         from '#standard/component';
 
    import { createOverflowItems }   from './createOverflowItems.js';
    import Folder                    from './Folder.svelte';

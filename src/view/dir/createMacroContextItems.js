@@ -1,5 +1,5 @@
-import { TJSDocumentDialog }  from '@typhonjs-fvtt/runtime/svelte/application/dialog';
-import { A11yHelper }         from '@typhonjs-fvtt/runtime/svelte/util';
+import { TJSDocumentDialog }  from '#runtime/svelte/application/dialog';
+import { A11yHelper }         from '#runtime/svelte/util';
 
 /**
  * Creates the items for the context menu from the given document ID.

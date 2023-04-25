@@ -3,9 +3,9 @@
 
    import {
       ApplicationShell,
-      TJSApplicationShell }      from '@typhonjs-fvtt/runtime/svelte/component/core';
+      TJSApplicationShell }      from '#runtime/svelte/component/core';
 
-   import { debounce }           from '@typhonjs-fvtt/runtime/svelte/util';
+   import { debounce }           from '#runtime/svelte/util';
 
    import MacroDirectory         from './dir/MacroDirectory.svelte';
 

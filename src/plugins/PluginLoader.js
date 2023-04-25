@@ -1,4 +1,4 @@
-import { TJSSessionStorage }  from '@typhonjs-fvtt/runtime/svelte/plugin/system';
+import { TJSSessionStorage }  from '#runtime/svelte/plugin/system';
 
 import * as DataPlugins    from './data/index.js';
 import * as SystemPlugins  from './system/index.js';

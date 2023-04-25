@@ -1,6 +1,6 @@
 import {
    EventbusSecure,
-   PluginManager }   from '@typhonjs-fvtt/runtime/plugin/manager';
+   PluginManager }   from '#runtime/plugin/manager';
 
 const pluginManager = new PluginManager();
 

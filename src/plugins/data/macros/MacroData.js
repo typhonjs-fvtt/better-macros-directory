@@ -1,14 +1,14 @@
-import { writable }        from 'svelte/store';
+import { writable }              from 'svelte/store';
 
-import {
-   DynArrayReducer,
-   TJSDocumentCollection } from '#runtime/svelte/store';
+import { DynArrayReducer }       from '#runtime/svelte/store/reducer';
 
-import { filterSearch }    from './filterSearch.js';
-import { filterUser }      from './filterUser.js';
-import { sortAlpha }       from './sortAlpha.js';
+import { TJSDocumentCollection } from '#runtime/svelte/store/document';
 
-import { Subscribers }     from './Subscribers.js';
+import { filterSearch }          from './filterSearch.js';
+import { filterUser }            from './filterUser.js';
+import { sortAlpha }             from './sortAlpha.js';
+
+import { Subscribers }           from './Subscribers.js';
 
 /**
  * @type {TJSDocumentCollection}

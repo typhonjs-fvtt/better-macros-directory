@@ -1,9 +1,9 @@
-import { TJSSessionStorage }  from '#runtime/svelte/plugin/system';
+import { TJSPSessionStorage } from '#runtime/svelte/store/storage/web/plugin';
 
-import * as DataPlugins    from './data/index.js';
-import * as SystemPlugins  from './system/index.js';
+import * as DataPlugins       from './data/index.js';
+import * as SystemPlugins     from './system/index.js';
 
-import pluginManager       from './PluginManager.js';
+import pluginManager          from './PluginManager.js';
 
 export default class PluginLoader
 {
@@ -15,7 +15,7 @@ export default class PluginLoader
          // Manages session storage w/ Svelte stores for each session item.
          {
             name: 'tjs-system-session-storage',
-            instance: new TJSSessionStorage(),
+            instance: new TJSPSessionStorage(),
             options: { eventPrepend: 'bmd' }
          },
          // Add view manager.

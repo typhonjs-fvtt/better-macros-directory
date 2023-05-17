@@ -1,12 +1,8 @@
-import {
-   EventbusSecure,
-   PluginManager }   from '#runtime/plugin/manager';
+import { PluginManager }   from '#runtime/plugin/manager';
 
 const pluginManager = new PluginManager();
 
-const mainEventbus = pluginManager.getEventbus();
-
 // Create a secure eventbus which can not have new registrations to the plugin eventbus.
-export const eventbus = EventbusSecure.initialize(mainEventbus, 'plugin-eventbus').eventbusSecure;
+export const eventbus = pluginManager.createEventbusSecure('plugin-eventbus');
 
 export default pluginManager;

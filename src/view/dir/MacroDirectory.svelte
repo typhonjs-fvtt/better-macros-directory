@@ -4,11 +4,11 @@
 
    import { applyStyles }           from '#runtime/svelte/action/dom';
    import { localize }              from '#runtime/svelte/helper';
-   import { gameState }             from '#runtime/svelte/store';
+   import { gameState }             from '#runtime/svelte/store/fvtt';
 
    import {
       ripple,
-      rippleFocus }                 from '#runtime/svelte/animate/action';
+      rippleFocus }                 from '#runtime/svelte/action/animate';
 
    import {
       TJSInput,

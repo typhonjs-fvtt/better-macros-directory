@@ -2,7 +2,7 @@ import { writable }              from 'svelte/store';
 
 import { DynArrayReducer }       from '#runtime/svelte/store/reducer';
 
-import { TJSDocumentCollection } from '#runtime/svelte/store/document';
+import { TJSDocumentCollection } from '#runtime/svelte/store/fvtt';
 
 import { filterSearch }          from './filterSearch.js';
 import { filterUser }            from './filterUser.js';

@@ -7,9 +7,9 @@ import { constants, sessionConstants } from '#constants';
 export default class BMDirectory extends SvelteApplication
 {
    /** @inheritDoc */
-   constructor(options)
+   constructor()
    {
-      super(options);
+      super();
 
       try
       {

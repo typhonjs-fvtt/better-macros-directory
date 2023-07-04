@@ -1,5 +1,5 @@
 import { TJSDocumentDialog }  from '#runtime/svelte/application/dialog';
-import { A11yHelper }         from '#runtime/svelte/util';
+import { A11yHelper }         from '#runtime/util/browser';
 
 /**
  * Creates the items for the context menu from the given document ID.

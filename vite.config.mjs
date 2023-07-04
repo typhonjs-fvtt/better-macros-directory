@@ -24,7 +24,7 @@ const s_SOURCEMAPS = true; // Generate sourcemaps for the bundle (recommended).
 // Used in bundling particularly during development. If you npm-link packages to your project add them here.
 const s_RESOLVE_CONFIG = {
    browser: true,
-   dedupe: ['svelte']
+   dedupe: ['svelte', '@typhonjs-fvtt/runtime', '@typhonjs-fvtt/svelte-standard']
 };
 
 export default () =>
@@ -68,7 +68,8 @@ export default () =>
 
             // Enable socket.io from main Foundry server.
             '/socket.io': { target: 'ws://localhost:30000', ws: true }
-         }
+         },
+         fs: { strict: false }
       },
       build: {
          outDir: __dirname,

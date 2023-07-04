@@ -7,23 +7,31 @@
   "author": "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)",
   "imports": {
     "#constants": "./src/constants.js",
-    "#views": "./src/view/index.js"
+    "#views": "./src/view/index.js",
+    "#runtime/*": "@typhonjs-fvtt/runtime/*",
+    "#runtime-plugins/*": "@typhonjs-fvtt/runtime-plugins/*",
+    "#standard/*": "@typhonjs-fvtt/svelte-standard/*"
   },
   "dependencies": {
-    "@typhonjs-fvtt/runtime": "^0.0.22",
-    "@typhonjs-fvtt/svelte-standard": "^0.0.18",
-    "svelte": "^3.55.0"
+    "@typhonjs-fvtt/runtime": "^0.0.23",
+    "@typhonjs-fvtt/runtime-plugins": "github:typhonjs-fvtt-lib/runtime-plugins",
+    "@typhonjs-fvtt/svelte-standard": "^0.0.23",
+    "svelte": "^4.0.3"
   },
   "devDependencies": {
-    "@typhonjs-config/eslint-config": "^0.3.0",
+    "@typhonjs-config/eslint-config": "^0.6.3",
     "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
     "eslint": "^8",
-    "svelte-preprocess": "^5",
-    "vite": "^4"
+    "svelte-preprocess": "^5.0.4",
+    "vite": "^4.3.9"
+  },
+  "peerDependencies": {
+    "@rollup/plugin-node-resolve": "^15",
+    "@sveltejs/vite-plugin-svelte": "^2.4.2"
   },
   "browserslist": [">5%", "not IE 11"],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build --force",
     "dev": "vite",
     "eslint": "eslint ."
   }

@@ -1,4 +1,6 @@
 <script>
+   import { getContext }               from 'svelte';
+
    import { TJSContextMenu }           from '#standard/application';
    import { TJSIconFolder }            from '#standard/component';
 
@@ -10,6 +12,8 @@
    /** @type {Folder} */
    export let folder;
 
+   const { application } = getContext('#external');
+
    const folderProps = {
       iconClosed: 'fas fa-folder',
       iconOpen: 'fas fa-folder-open',
@@ -17,7 +21,8 @@
          id: 'better-macros-directory-context-menu',
          items: createFolderContextItems(folder?.folder?.id),
          focusEl: constants.appId,
-         event
+         event,
+         activeWindow: application.reactive.activeWindow
       }),
       options: { focusIndicator: true }
    }

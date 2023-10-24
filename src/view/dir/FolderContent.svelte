@@ -8,7 +8,7 @@
 
    export let content;
 
-   const { eventbus } = getContext('#external');
+   const { application, eventbus } = getContext('#external');
 
    function onPress(documentId)
    {
@@ -35,7 +35,8 @@
          id: 'better-macros-directory-context-menu',
          items: createMacroContextItems(eventbus, documentId),
          focusEl: constants.appId,
-         event
+         event,
+         activeWindow: application.reactive.activeWindow
       });
    }
 
@@ -45,7 +46,8 @@
          id: 'better-macros-directory-context-menu',
          items: createMacroContextItems(eventbus, documentId),
          focusEl: constants.appId,
-         event
+         event,
+         activeWindow: application.reactive.activeWindow
       });
 
       event.preventDefault();

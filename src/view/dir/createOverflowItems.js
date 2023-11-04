@@ -14,12 +14,12 @@ export function createOverflowItems(eventbus) // eslint-disable-line no-unused-v
       {
          label: localize('SIDEBAR.Create', { type: localize(Macro.metadata.label) }),
          icon: 'fas fa-code',
-         onPress: (item, options) => TJSDocumentDialog.documentCreate(Macro, {}, options)
+         onPress: ({ focusSource }) => TJSDocumentDialog.documentCreate(Macro, {}, { focusSource })
       },
       {
          label: 'FOLDER.Create',
          icon: 'fas fa-folder',
-         onPress: (item, options) => TJSDocumentDialog.folderCreate({ type: 'Macro' }, options)
+         onPress: ({ focusSource }) => TJSDocumentDialog.folderCreate({ type: 'Macro' }, { focusSource })
       },
       { label: 'bmd.menu.overflow.always-on-top', icon: 'fas fa-arrow-alt-circle-up' },
       { separator: 'hr' }

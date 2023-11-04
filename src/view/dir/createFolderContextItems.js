@@ -1,4 +1,4 @@
-import { TJSDocumentDialog }  from '#runtime/svelte/application/dialog';
+import { TJSDocumentDialog }  from '#standard/application/dialog';
 
 /**
  * Creates the items for the context menu from the given document ID.

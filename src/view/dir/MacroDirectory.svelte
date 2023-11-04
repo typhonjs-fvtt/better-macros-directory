@@ -85,12 +85,12 @@
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>
       <TJSMenu menu={{ items: createOverflowItems(eventbus), offset: { y: 4 }, focusEl: constants.appId }}>
-         <div class=range
-              slot=after
-              on:click|preventDefault|stopPropagation={() => null}
-              role=presentation>
+         <!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+         <label class=range
+                slot=after
+                on:click|stopPropagation>
             Scale: <input type=range bind:value={$storeMenuScale} min=200 max=500 step=1>
-         </div>
+         </label>
       </TJSMenu>
    </TJSToggleIconButton>
 </section>

@@ -15,7 +15,7 @@
    const folderProps = {
       iconClosed: 'fas fa-folder',
       iconOpen: 'fas fa-folder-open',
-      onContextMenu: (event) => TJSContextMenu.create({
+      onContextMenu: ({ event }) => TJSContextMenu.create({
          id: 'better-macros-directory-context-menu',
          items: createFolderContextItems(folder?.folder?.id),
          focusEl: constants.appId,

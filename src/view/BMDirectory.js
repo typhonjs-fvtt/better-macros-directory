@@ -65,13 +65,13 @@ export default class BMDirectory extends SvelteApplication
          icon: themeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off',
          title: themeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable',
 
-         onPress: function()
+         onPress: ({ button }) =>
          {
             const newThemeDarkMode = eventbus.triggerSync('bmd:storage:session:item:boolean:swap',
              sessionConstants.themeDarkMode);
 
-            this.icon = newThemeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off';
-            this.title = newThemeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable';
+            button.icon = newThemeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off';
+            button.title = newThemeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable';
          }
       });
 

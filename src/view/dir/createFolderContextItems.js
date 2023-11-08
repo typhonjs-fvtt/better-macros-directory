@@ -1,4 +1,4 @@
-import { TJSDocumentDialog }  from '#standard/application/dialog';
+import { TJSDocumentDialog }  from '#standard/application/dialog/document';
 
 /**
  * Creates the items for the context menu from the given document ID.

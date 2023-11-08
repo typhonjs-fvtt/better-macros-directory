@@ -1,6 +1,6 @@
 import { localize }           from '#runtime/svelte/helper';
 
-import { TJSDocumentDialog }  from '#standard/application/dialog';
+import { TJSDocumentDialog }  from '#standard/application/dialog/document';
 
 /**
  * Creates the items for the overflow menu.

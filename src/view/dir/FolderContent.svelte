@@ -1,6 +1,6 @@
 <script>
    import { getContext }               from 'svelte';
-   import { TJSContextMenu }           from '#standard/application';
+   import { TJSContextMenu }           from '#standard/application/menu';
 
    import { createMacroContextItems }  from './createMacroContextItems.js';
 

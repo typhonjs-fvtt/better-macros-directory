@@ -1,8 +1,6 @@
 <script>
-   import { getContext }               from 'svelte';
-
-   import { TJSContextMenu }           from '#standard/application';
-   import { TJSIconFolder }            from '#standard/component';
+   import { TJSContextMenu }           from '#standard/application/menu';
+   import { TJSIconFolder }            from '#standard/component/folder';
 
    import { createFolderContextItems } from './createFolderContextItems.js';
    import FolderContent                from './FolderContent.svelte';

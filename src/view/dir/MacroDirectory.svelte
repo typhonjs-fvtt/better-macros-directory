@@ -10,12 +10,15 @@
       ripple,
       rippleFocus }                 from '#runtime/svelte/action/animate';
 
+   import { TJSToggleIconButton }   from '#standard/component/button';
+
    import {
       TJSInput,
-      TJSMenu,
-      TJSScrollContainer,
-      TJSSelect,
-      TJSToggleIconButton }         from '#standard/component';
+      TJSSelect }                   from '#standard/component/form';
+
+   import { TJSScrollContainer }    from '#standard/component/container';
+
+   import { TJSMenu }               from '#standard/component/menu';
 
    import { createOverflowItems }   from './createOverflowItems.js';
    import Folder                    from './Folder.svelte';

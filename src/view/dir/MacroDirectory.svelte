@@ -3,12 +3,13 @@
    import { quadIn }                from 'svelte/easing';
 
    import { applyStyles }           from '#runtime/svelte/action/dom';
-   import { localize }              from '#runtime/svelte/helper';
    import { gameState }             from '#runtime/svelte/store/fvtt';
 
    import {
       ripple,
       rippleFocus }                 from '#runtime/svelte/action/animate';
+
+   import { localize }              from '#runtime/util/i18n';
 
    import { TJSToggleIconButton }   from '#standard/component/button';
 

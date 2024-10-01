@@ -3,7 +3,7 @@
 
    import {
       ApplicationShell,
-      TJSApplicationShell }      from '#runtime/svelte/component/core';
+      TJSApplicationShell }      from '#runtime/svelte/component/application';
 
    import { Timing }             from '#runtime/util';
 

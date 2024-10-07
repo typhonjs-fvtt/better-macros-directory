@@ -2,7 +2,7 @@
    import { getContext }            from 'svelte';
    import { quadIn }                from 'svelte/easing';
 
-   import { applyStyles }           from '#runtime/svelte/action/dom';
+   import { applyStyles }           from '#runtime/svelte/action/dom/style';
    import { gameState }             from '#runtime/svelte/store/fvtt';
 
    import {

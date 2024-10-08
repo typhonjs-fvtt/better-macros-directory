@@ -4,12 +4,11 @@
 
    import { applyStyles }           from '#runtime/svelte/action/dom/style';
    import { gameState }             from '#runtime/svelte/store/fvtt';
+   import { localize }              from '#runtime/util/i18n';
 
    import {
       ripple,
-      rippleFocus }                 from '#runtime/svelte/action/animate';
-
-   import { localize }              from '#runtime/util/i18n';
+      rippleFocus }                 from '#standard/action/animate/ripple';
 
    import { TJSToggleIconButton }   from '#standard/component/button';
 

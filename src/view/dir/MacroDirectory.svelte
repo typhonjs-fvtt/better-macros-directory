@@ -8,7 +8,7 @@
 
    import {
       ripple,
-      rippleFocus }                 from '#standard/action/animate/ripple';
+      rippleFocus }                 from '#standard/action/animate/composable/ripple';
 
    import { TJSToggleIconButton }   from '#standard/component/button';
 

@@ -3,12 +3,11 @@
    import { quadIn }                from 'svelte/easing';
 
    import { applyStyles }           from '#runtime/svelte/action/dom/style';
-   import { gameState }             from '#runtime/svelte/store/fvtt';
    import { localize }              from '#runtime/util/i18n';
 
    import {
       ripple,
-      rippleFocus }                 from '#standard/action/animate/composable/ripple';
+      rippleFocus }                 from '#standard/action/animate/composable';
 
    import { TJSToggleIconButton }   from '#standard/component/button';
 
@@ -81,7 +80,7 @@
 </script>
 
 <section class=bmd-top-bar>
-   {#if $gameState.user.isGM}
+   {#if globalThis.game.user.isGM}
       <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>
    {/if}
    <TJSInput input={searchInput}/>

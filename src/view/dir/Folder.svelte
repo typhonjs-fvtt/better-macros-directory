@@ -27,8 +27,9 @@
    $:
    {
       // The foundry create / edit folder dialog can set the color to an empty string, so check for that.
-      const background = typeof folder?.folder?.color === 'string' && folder.folder.color.length ?
-       folder.folder.color : void 0;
+      const color = folder?.folder?.color?.css;
+
+      const background = typeof color === 'string' && color.length ? color : void 0;
 
       // TJSFolder background; --bmd-folder-closed & open defined in Sass.
       styles = {

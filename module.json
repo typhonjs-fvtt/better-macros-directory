@@ -13,14 +13,14 @@
   ],
   "compatibility": {
     "minimum": "11",
-    "maximum": "12",
-    "verified": "12"
+    "maximum": "13",
+    "verified": "13"
   },
   "esmodules": [
-    "index.js"
+    "dist/better-macros-directory.js"
   ],
   "styles": [
-    "style.css"
+    "dist/better-macros-directory.css"
   ],
   "flags": {
     "hotReload": {

@@ -1,11 +1,11 @@
-/.github/
-/assets/
-/css/
-/dist/
-/docs/
-/lang/
-/packs/
-/styles/
+.github/
+dist/
+docs/
+lang/
+packs/
+scripts/
+styles/
 src/**/*.svelte
-/index.js
-/index.js.map
+
+# Temporary until ESLint v9 upgrade
+vite.config.js

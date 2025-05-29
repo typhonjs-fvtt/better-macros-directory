@@ -15,31 +15,27 @@ export class ViewManager
          instance: Apps.directory
       });
 
-      Hooks.on('renderHotbar', this.#hotbarRendered.bind(this));
+      // Hooks.on('renderHotbar', this.#hotbarRendered.bind(this));
+      Hooks.on('ready', this.#sidebarRendered.bind(this));
    }
 
    /**
-    * Replace core listener for macro directory button to launch BMD from a click and a context menu click opens
-    * the old / core macros directory app.
-    *
-    * @param {Hotbar}   app - Hotbar app
-    *
-    * @param {JQuery}   html - Hotbar HTML
+    * Add context menu listener to sidebar macro directory button to launch BMD. Potentially in the future an entire
+    * sidebar replacement is done.
     */
-   static #hotbarRendered(app, html)
+   static #sidebarRendered()
    {
-      const element = html[0].querySelector('#macro-directory');
+      const button = globalThis.document.querySelector('button.ui-control[data-tab="macros"]');
 
-      if (element instanceof HTMLElement && element.parentNode instanceof HTMLElement)
+      if (button)
       {
-         const elementClone = element.cloneNode(true);
+         button.addEventListener('contextmenu', (event) =>
+         {
+            event.preventDefault();
+            event.stopImmediatePropagation();
 
-         // Clone anchor element to remove all listeners.
-         element.parentNode.replaceChild(elementClone, element);
-
-         // Add new listeners; click opens BMD; context menu opens the core / old macros directory app.
-         elementClone.addEventListener('click', () => Apps.directory.render(true, { focus: true }));
-         elementClone.addEventListener('contextmenu', () => ui.macros.renderPopout(true));
+            Apps.directory.render(true, { focus: true });
+         });
       }
    }
 

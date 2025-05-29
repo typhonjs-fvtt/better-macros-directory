@@ -16,7 +16,7 @@ const storeKeyword = writable(keyword);
  */
 function filterSearch(macro)
 {
-   return keyword === '' || !regex ? true : regex.test(SearchFilter.cleanQuery(macro.name));
+   return keyword === '' || !regex ? true : regex.test(foundry.applications.ux.SearchFilter.cleanQuery(macro.name));
 }
 
 // Create a custom store that changes when the search keyword changes.
@@ -33,7 +33,7 @@ filterSearch.set = (value) =>
 {
    if (typeof value === 'string')
    {
-      keyword = SearchFilter.cleanQuery(value);
+      keyword = foundry.applications.ux.SearchFilter.cleanQuery(value);
       regex = new RegExp(RegExp.escape(keyword), 'i');
       storeKeyword.set(keyword);
    }

@@ -18,7 +18,7 @@ export function createOverflowItems(eventbus) // eslint-disable-line no-unused-v
          onPress: ({ focusSource }) => TJSDocumentDialog.documentCreate(Macro, {}, { focusSource })
       },
       {
-         label: 'FOLDER.Create',
+         label: 'SIDEBAR.ACTIONS.CREATE.Folder',
          icon: 'fas fa-folder',
          onPress: ({ focusSource }) => TJSDocumentDialog.folderCreate({ type: 'Macro' }, { focusSource })
       },

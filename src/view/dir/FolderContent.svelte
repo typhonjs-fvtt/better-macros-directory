@@ -92,7 +92,7 @@
          on:keyup={(event) => onKeyup(event, macro.id)}
          role=button
          tabindex=0>
-         <h4>{macro.name}</h4>
+         {macro.name}
       </a>
    </li>
 {/each}
@@ -126,11 +126,6 @@
 
    .directory-item {
       gap: 3px;
-   }
-
-   h4 {
-      margin: 0;
-      overflow: hidden;
-      white-space: nowrap;
+      padding: 0.25rem;
    }
 </style>

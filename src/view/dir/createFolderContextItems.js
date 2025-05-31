@@ -22,18 +22,6 @@ export function createFolderContextItems(documentId)
          onPress: ({ focusSource }) => TJSDocumentDialog.folderUpdate(folder, { focusSource })
       },
       {
-         label: 'OWNERSHIP.Configure',
-         icon: 'fas fa-lock fa-fw',
-         condition: () => game.user.isGM || folder.isOwner,
-         onPress: ({ focusSource }) => TJSDocumentDialog.configureOwnership(folder, { focusSource })
-      },
-      {
-         label: 'FOLDER.Export',
-         icon: 'fas fa-atlas',
-         condition: () => CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
-         onPress: ({ focusSource }) => TJSDocumentDialog.folderExport(folder, { focusSource })
-      },
-      {
          label: 'FOLDER.CreateTable',
          icon: `${CONFIG.RollTable.sidebarIcon}`,
          condition: () => CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
@@ -50,6 +38,18 @@ export function createFolderContextItems(documentId)
          icon: 'fas fa-dumpster',
          condition: () => game.user.isGM || folder.isOwner,
          onPress: ({ focusSource }) => TJSDocumentDialog.folderDelete(folder, { focusSource })
+      },
+      {
+         label: 'OWNERSHIP.Configure',
+         icon: 'fas fa-lock fa-fw',
+         condition: () => game.user.isGM || folder.isOwner,
+         onPress: ({ focusSource }) => TJSDocumentDialog.configureOwnership(folder, { focusSource })
+      },
+      {
+         label: 'FOLDER.Export',
+         icon: 'fas fa-atlas',
+         condition: () => CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
+         onPress: ({ focusSource }) => TJSDocumentDialog.folderExport(folder, { focusSource })
       }
    ];
 }

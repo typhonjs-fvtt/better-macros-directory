@@ -29,22 +29,6 @@ export function createMacroContextItems(eventbus, documentId)
          }
       },
       {
-         label: 'SIDEBAR.Delete',
-         icon: 'fas fa-trash fa-fw',
-         condition: () => game.user.isGM || macro.isOwner,
-         onPress: ({ focusSource }) => TJSDocumentDialog.documentDelete(macro, { focusSource })
-      },
-      {
-         label: 'SIDEBAR.Duplicate',
-         icon: 'fas fa-copy fa-fw',
-         condition: () => game.user.isGM || macro.isOwner,
-         onPress: ({ focusSource }) =>
-         {
-            macro.clone({ name: `${macro.name} (Copy)` }, { save: true });
-            A11yHelper.applyFocusSource(focusSource);
-         }
-      },
-      {
          label: 'OWNERSHIP.Configure',
          icon: 'fas fa-lock fa-fw',
          onPress: ({ focusSource }) => TJSDocumentDialog.configureOwnership(macro, { focusSource })
@@ -64,6 +48,22 @@ export function createMacroContextItems(eventbus, documentId)
          icon: 'fas fa-file-import fa-fw',
          condition: () => macro.isOwner,
          onPress: ({ focusSource }) => TJSDocumentDialog.importFromJSON(macro, { focusSource })
+      },
+      {
+         label: 'SIDEBAR.Delete',
+         icon: 'fas fa-trash fa-fw',
+         condition: () => game.user.isGM || macro.isOwner,
+         onPress: ({ focusSource }) => TJSDocumentDialog.documentDelete(macro, { focusSource })
+      },
+      {
+         label: 'SIDEBAR.Duplicate',
+         icon: 'fas fa-copy fa-fw',
+         condition: () => game.user.isGM || macro.isOwner,
+         onPress: ({ focusSource }) =>
+         {
+            macro.clone({ name: `${macro.name} (Copy)` }, { save: true });
+            A11yHelper.applyFocusSource(focusSource);
+         }
       }
    ];
 }

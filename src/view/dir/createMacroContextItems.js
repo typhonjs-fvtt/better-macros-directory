@@ -30,7 +30,7 @@ export function createMacroContextItems(eventbus, documentId)
       },
       {
          label: 'OWNERSHIP.Configure',
-         icon: 'fas fa-lock fa-fw',
+         icon: 'fa-fw fa-solid fa-file-lock',
          onPress: ({ focusSource }) => TJSDocumentDialog.configureOwnership(macro, { focusSource })
       },
       {

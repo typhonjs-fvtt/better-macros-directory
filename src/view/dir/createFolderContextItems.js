@@ -41,7 +41,7 @@ export function createFolderContextItems(documentId)
       },
       {
          label: 'OWNERSHIP.Configure',
-         icon: 'fas fa-lock fa-fw',
+         icon: 'fa-fw fa-solid fa-file-lock',
          condition: () => game.user.isGM || folder.isOwner,
          onPress: ({ focusSource }) => TJSDocumentDialog.configureOwnership(folder, { focusSource })
       },

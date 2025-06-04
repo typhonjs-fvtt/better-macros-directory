@@ -1,25 +1,33 @@
 <script>
+   import { getContext }               from 'svelte';
+
    import { TJSContextMenu }           from '#standard/application/menu';
    import { TJSIconFolder }            from '#standard/component/folder';
 
    import { createFolderContextItems } from './createFolderContextItems.js';
    import FolderContent                from './FolderContent.svelte';
 
-   import { constants }                from '#constants';
+   import {
+      constants,
+      sessionConstants }               from '#constants';
 
    /** @type {Folder} */
    export let folder;
+
+   /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
+   const { application } = getContext('#external');
 
    const folderProps = {
       iconClosed: 'fas fa-folder',
       iconOpen: 'fas fa-folder-open',
       onContextMenu: ({ event }) => TJSContextMenu.create({
          id: 'better-macros-directory-context-menu',
-         items: createFolderContextItems(folder?.folder?.id),
+         items: createFolderContextItems(folder.folder.id),
          focusEl: constants.appId,
          event
       }),
-      options: { focusIndicator: true }
+      options: { focusIndicator: true },
+      store: application.reactive.sessionStorage.getStore(`${sessionConstants.folderState}.${folder.folder.id}`, false)
    }
 
    let styles;

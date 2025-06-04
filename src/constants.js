@@ -21,6 +21,7 @@ const settings = {
  */
 const sessionConstants = {
    appState: `${constants.moduleId}.settings.appState`,
+   folderState: `${constants.moduleId}.folder.state`,
    menuScale: `${constants.moduleId}.menu.scale`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
    scrolltopPartial: `${constants.moduleId}.scrolltop-`
@@ -38,6 +39,8 @@ export { constants, sessionConstants, settings };
  * @typedef {object} BMDSessionConstants
  *
  * @property {string} appState - Stores the application state / position.
+ *
+ * @property {string} folderState - Base key for folder opened state.
  *
  * @property {string} menuScale - Scaling factor for menu item size / height.
  *

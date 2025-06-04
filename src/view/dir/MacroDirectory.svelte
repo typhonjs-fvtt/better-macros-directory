@@ -129,9 +129,9 @@
       display: flex;
       padding: 4px;
       gap: 4px;
-      flex: 1 1 20px;
       justify-content: center;
       border-bottom: solid 1px #444;
+      max-height: fit-content;
    }
 
    .range {

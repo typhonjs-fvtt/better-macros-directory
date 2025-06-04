@@ -17,9 +17,14 @@
     background: none;
   }
 
-  // Reverse universal selector set for `.window-app .window-content > *`.
-  .window-content > * {
-    flex: unset;
+  .window-header {
+    // Header menu icon
+    button.icon {
+      // TJSAppShell / static dark mode.
+      &.fas.fa-moon.on:before {
+        color: lightblue;
+      }
+    }
   }
 
   .directory-list {
@@ -32,26 +37,6 @@
 
     // Font color for macro directory list.
     color: var(--color-text-light-highlight);
-  }
-
-  // Header menu icon
-  i {
-    flex: none;
-
-    &.fas.fa-filter {
-      color: yellow;
-      filter: drop-shadow(0 0 2px #000);
-    }
-
-    &.fas.fa-moon {
-      color: lightblue;
-      filter: drop-shadow(0 0 2px #000);
-    }
-
-    &.fas.off {
-      color: white;
-      filter: drop-shadow(0 0 2px #000);
-    }
   }
 
   // Light / normal theme

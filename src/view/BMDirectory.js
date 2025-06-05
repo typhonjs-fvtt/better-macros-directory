@@ -36,7 +36,6 @@ export default class BMDirectory extends SvelteApplication
          height: 300,
          headerIcon: `${CONFIG.Macro.sidebarIcon}`,
          title: 'bmd.settings.title',
-         headerButtonNoLabel: true,
          svelte: {
             class: BMDAppShell,
             target: document.body
@@ -64,7 +63,7 @@ export default class BMDirectory extends SvelteApplication
       buttons.unshift({
          class: 'theme-dark',
          icon: themeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off',
-         title: themeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable',
+         label: themeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable',
 
          onPress: ({ button }) =>
          {
@@ -72,7 +71,7 @@ export default class BMDirectory extends SvelteApplication
              sessionConstants.themeDarkMode);
 
             button.icon = newThemeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off';
-            button.title = newThemeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable';
+            button.label = newThemeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable';
          }
       });
 

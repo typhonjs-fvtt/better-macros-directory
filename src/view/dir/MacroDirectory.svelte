@@ -77,6 +77,20 @@
       folderStyles = { '--tjs-folder-summary-font-size': fontSize };
       itemHeightQuad = `${20 + (easing * 30)}px`;
    }
+
+   /**
+    * Stop propagation of `<Alt>` key which is used to control open / close all folders.
+    *
+    * @param {KeyboardEvent} event - Keyboard event
+    */
+   function onKeydown(event)
+   {
+      if (event.altKey)
+      {
+         event.preventDefault();
+         event.stopPropagation();
+      }
+   }
 </script>
 
 <section class=bmd-top-bar>
@@ -98,9 +112,11 @@
 </section>
 
 <TJSScrollContainer scrollTop={storeScroll}>
+   <!-- svelte-ignore a11y-no-static-element-interactions -->
    <section class="directory flexcol"
             style:font-size={fontSize}
-            style:--sidebar-item-height={itemHeightQuad}>
+            style:--sidebar-item-height={itemHeightQuad}
+            on:keydown={onKeydown}>
       <ol class=directory-list use:applyStyles={folderStyles}>
          {#each $tree.children as folder (folder.folder.id)}
             <Folder {folder} />

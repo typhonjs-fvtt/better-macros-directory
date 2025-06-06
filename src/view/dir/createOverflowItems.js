@@ -20,6 +20,7 @@ export function createOverflowItems(eventbus) // eslint-disable-line no-unused-v
       {
          label: 'SIDEBAR.ACTIONS.CREATE.Folder',
          icon: 'fas fa-folder',
+         condition: () => game.user.isGM,
          onPress: ({ focusSource }) => TJSDocumentDialog.folderCreate({ type: 'Macro' }, { focusSource })
       },
       { label: 'bmd.menu.overflow.always-on-top', icon: 'fas fa-arrow-alt-circle-up' },

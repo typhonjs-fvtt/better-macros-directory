@@ -31,6 +31,7 @@ export function createMacroContextItems(eventbus, documentId)
       {
          label: 'OWNERSHIP.Configure',
          icon: 'fa-fw fa-solid fa-file-lock',
+         condition: () => game.user.isGM || macro.isOwner,
          onPress: ({ focusSource }) => TJSDocumentDialog.configureOwnership(macro, { focusSource })
       },
       {

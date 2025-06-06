@@ -1,4 +1,5 @@
 import { TJSDocumentDialog }  from '#standard/application/dialog/document';
+import {localize} from "../../../../typhonjs/_dist/util/i18n/index.js";
 
 /**
  * Creates the items for the context menu from the given document ID.
@@ -24,7 +25,7 @@ export function createFolderContextItems(documentId)
       {
          label: 'FOLDER.CreateTable',
          icon: `${CONFIG.RollTable.sidebarIcon}`,
-         condition: () => CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
+         condition: () => game.user.isGM && CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
          onPress: ({ focusSource }) => TJSDocumentDialog.folderRolltable(folder, { focusSource })
       },
       {
@@ -42,14 +43,32 @@ export function createFolderContextItems(documentId)
       {
          label: 'OWNERSHIP.Configure',
          icon: 'fa-fw fa-solid fa-file-lock',
-         condition: () => game.user.isGM || folder.isOwner,
+         condition: () => game.user.isGM,
          onPress: ({ focusSource }) => TJSDocumentDialog.configureOwnership(folder, { focusSource })
       },
       {
          label: 'FOLDER.Export',
          icon: 'fas fa-atlas',
-         condition: () => CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
+         condition: () => game.user.isGM && CONST.COMPENDIUM_DOCUMENT_TYPES.includes(folder.type),
          onPress: ({ focusSource }) => TJSDocumentDialog.folderExport(folder, { focusSource })
-      }
+      },
+
+      {
+         condition: () => game.user.isGM,
+         separator: 'hr'
+      },
+      {
+         label: localize('SIDEBAR.Create', { type: localize(Macro.metadata.label) }),
+         icon: 'fas fa-code',
+         condition: () => game.user.isGM,
+         onPress: ({ focusSource }) => TJSDocumentDialog.documentCreate(Macro, { folder: folder.id }, { focusSource })
+      },
+      {
+         label: 'SIDEBAR.ACTIONS.CREATE.Folder',
+         icon: 'fas fa-folder',
+         condition: () => game.user.isGM,
+         onPress: ({ focusSource }) => TJSDocumentDialog.folderCreate({ folder: folder.id, type: 'Macro' },
+          { focusSource })
+      },
    ];
 }

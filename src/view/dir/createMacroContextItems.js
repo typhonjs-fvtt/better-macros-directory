@@ -31,7 +31,7 @@ export function createMacroContextItems(eventbus, documentId)
       {
          label: 'OWNERSHIP.Configure',
          icon: 'fa-fw fa-solid fa-file-lock',
-         condition: () => game.user.isGM || macro.isOwner,
+         condition: () => game.user.isGM,
          onPress: ({ focusSource }) => TJSDocumentDialog.configureOwnership(macro, { focusSource })
       },
       {
@@ -47,7 +47,7 @@ export function createMacroContextItems(eventbus, documentId)
       {
          label: 'SIDEBAR.Import',
          icon: 'fas fa-file-import fa-fw',
-         condition: () => macro.isOwner,
+         condition: () => game.user.isGM,
          onPress: ({ focusSource }) => TJSDocumentDialog.importFromJSON(macro, { focusSource })
       },
       {

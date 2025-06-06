@@ -19,7 +19,7 @@ export function createFolderContextItems(documentId)
       {
          label: 'FOLDER.Edit',
          icon: 'fas fa-edit',
-         condition: () => game.user.isGM || folder.isOwner,
+         condition: () => game.user.isGM,
          onPress: ({ focusSource }) => TJSDocumentDialog.folderUpdate(folder, { focusSource })
       },
       {
@@ -31,13 +31,13 @@ export function createFolderContextItems(documentId)
       {
          label: 'FOLDER.Remove',
          icon: 'fas fa-trash',
-         condition: () => game.user.isGM || folder.isOwner,
+         condition: () => game.user.isGM,
          onPress: ({ focusSource }) => TJSDocumentDialog.folderRemove(folder, { focusSource })
       },
       {
          label: 'FOLDER.Delete',
          icon: 'fas fa-dumpster',
-         condition: () => game.user.isGM || folder.isOwner,
+         condition: () => game.user.isGM,
          onPress: ({ focusSource }) => TJSDocumentDialog.folderDelete(folder, { focusSource })
       },
       {

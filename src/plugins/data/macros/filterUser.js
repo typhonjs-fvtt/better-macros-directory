@@ -16,11 +16,12 @@ const storeUserId = writable(userId);
 function filterUser(macro)
 {
    const ownership = macro.ownership;
+   const author = macro.author;
    const LIMITED = CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED;
 
-   // If no user ID is set do not filter otherwise if ID is in permissions or the default permission is at least
-   // OBSERVER then keep the macro.
-   return userId === '' ? true : (userId in ownership && ownership[userId] >= LIMITED) ||
+   // If no user ID is set do not filter otherwise if author ID matches user ID, ID is in permissions or the default
+   // permission is at least LIMITED then keep the macro.
+   return userId === '' ? true : (author?.id === userId) || (userId in ownership && ownership[userId] >= LIMITED) ||
     ('default' in ownership && ownership['default'] >= LIMITED);
 }
 

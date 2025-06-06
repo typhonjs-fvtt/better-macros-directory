@@ -73,7 +73,9 @@
 
 <TJSIconFolder folder={folderProps} {onClose} {onOpen} {styles}>
 {#each folder.children as folder (folder?.folder?.id)}
-   <svelte:self {folder}/>
+   {#if folder?.folder?.displayed}
+      <svelte:self {folder}/>
+   {/if}
 {/each}
 <FolderContent content={folder.documentStore} />
 </TJSIconFolder>

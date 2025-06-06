@@ -119,7 +119,9 @@
             on:keydown={onKeydown}>
       <ol class=directory-list use:applyStyles={folderStyles}>
          {#each $tree.children as folder (folder.folder.id)}
-            <Folder {folder} />
+            {#if folder?.folder?.displayed}
+               <Folder {folder} />
+            {/if}
          {/each}
          <FolderContent content={$tree.documentStore} />
       </ol>

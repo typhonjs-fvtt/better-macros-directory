@@ -44,7 +44,8 @@
 
       // TJSIconFolder background; --bmd-folder-background-closed defined in Sass.
       styles = {
-         '--tjs-folder-summary-background': background ?? 'var(--bmd-folder-background)'
+         '--tjs-folder-summary-background': background ?? 'var(--bmd-folder-background)',
+         '--tjs-folder-contents-border-left': `3px solid ${background ?? 'var(--bmd-folder-background)'}`
       };
    }
 

@@ -4,9 +4,9 @@ import { TJSPSessionStorage } from './TJSPSessionStorage.js';
 import * as DataPlugins       from './data/index.js';
 import * as SystemPlugins     from './system/index.js';
 
-import pluginManager          from './PluginManager.js';
+import { pluginManager }      from './PluginManager.js';
 
-export default class PluginLoader
+export class PluginLoader
 {
    static async foundryInit()
    {

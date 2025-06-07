@@ -1,4 +1,5 @@
-import { TJSPSessionStorage } from '#runtime-plugins/svelte/store/web-storage';
+// import { TJSPSessionStorage } from '#runtime-plugins/svelte/store/web-storage';
+import { TJSPSessionStorage } from './TJSPSessionStorage.js';
 
 import * as DataPlugins       from './data/index.js';
 import * as SystemPlugins     from './system/index.js';
@@ -10,6 +11,14 @@ export default class PluginLoader
    static async foundryInit()
    {
       await pluginManager.addAll([
+         // Data plugins ---------------------------------------------------------------------------------------------
+
+         // Manages reactive data for macro collection.
+         {
+            name: 'bmd-data-macros',
+            instance: DataPlugins.MacroData
+         },
+
          // System plugins -------------------------------------------------------------------------------------------
 
          // Manages session storage w/ Svelte stores for each session item.
@@ -23,18 +32,6 @@ export default class PluginLoader
             name: 'bmd-system-ui-view-manager',
             instance: SystemPlugins.ViewManager
          }
-      ]);
-   }
-
-   static async foundryReady()
-   {
-      await pluginManager.addAll([
-         {
-            name: 'bmd-data-macros',
-            instance: DataPlugins.MacroData
-         },
-
-         // System plugins -------------------------------------------------------------------------------------------
       ]);
    }
 }

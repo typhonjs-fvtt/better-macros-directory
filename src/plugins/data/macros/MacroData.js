@@ -15,6 +15,8 @@ import { Subscribers }           from './Subscribers.js';
  * {@link SidebarDirectory} data preparation and augments the returned results with reactive storage. When any updates /
  * changes occur the core Foundry data preparation is kicked off and the resulting data is augmented and set to a
  * Svelte store.
+ *
+ * Note: This plugin loads in the `init` hook to support sidebar embedding. The data is initialized in the `ready` hook.
  */
 export class MacroData
 {
@@ -39,18 +41,26 @@ export class MacroData
    static #macroDataUpdates = ['name', 'img', 'thumb', 'ownership', 'sort', 'sorting', 'folder'];
 
    /**
-    * Stores the macro tree data.
-    *
-    * @type {Writable<{root: boolean, content: [], children: []}>}
-    */
-   static #tree = writable({ root: true, content: [], children: [] });
-
-   /**
     * Stores game user data for TJSSelect.
     *
     * @type {{}}
     */
    static #userSelect = {};
+
+   /**
+    * Stores the macro tree data.
+    *
+    * @type {Writable<{root: boolean, content: [], children: []}>}
+    */
+   static #tree = writable({
+      root: true,
+      content: [],
+      children: [],
+      documentStore: new DynArrayReducer(),
+      filterSearch,
+      sortAlpha,
+      userSelect: MacroData.#userSelect
+   });
 
    /**
     * Recursive function that augments the data structure returned by {@link SidebarDirectory.setupFolders}
@@ -104,31 +114,36 @@ export class MacroData
     */
    static onPluginLoad(ev)
    {
-      MacroData.#collection.set(game.macros);
-
-      MacroData.#userSelect = {
-         options: [{ label: 'All', value: '' }, ...[...game.users].map((u) => ({ label: u.name, value: u.id })).sort(
-          (a, b) => a.label.localeCompare(b.label))],
-         store: filterUser
-      };
-
-      // Subscribe to receive updates from `game.macros`.
-      MacroData.#collection.subscribe((col, updateOptions) =>
+      // Must initialize data after Foundry is `ready`.
+      Hooks.once('ready', () =>
       {
-         const { action, data } = updateOptions;
+         MacroData.#collection.set(game.macros);
 
-         if (!MacroData.#actionTypes.has(action)) { return; }
+         MacroData.#userSelect = {
+            options: [{ label: 'All', value: '' }, ...[...game.users].map((u) => ({ label: u.name, value: u.id })).sort(
+               (a, b) => a.label.localeCompare(b.label))],
+            store: filterUser
+         };
 
-         // Only rebuild tree on some macro data updates.
-         if (action === 'updateMacro' && !data.some(
-          (d) => MacroData.#macroDataUpdates.some((k) => k in d))) { return; }
+         // Subscribe to receive updates from `game.macros`.
+         MacroData.#collection.subscribe((col, updateOptions) =>
+         {
+            const { action, data } = updateOptions;
 
+            if (!MacroData.#actionTypes.has(action)) { return; }
+
+            // Only rebuild tree on some macro data updates.
+            if (action === 'updateMacro' && !data.some(
+               (d) => MacroData.#macroDataUpdates.some((k) => k in d))) { return; }
+
+            this.#buildTree();
+         });
+
+         // Build tree initially as the initial response on subscription above will not have any update options set.
          this.#buildTree();
       });
 
-      // Build tree initially as the initial response on subscription above will not have any update options set.
-      this.#buildTree();
-
+      // Event to retrieve the macro directory.
       ev.eventbus.on('bmd:data:macros:directory:get', () => MacroData.#tree, this, { guard: true });
    }
 }

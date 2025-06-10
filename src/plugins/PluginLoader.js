@@ -1,5 +1,4 @@
-// import { TJSPSessionStorage } from '#runtime-plugins/svelte/store/web-storage';
-import { TJSPSessionStorage } from './TJSPSessionStorage.js';
+import { TJSPSessionStorage } from '#runtime-plugins/svelte/store/web-storage';
 
 import * as DataPlugins       from './data/index.js';
 import * as SystemPlugins     from './system/index.js';

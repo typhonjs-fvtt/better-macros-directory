@@ -1,4 +1,6 @@
-import * as Views from '#views';
+import { FVTTSidebarControl } from '#standard/application/control/sidebar';
+
+import * as Views             from '#views';
 
 const Apps = {
    directory: void 0
@@ -6,37 +8,37 @@ const Apps = {
 
 export class ViewManager
 {
-   static async #init()
+   static #init()
    {
-      Apps.directory = new Views.BMDirectory();
+      // Replace core macro directory sidebar.
+      FVTTSidebarControl.replace({
+         id: 'macros',
+         tooltip: 'Macro+',
+         title: 'Macro+',
 
-      await this._eventbus.triggerAsync('plugins:async:add', {
-         name: 'bmd-view-bm-directory',
-         instance: Apps.directory
-      });
+         popoutApplication: Views.BMDirectory,
 
-      // Hooks.on('renderHotbar', this.#hotbarRendered.bind(this));
-      Hooks.on('ready', this.#sidebarRendered.bind(this));
-   }
-
-   /**
-    * Add context menu listener to sidebar macro directory button to launch BMD. Potentially in the future an entire
-    * sidebar replacement is done.
-    */
-   static #sidebarRendered()
-   {
-      const button = globalThis.document.querySelector('button.ui-control[data-tab="macros"]');
-
-      if (button)
-      {
-         button.addEventListener('contextmenu', (event) =>
+         // Add sidebar popout app to the eventbus as a plugin.
+         popoutPostInitialize: (app) =>
          {
-            event.preventDefault();
-            event.stopImmediatePropagation();
+            Apps.directory = app;
 
-            Apps.directory.render(true, { focus: true });
-         });
-      }
+            this._eventbus.triggerAsync('plugins:async:add', {
+               name: 'bmd-view-bm-directory',
+               instance: app
+            });
+         },
+
+         icon: 'fa-solid fa-code',
+         svelte: {
+            class: Views.MacroDirectory,
+            context: {
+               '#external': {
+                  eventbus: this._eventbus
+               }
+            }
+         }
+      });
    }
 
    static async onPluginLoad(ev)

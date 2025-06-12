@@ -3,14 +3,32 @@
   --tjs-default-text-shadow-focus-hover: 0 0 8px pink;
 }
 
-#better-macros-directory {
-  min-width: 300px;
-  min-height: 200px;
-  max-height: 750px;
-
+.better-macros-directory, .macros-sidebar {
   --tjs-default-transition-focus-visible: box-shadow 0.1s ease-in-out, outline 0.1s ease-in-out;
   --tjs-default-outline-focus-visible: 4px dotted orange;
 
+  .directory-list {
+    // TJSIconFolder background / color default for open & closed folders.
+    --bmd-folder-background: rgba(0, 0, 0, 0.5);
+
+    // border type & color for TJSIconFolder outline.
+    --tjs-folder-summary-border: solid rgba(0, 0, 0, 0.3);
+    --tjs-folder-summary-color: white;
+    --tjs-folder-summary-text-shadow: 0 0 3px var(--color-dark-1);
+
+    --tjs-folder-contents-padding: 0 0 0 0.3em;
+    --tjs-folder-contents-margin: 0;
+
+    color: var(--color-text-light-highlight);
+
+    .tjs-icon-folder .contents {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+  }
+}
+
+#better-macros-directory {
   .window-content {
     padding: 0;
     overflow: inherit;
@@ -27,21 +45,6 @@
     }
   }
 
-  .directory-list {
-    // TJSIconFolder background / color default for open & closed folders.
-    --bmd-folder-background: rgba(0, 0, 0, 0.5);
-
-    // border type & color for TJSIconFolder outline.
-    --tjs-folder-summary-border: solid rgba(0, 0, 0, 0.3);
-    --tjs-folder-summary-text-shadow: 0 0 3px var(--color-dark-1);
-
-    --tjs-folder-contents-padding: 0 0 0 0.3em;
-    --tjs-folder-contents-margin: 0;
-
-    // Font color for macro directory list.
-    color: var(--color-text-light-highlight);
-  }
-
   // Light / normal theme
   &.window-app {
     .style-rule {
@@ -52,11 +55,6 @@
     }
   }
 
-  // For Firefox scrollbars
-  .tjs-scroll-container {
-    scrollbar-color: #782e22 #111;
-  }
-
   // Dark theme
   &.tjs-window-app {
     --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
@@ -64,10 +62,6 @@
 
     --tjs-icon-button-background-hover: rgba(255, 255, 255, 0.05);
     --tjs-icon-button-background-selected: rgba(255, 255, 255, 0.1);
-
-    --tjs-input-background: #333333dd;
-    --tjs-input-border: solid 1px #666;
-    --tjs-input-placeholder-color: #666;
 
     ::-webkit-scrollbar {
       width: 6px !important;

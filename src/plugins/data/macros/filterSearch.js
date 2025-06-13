@@ -1,6 +1,4 @@
-import { writable }     from 'svelte/store';
-
-import { Subscribers }  from './Subscribers.js';
+import { writable }  from 'svelte/store';
 
 let keyword = '';
 let regex;
@@ -19,15 +17,10 @@ function filterSearch(macro)
    return keyword === '' || !regex ? true : regex.test(foundry.applications.ux.SearchFilter.cleanQuery(macro.name));
 }
 
+// Augment the `filterSearch` function with Svelte readable store API.
 // Create a custom store that changes when the search keyword changes.
-filterSearch.subscribe = (handler) =>
-{
-   const unsubscribe = storeKeyword.subscribe(handler);
 
-   Subscribers.add(unsubscribe);
-
-   return unsubscribe;
-};
+filterSearch.subscribe = storeKeyword.subscribe;
 
 filterSearch.set = (value) =>
 {

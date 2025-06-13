@@ -1,6 +1,4 @@
-import { writable }     from 'svelte/store';
-
-import { Subscribers }  from './Subscribers.js';
+import { writable }  from 'svelte/store';
 
 let userId = '';
 const storeUserId = writable(userId);
@@ -26,16 +24,9 @@ function filterUser(macro)
 }
 
 // Augment the `filterUser` function with Svelte readable store API.
-
 // Create a custom store that changes when on select / option change.
-filterUser.subscribe = (handler) =>
-{
-   const unsubscribe = storeUserId.subscribe(handler);
 
-   Subscribers.add(unsubscribe);
-
-   return unsubscribe;
-};
+filterUser.subscribe = storeUserId.subscribe;
 
 filterUser.set = (value) =>
 {

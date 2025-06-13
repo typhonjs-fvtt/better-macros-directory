@@ -1,6 +1,4 @@
-import { writable }     from 'svelte/store';
-
-import { Subscribers }  from './Subscribers.js';
+import { writable }  from 'svelte/store';
 
 let sort = false;
 const storeSort = writable(sort);
@@ -19,15 +17,10 @@ function sortAlpha(a, b)
    return sort ? a.name.localeCompare(b.name) : 0;
 }
 
+// Augment the `sortAlpha` function with Svelte readable store API.
 // Create a custom store that changes when on select / option change.
-sortAlpha.subscribe = (handler) =>
-{
-   const unsubscribe = storeSort.subscribe(handler);
 
-   Subscribers.add(unsubscribe);
-
-   return unsubscribe;
-};
+sortAlpha.subscribe = storeSort.subscribe;
 
 sortAlpha.set = (value) =>
 {

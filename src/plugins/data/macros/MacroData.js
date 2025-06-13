@@ -8,13 +8,11 @@ import { filterSearch }          from './filterSearch.js';
 import { filterUser }            from './filterUser.js';
 import { sortAlpha }             from './sortAlpha.js';
 
-import { Subscribers }           from './Subscribers.js';
-
 /**
  * Provides the data preparation and generation for the Svelte view layer. MacroData takes advantage of the core
- * {@link SidebarDirectory} data preparation and augments the returned results with reactive storage. When any updates /
- * changes occur the core Foundry data preparation is kicked off and the resulting data is augmented and set to a
- * Svelte store.
+ * {@link DocumentCollection.tree} data preparation and augments the returned results with reactive storage. When any
+ * updates / changes occur, the core Foundry data preparation is kicked off and the resulting data is augmented and set
+ * to a Svelte store.
  *
  * Note: This plugin loads in the `init` hook to support sidebar embedding. The data is initialized in the `ready` hook.
  */
@@ -32,6 +30,14 @@ export class MacroData
     * @type {TJSDocumentCollection}
     */
    static #collection = new TJSDocumentCollection();
+
+   /**
+    * Stores all dynamic reducers created for the tree such that the filter / sort functions may be cleared when the
+    * tree is rebuilt.
+    *
+    * @type {import('#runtime/svelte/store/reducer').DynArrayReducer[]}
+    */
+   static #dynReducers = [];
 
    /**
     * Respond to only these macro data updates.
@@ -63,7 +69,7 @@ export class MacroData
    });
 
    /**
-    * Recursive function that augments the data structure returned by {@link SidebarDirectory.setupFolders}
+    * Recursive function that augments the data structure returned by {@link DocumentCollection.tree}
     * converting the 'content' array to a DynArrayReducer store w/ two filters for retaining macros owned by a specific
     * user and a keyword search. Additionally, an alpha sort can be applied to any remaining macros & folders.
     *
@@ -73,11 +79,12 @@ export class MacroData
     */
    static #augmentTree(data)
    {
-      data.documentStore = new DynArrayReducer({
+      // Track reducer created as it must be cleaned up when the tree is rebuilt.
+      this.#dynReducers.push(data.documentStore = new DynArrayReducer({
          data: data.entries,
          filters: [filterUser, filterSearch],
          sort: sortAlpha
-      });
+      }));
 
       for (const child of data.children) { this.#augmentTree(child); }
 
@@ -85,19 +92,24 @@ export class MacroData
    }
 
    /**
-    * Builds the macro directory tree structure utilizing the Foundry {@link SidebarDirectory} for parsing. Since core
-    * Foundry is bound to Handlebars / JQuery any changes to any macro require a full render cycle. Foundry core
-    * rebuilds the entire folder / document structure for all sidebars each render via Handlebars. Instead of rewriting
-    * all of that parsing code and creating a more long-lived reactive data structure we leverage the core functionality
-    * and augment the returned results w/ DynArrayReducer for all content arrays. Downstream Svelte is smart enough to
-    * not re-render everything.
+    * Builds the macro directory tree structure utilizing the Foundry {@link DocumentCollection.tree} for parsing.
+    * Since core Foundry is bound to Handlebars / JQuery any changes to any macro require a full render cycle. Foundry
+    * core rebuilds the entire folder / document structure for all sidebars each render via Handlebars. Instead of
+    * rewriting all of that parsing code and creating a more long-lived reactive data structure we leverage the core
+    * functionality and augment the returned results w/ DynArrayReducer for all content arrays. Downstream Svelte is
+    * smart enough to not re-render everything.
     */
    static #buildTree()
    {
       // Run all unsubscribe functions for DynArrayReducer subscriptions added previously.
-      Subscribers.unsubscribeAll();
+      for (const reducer of this.#dynReducers)
+      {
+         reducer.filters.clear();
+         reducer.sort.clear();
+      }
 
-      // TODO: Now that collections seemingly have a static tree on v11 can we reuse it?
+      this.#dynReducers.length = 0;
+
       const newTree = this.#augmentTree(game.collections.get('Macro').tree);
 
       newTree.filterSearch = filterSearch;
@@ -139,7 +151,7 @@ export class MacroData
             this.#buildTree();
          });
 
-         // Build tree initially as the initial response on subscription above will not have any update options set.
+         // Build the tree initially as the initial response on subscription above will not have any update options set.
          this.#buildTree();
       });
 

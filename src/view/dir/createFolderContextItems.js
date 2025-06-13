@@ -60,7 +60,6 @@ export function createFolderContextItems(documentId)
       {
          label: localize('SIDEBAR.Create', { type: localize(Macro.metadata.label) }),
          icon: 'fas fa-code',
-         condition: () => game.user.isGM,
          onPress: ({ focusSource }) => TJSDocumentDialog.documentCreate(Macro, { folder: folder.id }, { focusSource })
       },
       {

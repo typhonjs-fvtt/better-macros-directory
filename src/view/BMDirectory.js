@@ -29,11 +29,16 @@ export default class BMDirectory extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: constants.moduleId,
+         classes: [constants.moduleId],
          popOut: true,
          resizable: true,
          minimizable: true,
          width: 325,
          height: 300,
+         minWidth: 300,
+         minHeight: 200,
+         maxWidth: 500,
+         maxHeight: 700,
          headerIcon: `${CONFIG.Macro.sidebarIcon}`,
          title: 'bmd.settings.title',
          svelte: {
@@ -49,7 +54,7 @@ export default class BMDirectory extends SvelteApplication
     *
     * Provides an explicit override of Application._getHeaderButtons to add
     *
-    * @returns {ApplicationHeaderButton[]} The app header buttons.
+    * @returns {fvtt.ApplicationHeaderButton[]} The app header buttons.
     * @override
     */
    _getHeaderButtons()

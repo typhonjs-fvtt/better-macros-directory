@@ -15,9 +15,9 @@
    export let folder;
 
    /** @type {import('#runtime/svelte/application').SvelteApp.Context.External} */
-   const { application } = getContext('#external');
+   const { eventbus } = getContext('#external');
 
-   const webStorage = application.reactive.sessionStorage;
+   const webStorage = eventbus.triggerSync('bmd:storage:session:get');
 
    const folderProps = {
       label: folder?.folder?.name,
@@ -68,7 +68,6 @@
    {
       if (data?.event?.altKey) { TreeControl.setChildState(webStorage, folder, true); }
    }
-// <TJSIconFolder label={folder?.folder?.name} {onClose} {onOpen} {...folderProps} {styles}>
 </script>
 
 <TJSIconFolder folder={folderProps} {onClose} {onOpen} {styles}>

@@ -3,7 +3,6 @@
    import { quadIn }                from 'svelte/easing';
 
    import { applyStyles }           from '#runtime/svelte/action/dom/style';
-   import { localize }              from '#runtime/util/i18n';
 
    import {
       ripple,
@@ -13,6 +12,7 @@
 
    import {
       TJSInput,
+      TJSInputRange,
       TJSSelect }                   from '#standard/component/form';
 
    import { TJSScrollContainer }    from '#standard/component/container';
@@ -20,22 +20,24 @@
    import { TJSMenu }               from '#standard/component/menu';
 
    import { createOverflowItems }   from './createOverflowItems.js';
+
    import Folder                    from './Folder.svelte';
    import FolderContent             from './FolderContent.svelte';
 
    import { constants, sessionConstants } from "#constants";
 
-   const eventbus = getContext('#external').eventbus;
+   const { application, eventbus } = getContext('#external');
 
    const tree = eventbus.triggerSync('bmd:data:macros:directory:get');
 
+   const storeAlwaysTop = eventbus.triggerSync('bmd:storage:session:store:get', sessionConstants.menuAlwaysTop, false);
    const storeMenuScale = eventbus.triggerSync('bmd:storage:session:store:get', sessionConstants.menuScale, 200);
 
    const searchInput = {
       type: 'search',
       store: $tree.filterSearch,
       efx: rippleFocus(),
-      placeholder: localize('SIDEBAR.Search', { types: localize('DOCUMENT.Macros') }),
+      placeholder: 'FILES.Search',
       styles: { '--tjs-input-text-align': 'center' }
    };
 
@@ -50,7 +52,31 @@
       efx: ripple()
    };
 
+   const scaleMenu = {
+      efxNumber: rippleFocus(),
+      label: 'Scale:',
+      min: 200,
+      max: 500,
+      store: storeMenuScale,
+   }
+
    const storeSelect = $tree.userSelect.store;
+
+   /** @type {Function} */
+   let alwaysTopFn;
+
+   // When embedded in an application, create the `alwaysTopFn` accessible in the context menu.
+   if (application)
+   {
+      alwaysTopFn = () =>
+      {
+         $storeAlwaysTop = !$storeAlwaysTop;
+         application.reactive.setAlwaysOnTop($storeAlwaysTop);
+      };
+
+      // Set current always on top state.
+      application.reactive.setAlwaysOnTop($storeAlwaysTop);
+   }
 
    let storeScroll;
 
@@ -100,13 +126,13 @@
    <TJSInput input={searchInput}/>
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>
-      <TJSMenu menu={{ items: createOverflowItems(eventbus), offset: { y: 4 }, focusEl: constants.appId }}>
-         <!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
-         <label class=range
-                slot=after
-                on:click|stopPropagation>
-            Scale: <input type=range bind:value={$storeMenuScale} min=200 max=500 step=1>
-         </label>
+      <TJSMenu menu={{ items: createOverflowItems({ alwaysTopFn, alwaysTopValue: $storeAlwaysTop }), offset: { y: 4 }, focusEl: constants.appId }}>
+         <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events -->
+         <div class=range
+              on:click|stopPropagation
+              slot=after>
+            <TJSInputRange input={scaleMenu} />
+         </div>
       </TJSMenu>
    </TJSToggleIconButton>
 </section>
@@ -160,9 +186,5 @@
       font-size: 0.8em;
       justify-content: center;
       align-items: center;
-   }
-
-   .range input {
-      width: 70%;
    }
 </style>

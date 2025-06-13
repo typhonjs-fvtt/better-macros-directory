@@ -23,6 +23,7 @@ const sessionConstants = {
    appState: `${constants.moduleId}.settings.appState`,
    folderState: `${constants.moduleId}.folder.state`,
    menuScale: `${constants.moduleId}.menu.scale`,
+   menuAlwaysTop: `${constants.moduleId}.menu.always.top`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
    scrolltopPartial: `${constants.moduleId}.scrolltop-`
 };
@@ -43,6 +44,8 @@ export { constants, sessionConstants, settings };
  * @property {string} folderState - Base key for folder opened state.
  *
  * @property {string} menuScale - Scaling factor for menu item size / height.
+ *
+ * @property {string} menuAlwaysTop - Always float popout on top.
  *
  * @property {string} themeDarkMode - Indicates whether dark mode is enabled.
  *

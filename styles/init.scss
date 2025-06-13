@@ -25,6 +25,15 @@
       border-top-left-radius: 6px;
       border-bottom-left-radius: 6px;
     }
+
+    // When the window content width is less than 250px change the item link to cut off the description text.
+    @container tjs-app-window-content (0 <= width < 250px) {
+      .directory-item span {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
   }
 }
 
@@ -57,37 +66,16 @@
 
   // Dark theme
   &.tjs-window-app {
-    --tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
+    //--tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
     --tjs-default-text-shadow-focus-hover: 0 0 8px pink;
 
-    --tjs-icon-button-background-hover: rgba(255, 255, 255, 0.05);
-    --tjs-icon-button-background-selected: rgba(255, 255, 255, 0.1);
+    // TODO: These should be defaults in TRL dynamic styles.
+    //--tjs-icon-button-background-hover: rgba(255, 255, 255, 0.05);
+    //--tjs-icon-button-background-selected: rgba(255, 255, 255, 0.1);
 
-    ::-webkit-scrollbar {
-      width: 6px !important;
-      height: 6px !important;
-    }
-    ::-webkit-scrollbar-track {
-      box-shadow: 0 0 1px #999 inset !important;
-      border-radius: 4px !important;
-    }
-    ::-webkit-scrollbar-thumb {
-      outline: none !important;
-      border-radius: 3px !important;
-      background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 14.7%, rgba(89, 97, 223, 1) 88.7% ) !important;
-      border: 1px solid rgba(95, 100, 230, 1) !important;
-    }
-
-    // For Firefox scrollbars
+    // For scrollbars
     .tjs-scroll-container {
       scrollbar-color: rgba(89, 97, 223, 1) #111 !important;
-    }
-
-    .style-rule {
-      background: linear-gradient(180deg, #4b4a44 0%, #191813 100%) !important;
-      border-top: solid 1px #666 !important;
-      border-bottom: solid 1px #444 !important;
-      padding: 0 0 2px 5px !important;
     }
 
     .window-content {

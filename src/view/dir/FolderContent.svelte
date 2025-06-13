@@ -80,40 +80,41 @@
 </script>
 
 {#each [...$content] as macro (macro.id)}
-   <li class="directory-item document flexrow">
+   <li class="directory-item entry document flexrow"
+       on:click|preventDefault={() => onPress(macro.id)}
+       on:contextmenu|preventDefault={(event) => onContextMenu(event, macro.id)}
+       on:keydown={onKeydown}
+       on:keyup={(event) => onKeyup(event, macro.id)}
+       role=menuitem
+       tabindex=0>
       {#if macro.img}
-         <img class=thumbnail title={macro.name} alt={macro.name} src={macro.img} />
+         <img class=thumbnail alt={macro.name} src={macro.img} />
       {/if}
+
       <div class=bmd-menu-focus-indicator />
-      <!-- svelte-ignore a11y-missing-attribute -->
-      <a on:click|preventDefault={() => onPress(macro.id)}
-         on:contextmenu|preventDefault={(event) => onContextMenu(event, macro.id)}
-         on:keydown={onKeydown}
-         on:keyup={(event) => onKeyup(event, macro.id)}
-         role=button
-         tabindex=0>
-         {macro.name}
-      </a>
+
+      <span>{macro.name}</span>
    </li>
 {/each}
 
 <style>
-   a:focus-visible {
+   .directory-item {
+      gap: 3px;
+      padding: 0.25rem;
+   }
+
+   .directory-item:focus-visible {
       outline: none;
       text-shadow: var(--tjs-default-text-shadow-focus-hover, 0 0 8px red);
    }
 
-   /* Enable focus indicator for focus-within */
-   /* Note: the use of `has` pseudo-selector that requires a child with :focus-visible */
-   li:focus-within:has(:focus-visible) .bmd-menu-focus-indicator {
-      background: var(--bmd-menu-focus-indicator-background, var(--tjs-default-focus-indicator-background, white));
+   li:hover {
+      cursor: var(--tjs-cursor-pointer, pointer);
    }
 
-   /* Fallback for browsers that don't support 'has'; any user interaction including mouse will trigger */
-   @supports not (selector(:has(*))) {
-      li:focus-within .bmd-menu-focus-indicator {
-         background: var(--bmd-menu-focus-indicator-background, var(--tjs-default-focus-indicator-background, white));
-      }
+   /* Enable focus indicator */
+   li:focus-visible .bmd-menu-focus-indicator {
+      background: var(--bmd-menu-focus-indicator-background, var(--tjs-default-focus-indicator-background, white));
    }
 
    .bmd-menu-focus-indicator {
@@ -122,10 +123,5 @@
       border-radius: var(--bmd-menu-focus-indicator-border-radius, var(--tjs-default-focus-indicator-border-radius, 0.1em));
       flex: 0 0 var(--bmd-menu-focus-indicator-width, var(--tjs-default-focus-indicator-width, 0.25em));
       height: var(--bmd-menu-focus-indicator-height, var(--tjs-default-focus-indicator-height));
-   }
-
-   .directory-item {
-      gap: 3px;
-      padding: 0.25rem;
    }
 </style>

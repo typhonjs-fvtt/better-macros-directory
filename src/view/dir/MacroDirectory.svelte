@@ -121,7 +121,9 @@
 
 <section class=bmd-top-bar>
    {#if globalThis.game.user.isGM}
-      <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>
+      <div class=gm-content>
+         <TJSSelect select={$tree.userSelect} efx={rippleFocus()}/>
+      </div>
    {/if}
    <TJSInput input={searchInput}/>
    <TJSToggleIconButton button={alphaSortButton}/>
@@ -176,6 +178,18 @@
       justify-content: center;
       border-bottom: solid 1px #444;
       max-height: fit-content;
+   }
+
+   .gm-content {
+      display: block;
+      width: 100%;
+   }
+
+   // When the window content width is less than 250px remove the GM user select.
+   @container tjs-app-window-content (0 <= width < 250px) {
+      .gm-content {
+         display: none;
+      }
    }
 
    .range {

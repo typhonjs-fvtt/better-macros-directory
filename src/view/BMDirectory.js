@@ -35,7 +35,7 @@ export default class BMDirectory extends SvelteApplication
          minimizable: true,
          width: 325,
          height: 300,
-         minWidth: 300,
+         minWidth: 200,
          minHeight: 200,
          maxWidth: 500,
          maxHeight: 700,

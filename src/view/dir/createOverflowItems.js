@@ -5,11 +5,15 @@ import { TJSDocumentDialog }  from '#standard/application/dialog/document';
 /**
  * Creates the items for the overflow menu.
  *
- * @param {Function}   [alwaysOnTopFn] - Always on top.
+ * @param {object}   [options] - Options.
+ *
+ * @param {Function} [options.alwaysOnTopFn] - Always on top callback.
+ *
+ * @param {Function} [options.alwaysOnTop] - Current always on top value.
  *
  * @returns {Iterable<object>} Overflow menu items.
  */
-export function createOverflowItems({ alwaysTopFn, alwaysTopValue } = {}) // eslint-disable-line no-unused-vars
+export function createOverflowItems({ alwaysOnTopFn, alwaysOnTop } = {}) // eslint-disable-line no-unused-vars
 {
    const items = [
       {
@@ -26,12 +30,12 @@ export function createOverflowItems({ alwaysTopFn, alwaysTopValue } = {}) // esl
    ];
 
    // Only add `always on top` option when `alwaysTopFn` is defined.
-   if (typeof alwaysTopFn === 'function')
+   if (typeof alwaysOnTopFn === 'function')
    {
       items.push({
          label: 'bmd.menu.overflow.always-on-top',
-         icon: `fas fa-arrow-alt-circle-${alwaysTopValue ? 'down' : 'up'}`,
-         onPress: alwaysTopFn
+         icon: `fas fa-arrow-alt-circle-${alwaysOnTop ? 'down' : 'up'}`,
+         onPress: alwaysOnTopFn
       });
    }
 

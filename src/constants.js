@@ -23,7 +23,6 @@ const sessionConstants = {
    appState: `${constants.moduleId}.settings.appState`,
    folderState: `${constants.moduleId}.folder.state`,
    menuScale: `${constants.moduleId}.menu.scale`,
-   menuAlwaysTop: `${constants.moduleId}.menu.always.top`,
    themeDarkMode: `${constants.moduleId}.theme.dark`,
    scrolltopPartial: `${constants.moduleId}.scrolltop-`
 };

@@ -28,9 +28,10 @@
 
    const { application, eventbus } = getContext('#external');
 
+   const storeAlwaysOnTop = application?.reactive?.storeAppOptions?.alwaysOnTop;
+
    const tree = eventbus.triggerSync('bmd:data:macros:directory:get');
 
-   const storeAlwaysTop = eventbus.triggerSync('bmd:storage:session:store:get', sessionConstants.menuAlwaysTop, false);
    const storeMenuScale = eventbus.triggerSync('bmd:storage:session:store:get', sessionConstants.menuScale, 200);
 
    const searchInput = {
@@ -62,21 +63,12 @@
 
    const storeSelect = $tree.userSelect.store;
 
-   /** @type {Function} */
-   let alwaysTopFn;
-
-   // When embedded in an application, create the `alwaysTopFn` accessible in the context menu.
-   if (application)
-   {
-      alwaysTopFn = () =>
-      {
-         $storeAlwaysTop = !$storeAlwaysTop;
-         application.reactive.setAlwaysOnTop($storeAlwaysTop);
-      };
-
-      // Set current always on top state.
-      application.reactive.setAlwaysOnTop($storeAlwaysTop);
-   }
+   /**
+    * When embedded in an application, create the `alwaysOnTopFn` callback accessible in the context menu.
+    *
+    * @type {Function}
+    */
+   const alwaysOnTopFn = application ? () => $storeAlwaysOnTop = !$storeAlwaysOnTop : void 0;
 
    let storeScroll;
 
@@ -128,7 +120,7 @@
    <TJSInput input={searchInput}/>
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>
-      <TJSMenu menu={{ items: createOverflowItems({ alwaysTopFn, alwaysTopValue: $storeAlwaysTop }), offset: { y: 4 }, focusEl: constants.appId }}>
+      <TJSMenu menu={{ items: createOverflowItems({ alwaysOnTopFn, alwaysOnTop: $storeAlwaysOnTop }), offset: { y: 4 }, focusEl: constants.appId }}>
          <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events -->
          <div class=range
               on:click|stopPropagation

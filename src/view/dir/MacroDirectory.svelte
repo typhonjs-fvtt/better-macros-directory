@@ -185,10 +185,10 @@
    }
 
    .range {
+      --tjs-input-height: var(--tjs-menu-item-line-height);
+
       display: flex;
-      padding: 0 0.5em;
-      width: 110px;
-      gap: 4px;
+      width: 95px;
       font-size: 0.8em;
       justify-content: center;
       align-items: center;

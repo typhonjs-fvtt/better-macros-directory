@@ -29,23 +29,24 @@
       }
    }
 
+   /**
+    * Stores the current macro ID when context menu is displayed to add a class to the invoking macro content.
+    *
+    * @type {string}
+    */
+   let contextId = void 0;
+
    function onContextMenu(event, documentId)
    {
-      TJSContextMenu.create({
-         id: 'better-macros-directory-context-menu',
-         items: createMacroContextItems(eventbus, documentId),
-         focusEl: constants.appId,
-         event
-      });
-   }
+      // Store macro ID for context CSS class.
+      contextId = documentId;
 
-   function onContextPress(event, documentId)
-   {
       TJSContextMenu.create({
          id: 'better-macros-directory-context-menu',
          items: createMacroContextItems(eventbus, documentId),
          focusEl: constants.appId,
-         event
+         event,
+         onClose: () => contextId = void 0 // Reset contextId on close.
       });
 
       event.preventDefault();
@@ -73,7 +74,7 @@
             break;
 
          case 'ContextMenu':
-            onContextPress(event, documentId);
+            onContextMenu(event, documentId);
             break;
       }
    }
@@ -81,6 +82,7 @@
 
 {#each [...$content] as macro (macro.id)}
    <li class="directory-item entry document flexrow"
+       class:context-menu={contextId === macro.id}
        on:click|preventDefault={() => onPress(macro.id)}
        on:contextmenu|preventDefault={(event) => onContextMenu(event, macro.id)}
        on:keydown={onKeydown}
@@ -98,7 +100,12 @@
 {/each}
 
 <style>
+   .context-menu {
+      --context-menu-color: red;
+   }
+
    .directory-item {
+      border: 1px solid var(--context-menu-color, transparent);
       gap: 3px;
       padding: 0.25rem;
    }

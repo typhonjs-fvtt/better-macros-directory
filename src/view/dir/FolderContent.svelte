@@ -1,5 +1,9 @@
 <script>
    import { getContext }               from 'svelte';
+
+   import { inlineSvg }                from '#runtime/svelte/action/dom/inline-svg';
+   import { AssetValidator }           from '#runtime/util/browser';
+
    import { TJSContextMenu }           from '#standard/application/menu';
    import { TJSFocusIndicator }        from '#standard/component/dom/focus';
 
@@ -79,6 +83,21 @@
             break;
       }
    }
+
+   /**
+    * Foundry has many SVG icons hardcoded with `white` as the color. The transform below for the `inlineSvg` action
+    * replaces any variation of `fill="#000"` and `fill="#fff"` with `fill="currentColor"` which allows icons to appear
+    * equally on dark / light theme variations.
+    *
+    * @param {string}   svg - loaded SVG content.
+    */
+   function transformSvg(svg)
+   {
+      return svg.replace(
+         /\bfill\s*=\s*(["'])?#(?:000(?:000)?|fff(?:fff)?)(?:\1|(?![0-9a-fA-F]))/gi,
+         'fill="currentColor"'
+      );
+   }
 </script>
 
 {#each [...$content] as macro (macro.id)}
@@ -91,7 +110,16 @@
        role=menuitem
        tabindex=0>
       {#if macro.img}
-         <img class=thumbnail alt={macro.name} src={macro.img} />
+         {@const result = AssetValidator.parseMedia({
+            url: macro.img,
+            mediaTypes: AssetValidator.MediaTypes.img_svg
+         })}
+
+         {#if result.valid && result.elementType === 'img'}
+            <img class=thumbnail alt={macro.name} src={macro.img} />
+         {:else if result.valid && result.elementType === 'svg'}
+            <svg use:inlineSvg={{ src: macro.img, transform: transformSvg }}></svg>
+         {/if}
       {/if}
 
       <TJSFocusIndicator />
@@ -100,7 +128,18 @@
    </li>
 {/each}
 
-<style>
+<style lang=scss>
+   svg {
+      // Some Foundry SVG icons have no `fill` defined, so always use `currentColor`.
+      // The `transformSvg` function converts explicit `fill="#fff"` to `fill="currentColor"` as well.
+      fill: currentColor;
+
+      flex: 0 0 var(--sidebar-item-height);
+      height: var(--sidebar-item-height);
+      width: var(--sidebar-item-height);
+      border: none;
+   }
+
    .context-menu {
       --context-menu-color: var(--color-warm-2);
    }

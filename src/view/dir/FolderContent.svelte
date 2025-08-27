@@ -24,7 +24,7 @@
       // If the sheet is already rendered:
       if (sheet.rendered)
       {
-         sheet.bringToTop();
+         sheet.bringToFront();
          return sheet.maximize();
       }
       // Otherwise render the sheet
@@ -56,6 +56,13 @@
 
       event.preventDefault();
       event.stopPropagation();
+   }
+
+   function onDragstart(event, documentId)
+   {
+      const dragData = game.macros.get(documentId)?.toDragData?.();
+
+      if (dragData) { event.dataTransfer.setData('text/plain', JSON.stringify(dragData)); }
    }
 
    function onKeydown(event)
@@ -105,10 +112,12 @@
        class:context-menu={contextId === macro.id}
        on:click|preventDefault={() => onPress(macro.id)}
        on:contextmenu|preventDefault={(event) => onContextMenu(event, macro.id)}
+       on:dragstart={(event) => onDragstart(event, macro.id)}
        on:keydown={onKeydown}
        on:keyup={(event) => onKeyup(event, macro.id)}
        role=menuitem
-       tabindex=0>
+       tabindex=0
+       draggable=true>
       {#if macro.img}
          {@const result = AssetValidator.parseMedia({
             url: macro.img,

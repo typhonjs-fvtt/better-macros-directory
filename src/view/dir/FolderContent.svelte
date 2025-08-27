@@ -1,6 +1,7 @@
 <script>
    import { getContext }               from 'svelte';
    import { TJSContextMenu }           from '#standard/application/menu';
+   import { TJSFocusIndicator }        from '#standard/component/dom/focus';
 
    import { createMacroContextItems }  from './createMacroContextItems.js';
 
@@ -93,7 +94,7 @@
          <img class=thumbnail alt={macro.name} src={macro.img} />
       {/if}
 
-      <div class=bmd-menu-focus-indicator />
+      <TJSFocusIndicator />
 
       <span>{macro.name}</span>
    </li>
@@ -120,15 +121,7 @@
    }
 
    /* Enable focus indicator */
-   li:focus-visible .bmd-menu-focus-indicator {
-      background: var(--bmd-menu-focus-indicator-background, var(--tjs-default-focus-indicator-background, white));
-   }
-
-   .bmd-menu-focus-indicator {
-      align-self: var(--bmd-menu-focus-indicator-align-self, var(--tjs-default-focus-indicator-align-self, stretch));
-      border: var(--bmd-menu-focus-indicator-border, var(--tjs-default-focus-indicator-border));
-      border-radius: var(--bmd-menu-focus-indicator-border-radius, var(--tjs-default-focus-indicator-border-radius, 0.1em));
-      flex: 0 0 var(--bmd-menu-focus-indicator-width, var(--tjs-default-focus-indicator-width, 0.25em));
-      height: var(--bmd-menu-focus-indicator-height, var(--tjs-default-focus-indicator-height));
+   li:focus-visible {
+      --tjs-focus-indicator-background: currentColor;
    }
 </style>

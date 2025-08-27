@@ -1,10 +1,11 @@
-import { SvelteApplication } from '#runtime/svelte/application';
+import { SvelteApp }    from '#runtime/svelte/application';
+import { CrossWindow }  from '#runtime/util/browser';
 
-import BMDAppShell           from './BMDAppShell.svelte';
+import BMDAppShell      from './BMDAppShell.svelte';
 
 import { constants, sessionConstants } from '#constants';
 
-export default class BMDirectory extends SvelteApplication
+export default class BMDirectory extends SvelteApp
 {
    /** @inheritDoc */
    constructor()
@@ -30,7 +31,6 @@ export default class BMDirectory extends SvelteApplication
       return foundry.utils.mergeObject(super.defaultOptions, {
          id: constants.moduleId,
          classes: [constants.moduleId],
-         popOut: true,
          resizable: true,
          minimizable: true,
          width: 325,
@@ -38,7 +38,6 @@ export default class BMDirectory extends SvelteApplication
          minWidth: 200,
          minHeight: 200,
          maxWidth: 500,
-         maxHeight: 700,
          headerIcon: `${CONFIG.Macro.sidebarIcon}`,
          title: 'bmd.settings.title',
          svelte: {
@@ -70,8 +69,17 @@ export default class BMDirectory extends SvelteApplication
          icon: themeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off',
          label: themeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable',
 
-         onPress: ({ button }) =>
+         onPress: ({ button, event }) =>
          {
+            // Protect against theme swap when popped out.
+            if (globalThis !== CrossWindow.getWindow(event))
+            {
+               console.warn(
+                '[Better Macros Directory] warning: Can not swap to / from transparent theme when popped out.');
+
+               return;
+            }
+
             const newThemeDarkMode = eventbus.triggerSync('bmd:storage:session:item:boolean:swap',
              sessionConstants.themeDarkMode);
 

@@ -67,7 +67,7 @@ export default class BMDirectory extends SvelteApp
       buttons.unshift({
          class: 'theme-dark',
          icon: themeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off',
-         label: themeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable',
+         label: themeDarkMode ? 'bmd.buttons.transparency.disable' : 'bmd.buttons.transparency.enable',
 
          onPress: ({ button, event }) =>
          {
@@ -84,7 +84,7 @@ export default class BMDirectory extends SvelteApp
              sessionConstants.themeDarkMode);
 
             button.icon = newThemeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off';
-            button.label = newThemeDarkMode ? 'bmd.buttons.darkmode.disable' : 'bmd.buttons.darkmode.enable';
+            button.label = newThemeDarkMode ? 'bmd.buttons.transparency.disable' : 'bmd.buttons.transparency.enable';
          }
       });
 

@@ -9,9 +9,9 @@
     },
 
     "buttons": {
-      "darkmode": {
-        "disable": "Disable dark mode",
-        "enable": "Enable dark mode"
+      "transparency": {
+        "disable": "Disable transparency",
+        "enable": "Enable transparency"
       },
       "keyword-filter": {
         "disable": "Disable filters",

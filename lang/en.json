@@ -23,7 +23,8 @@
 
     "menu": {
       "overflow": {
-        "always-on-top": "Always on top"
+        "always-on-top": "Always On Top",
+        "click-to-exec": "Click To Execute"
       }
     }
   }

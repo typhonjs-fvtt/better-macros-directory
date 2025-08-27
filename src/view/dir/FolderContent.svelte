@@ -102,7 +102,7 @@
 
 <style>
    .context-menu {
-      --context-menu-color: red;
+      --context-menu-color: var(--color-warm-2);
    }
 
    .directory-item {
@@ -113,7 +113,6 @@
 
    .directory-item:focus-visible {
       outline: none;
-      text-shadow: var(--tjs-default-text-shadow-focus-hover, 0 0 8px red);
    }
 
    li:hover {
@@ -123,5 +122,6 @@
    /* Enable focus indicator */
    li:focus-visible {
       --tjs-focus-indicator-background: currentColor;
+      background: var(--sidebar-entry-hover-bg, rgba(255, 255, 255, 0.1))
    }
 </style>

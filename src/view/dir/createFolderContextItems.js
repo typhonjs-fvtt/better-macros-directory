@@ -1,5 +1,5 @@
 import { TJSDocumentDialog }  from '#standard/application/dialog/document';
-import {localize} from "../../../../typhonjs/_dist/util/i18n/index.js";
+import { localize }           from '#runtime/util/i18n';
 
 /**
  * Creates the items for the context menu from the given document ID.

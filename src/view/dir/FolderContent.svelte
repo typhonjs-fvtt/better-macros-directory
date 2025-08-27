@@ -94,7 +94,7 @@
    function transformSvg(svg)
    {
       return svg.replace(
-         /\bfill\s*=\s*(["'])?#(?:000(?:000)?|fff(?:fff)?)(?:\1|(?![0-9a-fA-F]))/gi,
+         /\bfill\s*=\s*(["'])?\s*(?:#(?:000(?:000)?|fff(?:fff)?)|black|white)\s*\1?(?![0-9a-fA-F])/gi,
          'fill="currentColor"'
       );
    }

@@ -30,7 +30,8 @@
    $: appShell = $storeDarkMode ? TJSApplicationShell : ApplicationShell;
 
    $: if(elementRootUpdate(elementRoot)) {
-      console.log(`!!!! BMD - initializing new root`);
+      // The popout module injects app header button, so force a render; not necessary otherwise.
+      application.render();
    }
 
    // ----------------------------------------------------------------------------------------------------------------

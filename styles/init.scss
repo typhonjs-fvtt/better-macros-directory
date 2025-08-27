@@ -1,8 +1,3 @@
-// Targets the context menu ID
-#better-macros-directory-context-menu {
-  --tjs-default-text-shadow-focus-hover: 0 0 8px pink;
-}
-
 .better-macros-directory, .macros-sidebar {
   --tjs-default-transition-focus-visible: box-shadow 0.1s ease-in-out, outline 0.1s ease-in-out;
   --tjs-default-outline-focus-visible: 4px dotted orange;
@@ -54,35 +49,18 @@
     }
   }
 
-  // Light / normal theme
-  &.window-app {
-    .style-rule {
-      background: linear-gradient(180deg, var(--color-border-light-1) 0%, var(--color-border-light-2) 100%);;
-      border-top: solid 1px var(--color-border-dark-primary);
-      border-bottom: solid 1px var(--color-border-dark-primary);
-      padding: 0 0 2px 5px;
-    }
-  }
-
-  // Dark theme
+  // Transparent theme
   &.tjs-window-app {
-    //--tjs-action-ripple-background: linear-gradient(64.5deg, rgba(245, 116, 185, 1) 40%, rgba(89, 97, 223, 1) 60% );
-    --tjs-default-text-shadow-focus-hover: 0 0 8px pink;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0.5;
 
-    // TODO: These should be defaults in TRL dynamic styles.
-    //--tjs-icon-button-background-hover: rgba(255, 255, 255, 0.05);
-    //--tjs-icon-button-background-selected: rgba(255, 255, 255, 0.1);
+    transition: opacity 0.2s ease-in-out;
 
-    // For scrollbars
-    .tjs-scroll-container {
-      scrollbar-color: rgba(89, 97, 223, 1) #111 !important;
+    &:hover {
+      opacity: 1;
     }
 
-    .window-content {
-      color: #b5b3a4 !important;
-      background: linear-gradient(135deg, rgba(52, 51, 52, 0.9) 10%, rgba(15, 14, 28, 0.9) 90%) !important;
-    }
-
+    // Ensure consistent header on all game systems.
     .window-header {
       h4 {
         font-family: "Signika", sans-serif !important;

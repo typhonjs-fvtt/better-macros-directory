@@ -21,6 +21,7 @@ const settings = {
  */
 const sessionConstants = {
    appState: `${constants.moduleId}.settings.appState`,
+   clickExec: `${constants.moduleId}.settings.clickExec`,
    folderState: `${constants.moduleId}.folder.state`,
    menuScale: `${constants.moduleId}.menu.scale`,
    themeTransparent: `${constants.moduleId}.theme.transparent`,
@@ -39,6 +40,8 @@ export { constants, sessionConstants, settings };
  * @typedef {object} BMDSessionConstants
  *
  * @property {string} appState - Stores the application state / position.
+ *
+ * @property {string} clickExec - Stores the click macro to execute state.
  *
  * @property {string} folderState - Base key for folder opened state.
  *

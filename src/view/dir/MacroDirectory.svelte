@@ -120,7 +120,7 @@
    <TJSInput input={searchInput}/>
    <TJSToggleIconButton button={alphaSortButton}/>
    <TJSToggleIconButton button={overflowMenu}>
-      <TJSMenu menu={{ items: createOverflowItems({ alwaysOnTopFn, alwaysOnTop: $storeAlwaysOnTop }), offset: { y: 4 }, focusEl: constants.appId }}>
+      <TJSMenu menu={{ items: createOverflowItems({ alwaysOnTopFn, alwaysOnTop: $storeAlwaysOnTop, eventbus }), offset: { y: 4 }, focusEl: constants.appId }}>
          <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events -->
          <div class=range
               on:click|stopPropagation

@@ -2,6 +2,10 @@ import { A11yHelper }         from '#runtime/util/a11y';
 
 import { TJSDocumentDialog }  from '#standard/application/dialog/document';
 
+import { MacroDoc }           from './MacroDoc.js';
+
+import { sessionConstants }   from '#constants';
+
 /**
  * Creates the items for the context menu from the given document ID.
  *
@@ -13,21 +17,40 @@ import { TJSDocumentDialog }  from '#standard/application/dialog/document';
  */
 export function createMacroContextItems(eventbus, documentId)
 {
-   /**
-    * @type {Macro}
-    */
+   const clickExec = eventbus.triggerSync('bmd:storage:session:item:get', sessionConstants.clickExec, false);
+
+   /** @type {Macro} */
    const macro = game.macros.get(documentId);
 
-   return [
-      {
+   const items = [];
+
+   // Add edit / open macro depending on click to execute state.
+   if (clickExec)
+   {
+      items.push({
+         label: 'MACRO.Edit',
+         icon: 'fas fa-dice-d20',
+         onPress: ({ focusSource }) =>
+         {
+            MacroDoc.open(documentId);
+            A11yHelper.applyFocusSource(focusSource);
+         }
+      });
+   }
+   else
+   {
+      items.push({
          label: 'MACRO.Execute',
          icon: 'fas fa-dice-d20',
          onPress: ({ focusSource }) =>
          {
-            macro.execute();
+            MacroDoc.exec(documentId);
             A11yHelper.applyFocusSource(focusSource);
          }
-      },
+      });
+   }
+
+   items.push(
       {
          label: 'OWNERSHIP.Configure',
          icon: 'fa-fw fa-solid fa-file-lock',
@@ -66,5 +89,7 @@ export function createMacroContextItems(eventbus, documentId)
             A11yHelper.applyFocusSource(focusSource);
          }
       }
-   ];
+   );
+
+   return items;
 }

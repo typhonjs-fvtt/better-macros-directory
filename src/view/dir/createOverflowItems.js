@@ -2,6 +2,8 @@ import { localize }           from '#runtime/util/i18n';
 
 import { TJSDocumentDialog }  from '#standard/application/dialog/document';
 
+import { sessionConstants }   from "#constants";
+
 /**
  * Creates the items for the overflow menu.
  *
@@ -9,12 +11,16 @@ import { TJSDocumentDialog }  from '#standard/application/dialog/document';
  *
  * @param {Function} [options.alwaysOnTopFn] - Always on top callback.
  *
- * @param {Function} [options.alwaysOnTop] - Current always on top value.
+ * @param {boolean} [options.alwaysOnTop] - Current always on top value.
+ *
+ * @param {import('#runtime/plugin/manager/eventbus').Eventbus} [options.eventbus] - App eventbus.
  *
  * @returns {Iterable<object>} Overflow menu items.
  */
-export function createOverflowItems({ alwaysOnTopFn, alwaysOnTop } = {}) // eslint-disable-line no-unused-vars
+export function createOverflowItems({ alwaysOnTopFn, alwaysOnTop, eventbus } = {}) // eslint-disable-line no-unused-vars
 {
+   const clickExec = eventbus.triggerSync('bmd:storage:session:item:get', sessionConstants.clickExec, false);
+
    const items = [
       {
          label: localize('SIDEBAR.Create', { type: localize(Macro.metadata.label) }),
@@ -26,6 +32,11 @@ export function createOverflowItems({ alwaysOnTopFn, alwaysOnTop } = {}) // esli
          icon: 'fas fa-folder',
          condition: () => game.user.isGM,
          onPress: ({ focusSource }) => TJSDocumentDialog.folderCreate({ type: 'Macro' }, { focusSource })
+      },
+      {
+         label: 'bmd.menu.overflow.click-to-exec',
+         icon: `far ${clickExec ? 'fa-square-check' : 'fa-square'}`,
+         onPress: () => eventbus.triggerSync('bmd:storage:session:item:boolean:swap', sessionConstants.clickExec)
       }
    ];
 

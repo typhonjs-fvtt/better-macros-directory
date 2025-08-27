@@ -9,7 +9,9 @@
 
    import { createMacroContextItems }  from './createMacroContextItems.js';
 
-   import { constants }                from '#constants';
+   import { MacroDoc }                 from './MacroDoc.js';
+
+   import { constants, sessionConstants } from '#constants';
 
    export let content;
 
@@ -17,21 +19,9 @@
 
    function onPress(documentId)
    {
-      const sheet = game.macros.get(documentId)?.sheet;
+      const clickExec = eventbus.triggerSync('bmd:storage:session:item:get', sessionConstants.clickExec, false);
 
-      if (!sheet) { return; }
-
-      // If the sheet is already rendered:
-      if (sheet.rendered)
-      {
-         sheet.bringToFront();
-         return sheet.maximize();
-      }
-      // Otherwise render the sheet
-      else
-      {
-         sheet.render(true);
-      }
+      MacroDoc[clickExec ? 'exec' : 'open'](documentId);
    }
 
    /**

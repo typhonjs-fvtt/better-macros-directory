@@ -23,11 +23,12 @@
 
    // Handle updating the application shell depending on dark mode state.
 
-   const storeDarkMode = eventbus.triggerSync('bmd:storage:session:store:get', sessionConstants.themeDarkMode, true);
+   const storeThemeTransparent = eventbus.triggerSync('bmd:storage:session:store:get',
+    sessionConstants.themeTransparent, false);
 
    let appShell;
 
-   $: appShell = $storeDarkMode ? TJSApplicationShell : ApplicationShell;
+   $: appShell = $storeThemeTransparent ? TJSApplicationShell : ApplicationShell;
 
    $: if(elementRootUpdate(elementRoot)) {
       // The popout module injects app header button, so force a render; not necessary otherwise.

@@ -16,8 +16,10 @@ export default class BMDirectory extends SvelteApp
       {
          // Attempt to parse session storage item and set application state.
          this.state.set(JSON.parse(sessionStorage.getItem(sessionConstants.appState)));
+
+         throw new Error('TTRETRT');
       }
-      catch (err) { /**/ }
+      catch { /**/ }
    }
 
    /**
@@ -62,12 +64,12 @@ export default class BMDirectory extends SvelteApp
 
       const eventbus = this._eventbus;
 
-      const themeDarkMode = eventbus.triggerSync('bmd:storage:session:item:get', sessionConstants.themeDarkMode);
+      const themeTransparent = eventbus.triggerSync('bmd:storage:session:item:get', sessionConstants.themeTransparent);
 
       buttons.unshift({
          class: 'theme-dark',
-         icon: themeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off',
-         label: themeDarkMode ? 'bmd.buttons.transparency.disable' : 'bmd.buttons.transparency.enable',
+         icon: themeTransparent ? 'fas fa-moon on' : 'fas fa-moon off',
+         label: themeTransparent ? 'bmd.buttons.transparency.disable' : 'bmd.buttons.transparency.enable',
 
          onPress: ({ button, event }) =>
          {
@@ -80,11 +82,11 @@ export default class BMDirectory extends SvelteApp
                return;
             }
 
-            const newThemeDarkMode = eventbus.triggerSync('bmd:storage:session:item:boolean:swap',
-             sessionConstants.themeDarkMode);
+            const newThemeTransparent = eventbus.triggerSync('bmd:storage:session:item:boolean:swap',
+             sessionConstants.themeTransparent);
 
-            button.icon = newThemeDarkMode ? 'fas fa-moon on' : 'fas fa-moon off';
-            button.label = newThemeDarkMode ? 'bmd.buttons.transparency.disable' : 'bmd.buttons.transparency.enable';
+            button.icon = newThemeTransparent ? 'fas fa-moon on' : 'fas fa-moon off';
+            button.label = newThemeTransparent ? 'bmd.buttons.transparency.disable' : 'bmd.buttons.transparency.enable';
          }
       });
 

@@ -23,7 +23,7 @@ const sessionConstants = {
    appState: `${constants.moduleId}.settings.appState`,
    folderState: `${constants.moduleId}.folder.state`,
    menuScale: `${constants.moduleId}.menu.scale`,
-   themeDarkMode: `${constants.moduleId}.theme.dark`,
+   themeTransparent: `${constants.moduleId}.theme.transparent`,
    scrolltopPartial: `${constants.moduleId}.scrolltop-`
 };
 
@@ -46,7 +46,7 @@ export { constants, sessionConstants, settings };
  *
  * @property {string} menuAlwaysTop - Always float popout on top.
  *
- * @property {string} themeDarkMode - Indicates whether dark mode is enabled.
+ * @property {string} themeTransparent - Indicates whether dark mode is enabled.
  *
  * @property {string} scrolltopPartial - Provides the scrolltop store partial to construct.
  */

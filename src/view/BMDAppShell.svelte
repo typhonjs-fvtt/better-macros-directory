@@ -30,9 +30,11 @@
 
    $: appShell = $storeThemeTransparent ? TJSApplicationShell : ApplicationShell;
 
+   // Explicitly lock theme to `dark` when transparent.
+   $: application.reactive.theme = $storeThemeTransparent ? 'dark' : void 0;
+
    $: if(elementRootUpdate(elementRoot)) {
-      // The popout module injects app header button, so force a render; not necessary otherwise.
-      application.render();
+      console.log(`!!! BMDAppShell updated`);
    }
 
    // ----------------------------------------------------------------------------------------------------------------

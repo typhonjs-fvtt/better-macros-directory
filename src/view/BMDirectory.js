@@ -1,5 +1,6 @@
 import { SvelteApp }    from '#runtime/svelte/application';
 import { CrossWindow }  from '#runtime/util/browser';
+import { deepMerge }    from '#runtime/util/object';
 
 import BMDAppShell      from './BMDAppShell.svelte';
 
@@ -16,8 +17,6 @@ export default class BMDirectory extends SvelteApp
       {
          // Attempt to parse session storage item and set application state.
          this.state.set(JSON.parse(sessionStorage.getItem(sessionConstants.appState)));
-
-         throw new Error('TTRETRT');
       }
       catch { /**/ }
    }
@@ -25,12 +24,12 @@ export default class BMDirectory extends SvelteApp
    /**
     * Default Application options
     *
-    * @returns {object} options - Application options.
+    * @returns {SvelteApp.Options} options - Application options.
     * @see https://foundryvtt.com/api/Application.html#options
     */
    static get defaultOptions()
    {
-      return foundry.utils.mergeObject(super.defaultOptions, {
+      return deepMerge(super.defaultOptions, {
          id: constants.moduleId,
          classes: [constants.moduleId],
          resizable: true,

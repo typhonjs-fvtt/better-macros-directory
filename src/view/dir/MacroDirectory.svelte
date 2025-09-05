@@ -155,10 +155,6 @@
       --tjs-folder-summary-gap: 2px;
       --tjs-folder-summary-width: 100%;
 
-      --tjs-folder-summary-outline-focus-visible: none;
-      --tjs-folder-summary-focus-indicator-color: white;
-      --tjs-folder-summary-focus-indicator-width: 4px;
-
       padding: 0;
       margin: 0;
    }

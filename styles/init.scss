@@ -56,7 +56,7 @@
 
     transition: opacity 0.2s ease-in-out;
 
-    &:hover {
+    &:hover, &:focus-within {
       opacity: 1;
     }
 

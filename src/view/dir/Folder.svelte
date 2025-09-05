@@ -19,6 +19,7 @@
 
    const webStorage = eventbus.triggerSync('bmd:storage:session:get');
 
+   /** @type {import('#standard/component/folder').TJSFolder.DataIcon} */
    const folderProps = {
       label: folder?.folder?.name,
       iconClosed: 'fas fa-folder',

@@ -56,7 +56,8 @@
 
     transition: opacity 0.2s ease-in-out;
 
-    &:hover, &:focus-within {
+    // When hovered or window content / header has focus within reset opacity.
+    &:hover, &:has(.window-content:focus-within), &:has(.window-header:focus-within) {
       opacity: 1;
     }
 

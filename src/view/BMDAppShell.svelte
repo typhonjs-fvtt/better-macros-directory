@@ -31,7 +31,7 @@
    $: appShell = $storeThemeTransparent ? TJSApplicationShell : ApplicationShell;
 
    // Explicitly lock theme to `dark` when transparent.
-   $: application.reactive.theme = $storeThemeTransparent ? 'dark' : void 0;
+   $: application.reactive.themeName = $storeThemeTransparent ? 'dark' : void 0;
 
    $: if(elementRootUpdate(elementRoot)) {
       console.log(`!!! BMDAppShell updated`);

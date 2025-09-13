@@ -66,7 +66,7 @@ export default class BMDirectory extends SvelteApp
       const themeTransparent = eventbus.triggerSync('bmd:storage:session:item:get', sessionConstants.themeTransparent);
 
       buttons.unshift({
-         class: 'theme-dark',
+         class: 'theme-transparent',
          icon: themeTransparent ? 'fas fa-moon on' : 'fas fa-moon off',
          label: themeTransparent ? 'bmd.buttons.transparency.disable' : 'bmd.buttons.transparency.enable',
 

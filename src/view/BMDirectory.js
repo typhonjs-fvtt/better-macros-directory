@@ -37,7 +37,7 @@ export default class BMDirectory extends SvelteApp
          width: 325,
          height: 300,
          minWidth: 200,
-         minHeight: 200,
+         minHeight: 250,
          maxWidth: 500,
          headerIcon: `${CONFIG.Macro.sidebarIcon}`,
          title: 'bmd.settings.title',

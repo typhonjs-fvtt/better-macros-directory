@@ -174,7 +174,7 @@
    }
 
    // When the window content width is less than 250px remove the GM user select.
-   @container tjs-app-window-content (0 <= width < 250px) {
+   @container tjs-app-content (0 <= width < 250px) {
       .gm-content {
          display: none;
       }

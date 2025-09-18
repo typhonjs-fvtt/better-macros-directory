@@ -1,6 +1,8 @@
 <script>
    import { getContext }         from 'svelte';
 
+   import { onMount }         from 'svelte';
+
    import {
       ApplicationShell,
       TJSApplicationShell }      from '#runtime/svelte/component/application';
@@ -11,13 +13,30 @@
 
    import { sessionConstants }   from "#constants";
 
+   /** @type {HTMLElement} */
    export let elementRoot;
+
+   /** @type {HTMLElement} */
+   export let elementContent;
 
    const external = getContext('#external');
 
    const application = external.application;
    const eventbus = external.eventbus;
    const elementRootUpdate = external.elementRootUpdate();
+
+   // ----------------------------------------------------------------------------------------------------------------
+
+   /**
+    * Some systems like WFRP4e / Warhammer increase padding for a border image on window-content. This is a bit of a
+    * hack. If the window-content padding is the Foundry default (16px) dynamically set it to 0.
+    */
+   function dynamicContentPadding()
+   {
+      if (getComputedStyle(elementContent).padding === '16px') { elementContent.style.padding = '0'; }
+   }
+
+   onMount(dynamicContentPadding);
 
    // ----------------------------------------------------------------------------------------------------------------
 
@@ -35,6 +54,7 @@
 
    $: if(elementRootUpdate(elementRoot)) {
       console.log(`!!! BMDAppShell updated`);
+      dynamicContentPadding();
    }
 
    // ----------------------------------------------------------------------------------------------------------------
@@ -54,6 +74,6 @@
 
 <svelte:options accessors={true} />
 
-<svelte:component this={appShell} bind:elementRoot>
+<svelte:component this={appShell} bind:elementRoot bind:elementContent>
    <MacroDirectory />
 </svelte:component>

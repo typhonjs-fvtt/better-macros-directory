@@ -33,17 +33,19 @@
 }
 
 #better-macros-directory {
-  .window-content {
-    padding: 0;
-    overflow: inherit;
-    background: none;
+  // For transparent theme.
+  &.tjs-window-app {
+    .window-content {
+      padding: 0;
+      background: none;
+    }
   }
 
   .window-header {
     // Header menu icon
     button.icon {
       // TJSAppShell / static dark mode.
-      &.fas.fa-moon.on:before {
+      i.fas.fa-moon.on:before {
         color: lightblue;
       }
     }

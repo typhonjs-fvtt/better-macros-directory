@@ -6,7 +6,7 @@ import { localize }           from '#runtime/util/i18n';
  *
  * @param {string}   documentId - Document ID to lookup
  *
- * @returns {object[]} Context menu items.
+ * @returns {import('#standard/component/menu').TJSMenuData.Items[]} Context menu items.
  */
 export function createFolderContextItems(documentId)
 {

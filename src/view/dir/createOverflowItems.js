@@ -15,12 +15,13 @@ import { sessionConstants }   from "#constants";
  *
  * @param {import('#runtime/plugin/manager/eventbus').Eventbus} [options.eventbus] - App eventbus.
  *
- * @returns {Iterable<object>} Overflow menu items.
+ * @returns {import('#standard/component/menu').TJSMenuData.Items[]} Overflow menu items.
  */
 export function createOverflowItems({ alwaysOnTopFn, alwaysOnTop, eventbus } = {}) // eslint-disable-line no-unused-vars
 {
    const clickExec = eventbus.triggerSync('bmd:storage:session:item:get', sessionConstants.clickExec, false);
 
+   /** @type {import('#standard/component/menu').TJSMenuData.Items[]} */
    const items = [
       {
          label: localize('SIDEBAR.Create', { type: localize(Macro.metadata.label) }),

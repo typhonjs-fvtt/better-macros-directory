@@ -13,7 +13,7 @@ import { sessionConstants }   from '#constants';
  *
  * @param {string}   documentId - Document ID to lookup
  *
- * @returns {object[]} Context menu items.
+ * @returns {import('#standard/component/menu').TJSMenuData.Items[]} Context menu items.
  */
 export function createMacroContextItems(eventbus, documentId)
 {
@@ -22,6 +22,7 @@ export function createMacroContextItems(eventbus, documentId)
    /** @type {Macro} */
    const macro = game.macros.get(documentId);
 
+   /** @type {import('#standard/component/menu').TJSMenuData.Items[]} */
    const items = [];
 
    // Add edit / open macro depending on click to execute state.

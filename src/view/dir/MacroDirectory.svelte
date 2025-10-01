@@ -149,6 +149,11 @@
 </TJSScrollContainer>
 
 <style lang=scss>
+   // As things go disable Foundry overflow styles so `TJSScrollContainer` becomes the scrolling container.
+   .directory, .directory-list {
+      overflow: unset;
+   }
+
    .directory-list {
       --tjs-folder-summary-border-width: 0 0 2px 0;
       --tjs-folder-summary-border-radius: 0 0 0 0.25em;

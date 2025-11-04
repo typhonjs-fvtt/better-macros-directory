@@ -1,10 +1,12 @@
 import { SvelteApp }    from '#runtime/svelte/application';
-import { CrossRealm }   from '#runtime/util/browser';
+import { CrossRealm }   from '#runtime/util';
 import { deepMerge }    from '#runtime/util/object';
 
 import BMDAppShell      from './BMDAppShell.svelte';
 
-import { constants, sessionConstants } from '#constants';
+import {
+   constants,
+   sessionConstants }   from '#constants';
 
 export default class BMDirectory extends SvelteApp
 {

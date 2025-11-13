@@ -1,5 +1,5 @@
 import { SvelteApp }    from '#runtime/svelte/application';
-import { CrossRealm }   from '#runtime/util';
+import { CrossRealm }   from '#runtime/util/realm';
 import { deepMerge }    from '#runtime/util/object';
 
 import BMDAppShell      from './BMDAppShell.svelte';
@@ -75,7 +75,7 @@ export default class BMDirectory extends SvelteApp
          onPress: ({ button, event }) =>
          {
             // Protect against theme swap when popped out.
-            if (globalThis !== CrossRealm.getWindow(event))
+            if (globalThis !== CrossRealm.browser.getWindow(event))
             {
                console.warn(
                 '[Better Macros Directory] warning: Can not swap to / from transparent theme when popped out.');

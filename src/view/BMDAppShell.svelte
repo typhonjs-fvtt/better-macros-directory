@@ -27,19 +27,6 @@
 
    // ----------------------------------------------------------------------------------------------------------------
 
-   /**
-    * Some systems like WFRP4e / Warhammer increase padding for a border image on window-content. This is a bit of a
-    * hack. If the window-content padding is the Foundry default (16px) dynamically set it to 0.
-    */
-   function dynamicContentPadding()
-   {
-      if (getComputedStyle(elementContent).padding === '16px') { elementContent.style.padding = '0'; }
-   }
-
-   onMount(dynamicContentPadding);
-
-   // ----------------------------------------------------------------------------------------------------------------
-
    // Handle updating the application shell depending on dark mode state.
 
    const storeThemeTransparent = eventbus.triggerSync('bmd:storage:session:store:get',
@@ -54,7 +41,6 @@
 
    $: if(elementRootUpdate(elementRoot)) {
       console.log(`!!! BMDAppShell updated`);
-      dynamicContentPadding();
    }
 
    // ----------------------------------------------------------------------------------------------------------------
@@ -74,6 +60,6 @@
 
 <svelte:options accessors={true} />
 
-<svelte:component this={appShell} bind:elementRoot bind:elementContent>
+<svelte:component this={appShell} bind:elementRoot bind:elementContent paddingToBorder={true}>
    <MacroDirectory />
 </svelte:component>

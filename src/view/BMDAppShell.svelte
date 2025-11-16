@@ -60,6 +60,6 @@
 
 <svelte:options accessors={true} />
 
-<svelte:component this={appShell} bind:elementRoot bind:elementContent paddingToBorder={true}>
+<svelte:component this={appShell} bind:elementRoot bind:elementContent padToVisualEdge={true}>
    <MacroDirectory />
 </svelte:component>

@@ -3,6 +3,7 @@
    import { quadIn }                from 'svelte/easing';
 
    import { applyStyles }           from '#runtime/svelte/action/dom/style';
+   import { TJSScrollContainer }    from '#runtime/svelte/component/container';
 
    import {
       ripple,
@@ -14,8 +15,6 @@
       TJSInput,
       TJSInputRange,
       TJSSelect }                   from '#standard/component/form';
-
-   import { TJSScrollContainer }    from '#standard/component/container';
 
    import { TJSMenu }               from '#standard/component/menu';
 

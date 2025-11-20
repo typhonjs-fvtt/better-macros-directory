@@ -2,10 +2,10 @@
    import { getContext }               from 'svelte';
 
    import { inlineSvg }                from '#runtime/svelte/action/dom/inline-svg';
+   import { TJSFocusIndicator }        from '#runtime/svelte/component/dom/focus';
    import { AssetValidator }           from '#runtime/util/browser';
 
    import { TJSContextMenu }           from '#standard/application/menu';
-   import { TJSFocusIndicator }        from '#standard/component/dom/focus';
 
    import { createMacroContextItems }  from './createMacroContextItems.js';
 
